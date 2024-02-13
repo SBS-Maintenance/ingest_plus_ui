@@ -209,7 +209,7 @@
       <string>사용제한</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="originComboBox">
+    <widget class="QComboBox" name="subjectComboBox">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -502,22 +502,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QListView" name="fileListView">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>560</y>
-      <width>851</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="dragDropMode">
-     <enum>QAbstractItemView::DragDrop</enum>
-    </property>
-    <property name="defaultDropAction">
-     <enum>Qt::LinkAction</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
@@ -594,7 +578,7 @@
     <property name="geometry">
      <rect>
       <x>880</x>
-      <y>830</y>
+      <y>820</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -621,6 +605,16 @@
      <font>
       <family>Malgun Gothic</family>
      </font>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="fileListWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>560</y>
+      <width>841</width>
+      <height>311</height>
+     </rect>
     </property>
    </widget>
   </widget>
