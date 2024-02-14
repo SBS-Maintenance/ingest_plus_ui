@@ -6,6 +6,13 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QListWidgetItem
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal, QProcess
 
+from xml.etree.ElementTree import Element, SubElement, ElementTree
+
+import datetime
+
+import html
+import unicodedata
+
 form_class = uic.loadUiType("window.ui")[0]
 
 
@@ -33,8 +40,60 @@ class MyApp(QMainWindow, form_class):
 
         self.xmlCreateButton.clicked.connect(self.create_xml)
 
+        self.deleteButton.clicked.connect(self.delete_item)
+        self.resetButton.clicked.connect(self.reset_list)
+
+    def reset_list(self):
+        self.fileListWidget.clear()
+
+    def delete_item(self):
+        self.fileListWidget.takeItem(self.fileListWidget.currentRow())
+
     def create_xml(self):
-        pass
+        filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
+        path = "./"+filename
+        with open(path, "w") as f:
+            f.write("")
+
+        root = Element("sbsvts")
+        job_info = SubElement(root, "job_info")
+
+        source_info = SubElement(job_info, "source_info")
+        SubElement(
+            source_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
+        SubElement(
+            source_info, "subject").text = self.subjectComboBox.currentText()
+        SubElement(source_info, "folder").text = self.folderComboBox.currentText()
+        SubElement(source_info, "event").text = self.eventComboBox.currentText()
+        SubElement(
+            source_info, "category").text = self.categoryComboBox.currentText()
+        SubElement(
+            source_info, "ingest_src").text = self.sourceComboBox.currentText()
+        SubElement(
+            source_info, "restriction").text = self.restrictionComboBox.currentText()
+        SubElement(source_info, "title").text = self.titleLineEdit.text()
+
+        creation_info = SubElement(job_info, "creation_info")
+        SubElement(creation_info, "department").text = self.deptLineEdit.text()
+        SubElement(creation_info,
+                   "journalist").text = self.journalistLineEdit.text()
+        SubElement(creation_info,
+                   "video_reporter").text = self.videoReporterLineEdit.text()
+        SubElement(creation_info, "place").text = self.placeLineEdit.text()
+        SubElement(creation_info,
+                   "date").text = datetime.datetime.strptime(self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
+        SubElement(creation_info,
+                   "contents").text = self.contentTextEdit.toPlainText()
+
+        file_list = SubElement(job_info, "file_list")
+        for i in range(self.fileListWidget.count()):
+            file = SubElement(file_list, "file")
+            SubElement(file, "order").text = str(i)
+            SubElement(
+                file, "full_path").text = self.fileListWidget.item(i).text()
+
+        tree = ElementTree(root)
+        tree.write(path, encoding="utf-8", xml_declaration=True)
 
     def item_up(self):
         currentRow = self.fileListWidget.currentRow()
