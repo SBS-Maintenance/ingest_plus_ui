@@ -2,16 +2,13 @@ import sys
 import os
 
 import pymediainfo
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QListWidgetItem, QMessageBox
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal, QProcess
 
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 import datetime
-
-import html
-import unicodedata
 
 form_class = uic.loadUiType("window.ui")[0]
 
@@ -94,6 +91,7 @@ class MyApp(QMainWindow, form_class):
 
         tree = ElementTree(root)
         tree.write(path, encoding="utf-8", xml_declaration=True)
+        QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
 
     def item_up(self):
         currentRow = self.fileListWidget.currentRow()
