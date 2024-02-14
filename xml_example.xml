@@ -1,0 +1,27 @@
+<sbsvts xmlns="urn:sbsvts2024">
+    <job_info>
+        <source_info>
+            <ingest_type></ingest_type>
+            <subject></subject>
+            <folder></folder>
+            <event></event>
+            <category></category>
+            <ingest_src></ingest_src>
+            <restriction></restriction>
+            <title></title>
+        </source_info>
+        <creation_info>
+            <department></department>
+            <journalist></journalist>
+            <video_reporter></video_reporter>
+            <place></place>
+            <contents></contents>
+        </creation_info>
+        <file_list>
+            <file>
+                <order></order>
+                <full_path></full_path>
+            </file>
+        </file_list>
+    </job_info>
+</sbsvts>
