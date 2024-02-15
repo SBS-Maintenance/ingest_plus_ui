@@ -10,6 +10,11 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 import datetime
 
+import configparser
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+
 form_class = uic.loadUiType("window.ui")[0]
 
 
@@ -48,7 +53,7 @@ class MyApp(QMainWindow, form_class):
 
     def create_xml(self):
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
-        path = "./"+filename
+        path = config["xml"]["dir"]+filename
         with open(path, "w") as f:
             f.write("")
 
