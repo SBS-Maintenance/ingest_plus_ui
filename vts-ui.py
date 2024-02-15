@@ -163,23 +163,15 @@ class MyApp(QMainWindow, form_class):
         self.subjectComboBox.addItem("원본-디지털")
         self.subjectComboBox.currentIndexChanged.connect(self.subjectChanged)
 
-        self.categoryComboBox1.addItem("")
-        self.categoryComboBox1.addItem("정치")
-        self.categoryComboBox1.addItem("경제")
-        self.categoryComboBox1.addItem("사회")
-        self.categoryComboBox1.addItem("문화과학")
-        self.categoryComboBox1.addItem("스포츠")
-        self.categoryComboBox1.addItem("국제")
-        self.categoryComboBox1.addItem("북한")
-        self.categoryComboBox1.addItem("뉴스")
-        self.categoryComboBox1.addItem("기타")
-        self.categoryComboBox1.addItem("미분류")
-        self.categoryComboBox1.addItem("스브스뉴스")
-        self.categoryComboBox1.addItem("상용")
+        for category1 in categoryDict.keys():
+            self.categoryComboBox1.addItem(category1)
+
+        for category2 in categoryDict["정치"].keys():
+            self.categoryComboBox2.addItem(category2)
+
         self.categoryComboBox1.currentIndexChanged.connect(
             self.category1changed)
 
-        self.categoryComboBox2.addItem("")
         self.categoryComboBox2.currentIndexChanged.connect(
             self.category2changed)
 
@@ -210,141 +202,13 @@ class MyApp(QMainWindow, form_class):
 
     def category1changed(self):
         self.categoryComboBox2.clear()
-        if self.categoryComboBox1.currentText() == "정치":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("국방")
-            self.categoryComboBox2.addItem("국회")
-            self.categoryComboBox2.addItem("선거")
-            self.categoryComboBox2.addItem("외교")
-            self.categoryComboBox2.addItem("정당")
-            self.categoryComboBox2.addItem("정치사건")
-            self.categoryComboBox2.addItem("정치편집완본")
-            self.categoryComboBox2.addItem("지방자치단체")
-            self.categoryComboBox2.addItem("청와대")
-            self.categoryComboBox2.addItem("용산대통령실")
-            self.categoryComboBox2.addItem("행정")
-
-        if self.categoryComboBox1.currentText() == "경제":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("1차금융")
-            self.categoryComboBox2.addItem("2차금융")
-            self.categoryComboBox2.addItem("건설")
-            self.categoryComboBox2.addItem("경제사건")
-            self.categoryComboBox2.addItem("경제편집원본")
-            self.categoryComboBox2.addItem("기업")
-            self.categoryComboBox2.addItem("농림수산")
-            self.categoryComboBox2.addItem("무역")
-            self.categoryComboBox2.addItem("부동산")
-            self.categoryComboBox2.addItem("서비스업")
-            self.categoryComboBox2.addItem("에너지")
-            self.categoryComboBox2.addItem("유통")
-            self.categoryComboBox2.addItem("자동차")
-            self.categoryComboBox2.addItem("전기전자")
-            self.categoryComboBox2.addItem("제조업")
-            self.categoryComboBox2.addItem("경제일반")
-
-        if self.categoryComboBox1.currentText() == "사회":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("경찰소방서")
-            self.categoryComboBox2.addItem("공항항만")
-            self.categoryComboBox2.addItem("교육")
-            self.categoryComboBox2.addItem("교통운수")
-            self.categoryComboBox2.addItem("노동")
-            self.categoryComboBox2.addItem("법조")
-            self.categoryComboBox2.addItem("복지")
-            self.categoryComboBox2.addItem("사건사고")
-            self.categoryComboBox2.addItem("사람들")
-            self.categoryComboBox2.addItem("사회편집완본")
-            self.categoryComboBox2.addItem("외국인")
-            self.categoryComboBox2.addItem("유해환경")
-            self.categoryComboBox2.addItem("자연환경")
-
-        if self.categoryComboBox1.currentText() == "문화과학":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("과학통신")
-            self.categoryComboBox2.addItem("날씨풍경")
-            self.categoryComboBox2.addItem("문화과학사건")
-            self.categoryComboBox2.addItem("문화과학편집완본")
-            self.categoryComboBox2.addItem("미디어")
-            self.categoryComboBox2.addItem("예술")
-            self.categoryComboBox2.addItem("유적역사전통")
-            self.categoryComboBox2.addItem("인터넷")
-            self.categoryComboBox2.addItem("의료건강")
-            self.categoryComboBox2.addItem("종교")
-            self.categoryComboBox2.addItem("취미레저")
-
-        if self.categoryComboBox1.currentText() == "스포츠":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("골프")
-            self.categoryComboBox2.addItem("농구")
-            self.categoryComboBox2.addItem("이벤트")
-            self.categoryComboBox2.addItem("배구")
-            self.categoryComboBox2.addItem("스포츠사건사고")
-            self.categoryComboBox2.addItem("스포츠편집완본")
-            self.categoryComboBox2.addItem("야구")
-            self.categoryComboBox2.addItem("종합")
-            self.categoryComboBox2.addItem("축구")
-
-        if self.categoryComboBox1.currentText() == "국제":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("국제편집완본")
-            self.categoryComboBox2.addItem("기구회담")
-            self.categoryComboBox2.addItem("기후질병")
-            self.categoryComboBox2.addItem("남미")
-            self.categoryComboBox2.addItem("미국")
-            self.categoryComboBox2.addItem("북중미")
-            self.categoryComboBox2.addItem("분쟁")
-            self.categoryComboBox2.addItem("아시아")
-            self.categoryComboBox2.addItem("아프리카")
-            self.categoryComboBox2.addItem("오세아니아")
-            self.categoryComboBox2.addItem("유럽")
-            self.categoryComboBox2.addItem("일본")
-            self.categoryComboBox2.addItem("중동")
-            self.categoryComboBox2.addItem("중국")
-
-        if self.categoryComboBox1.currentText() == "북한":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("경제")
-            self.categoryComboBox2.addItem("군사")
-            self.categoryComboBox2.addItem("문화")
-            self.categoryComboBox2.addItem("북한편집완본")
-            self.categoryComboBox2.addItem("사회")
-            self.categoryComboBox2.addItem("정치")
-            self.categoryComboBox2.addItem("통일")
-
-        if self.categoryComboBox1.currentText() == "뉴스":
-            self.categoryComboBox2.addItem("")
-            self.categoryComboBox2.addItem("아침뉴스")
-            self.categoryComboBox2.addItem("오전 뉴스")
-            self.categoryComboBox2.addItem("오후뉴스")
-            self.categoryComboBox2.addItem("저녁뉴스")
-            self.categoryComboBox2.addItem("8뉴스")
-            self.categoryComboBox2.addItem("마감뉴스")
-            self.categoryComboBox2.addItem("스포츠뉴스")
-            self.categoryComboBox2.addItem("속보특보")
-            self.categoryComboBox2.addItem("기타")
-
-        if self.categoryComboBox1.currentText() == "기타":
-            self.categoryComboBox2.addItem("")
-
-        if self.categoryComboBox1.currentText() == "미분류":
-            self.categoryComboBox2.addItem("")
-
-        if self.categoryComboBox1.currentText() == "스브스뉴스":
-            self.categoryComboBox2.addItem("")
-
-        if self.categoryComboBox1.currentText() == "상용":
-            self.categoryComboBox2.addItem("")
+        for category2 in categoryDict[self.categoryComboBox1.currentText()].keys():
+            self.categoryComboBox2.addItem(category2)
 
     def category2changed(self):
         self.categoryComboBox3.clear()
-
-        if self.categoryComboBox2.currentText() == "국방":
-            self.categoryComboBOx3.addItem("공군")
-            self.categoryComboBOx3.addItem("국방부")
-            self.categoryComboBOx3.addItem("남북대치")
-            self.categoryComboBOx3.addItem("방위산업")
-            self.categoryComboBOx3.addItem("병무")
+        for category3 in categoryDict[self.categoryComboBox1.currentText()][self.categoryComboBox2.currentText()]:
+            self.categoryComboBox3.addItem(category3)
 
     def subjectChanged(self):
         pass
@@ -367,10 +231,8 @@ class MyApp(QMainWindow, form_class):
         source_info = SubElement(job_info, "source_info")
         SubElement(
             source_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
-        # SubElement(
-        #     source_info, "subject").text = self.subjectComboBox.currentText()
         SubElement(
-            source_info, "subject").text = "취재원본 (보도국)"
+            source_info, "subject").text = self.subjectComboBox.currentText()
         # SubElement(source_info, "folder").text = self.folderComboBox.currentText()
         SubElement(source_info, "folder").text = "News"
         # SubElement(source_info, "event").text = self.eventComboBox.currentText()
@@ -378,7 +240,11 @@ class MyApp(QMainWindow, form_class):
         SubElement(
             source_info, "ingest_src").text = self.sourceComboBox.currentText()
         SubElement(
-            source_info, "category").text = self.categoryComboBox.currentText()
+            source_info, "category1").text = self.categoryComboBox1.currentText()
+        SubElement(
+            source_info, "category2").text = self.categoryComboBox2.currentText()
+        SubElement(
+            source_info, "category3").text = self.categoryComboBox3.currentText()
         SubElement(
             source_info, "restriction").text = self.restrictionComboBox.currentText()
         SubElement(source_info, "title").text = self.titleLineEdit.text()
