@@ -27,8 +27,8 @@ class MyApp(QMainWindow, form_class):
         self.ingestTypeComboBox.addItem("Consolidation")
         self.ingestTypeComboBox.addItem("Normal")
 
-        self.subjectComboBox.addItem("취재원본(보도국)")
-        self.subjectComboBox.addItem("스포츠")
+        # self.subjectComboBox.addItem("취재원본 (보도국)")
+        # self.subjectComboBox.addItem("스포츠")
 
         self.setAcceptDrops(True)
 
@@ -58,14 +58,18 @@ class MyApp(QMainWindow, form_class):
         source_info = SubElement(job_info, "source_info")
         SubElement(
             source_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
+        # SubElement(
+        #     source_info, "subject").text = self.subjectComboBox.currentText()
         SubElement(
-            source_info, "subject").text = self.subjectComboBox.currentText()
-        SubElement(source_info, "folder").text = self.folderComboBox.currentText()
-        SubElement(source_info, "event").text = self.eventComboBox.currentText()
-        SubElement(
-            source_info, "category").text = self.categoryComboBox.currentText()
+            source_info, "subject").text = "취재원본 (보도국)"
+        # SubElement(source_info, "folder").text = self.folderComboBox.currentText()
+        SubElement(source_info, "folder").text = "News"
+        # SubElement(source_info, "event").text = self.eventComboBox.currentText()
+        SubElement(source_info, "event").text = "미분류"
         SubElement(
             source_info, "ingest_src").text = self.sourceComboBox.currentText()
+        SubElement(
+            source_info, "category").text = self.categoryComboBox.currentText()
         SubElement(
             source_info, "restriction").text = self.restrictionComboBox.currentText()
         SubElement(source_info, "title").text = self.titleLineEdit.text()

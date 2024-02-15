@@ -81,11 +81,47 @@
     <property name="title">
      <string>소재 정보</string>
     </property>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>영상구분</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>이벤트</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
        <width>76</width>
        <height>16</height>
       </rect>
@@ -102,7 +138,7 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>10</x>
        <y>110</y>
        <width>24</width>
        <height>16</height>
@@ -119,10 +155,28 @@
       <string>제목</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>20</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>폴더</string>
+     </property>
+    </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>300</x>
        <y>50</y>
        <width>48</width>
        <height>16</height>
@@ -140,7 +194,7 @@
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>300</x>
        <y>80</y>
        <width>48</width>
        <height>16</height>
@@ -155,10 +209,55 @@
       <string>사용제한</string>
      </property>
     </widget>
+    <widget class="QComboBox" name="subjectComboBox">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>20</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="eventComboBox">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
     <widget class="QComboBox" name="sourceComboBox">
      <property name="geometry">
       <rect>
        <x>100</x>
+       <y>80</y>
+       <width>121</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="folderComboBox">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
        <y>20</y>
        <width>151</width>
        <height>22</height>
@@ -173,7 +272,7 @@
     <widget class="QComboBox" name="categoryComboBox">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>370</x>
        <y>50</y>
        <width>151</width>
        <height>22</height>
@@ -188,7 +287,7 @@
     <widget class="QComboBox" name="restrictionComboBox">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>370</x>
        <y>80</y>
        <width>151</width>
        <height>22</height>
@@ -203,9 +302,9 @@
     <widget class="QLineEdit" name="titleLineEdit">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>60</x>
        <y>110</y>
-       <width>911</width>
+       <width>951</width>
        <height>20</height>
       </rect>
      </property>
