@@ -2,9 +2,10 @@ import sys
 import os
 
 import pymediainfo
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QListWidgetItem, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QTreeView, QTreeWidget, QTreeWidgetItem
 from PyQt5 import uic
-from PyQt5.QtCore import Qt, pyqtSignal, QProcess
+from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
@@ -16,6 +17,132 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 form_class = uic.loadUiType("window.ui")[0]
+
+categoryDict = {"정치": {"": [""],
+                       "국방": ["", "공군", "국방부", "남북대치", "방위산업",
+                              "병무", "예비군", "육군", "종합훈련", "주한미군", "특수부대", "파병", "학군단", "해군"],
+                       "국회": ["", "국회기관", "본회의", "상임위원회", "대표회담", "국회의원", "국정감사", "청문회", "토론회"],
+                       "선거": ["", "국회의원", "대통령", "선거관리위원회", "지방자치단체"],
+                       "외교": ["", "교민이민", "외교부", "재외공관", "주한공관", "회담"],
+                       "정당": ["", "군소정당", "여당", "야당"],
+                       "지방자치단체": ["", "서울특별시", "광역시", "경기도", "강원도", "충청도", "전라도", "경상도", "제주도", "이북5도", "세종시"],
+                       "청와대": ["", "청와대외경", "정상회담", "영수회담", "집무기자회견담화", "오찬만찬", "회의및행사", "수석", "접견및수여식", "업무보고", "가족행사", "현장방문", "해외순방"],
+                       "용산대통령실": ["", "용산대통령실외견", "정상회담", "영수회담", "집무기자회견담화", "오찬만찬", "회의및행사", "수석", "접견및수여식", "업무보고", "가족행사", "현장방문", "해외순방"],
+                       "행정": ["", "관계기관", "국무총리", "정부청사", "정부청사(세종)", "정부청사(대전)", "정부청사(중앙)"]
+                       },
+                "경제": {"": [""],
+                       "1차금융": ["", "기관", "시중은행", "한국은행", "화폐 통화 환율"],
+                       "2차금융": ["", "개인신용", "대부업", "보험", "신용카드", "제2금융", "증권"],
+                       "건설": ["", "교량 터널 도로", "아파트 빌딩", "재개발 택지개발"],
+                       "경제사건": [""],
+                       "경제편집완본": [""],
+                       "기업": ["", "경제단체", "공기업", "외국기업", "대기업", "중소기업"],
+                       "농림수산": ["", "광업", "농업", "어업", "임업", "축산업"],
+                       "무역": ["", "물류기지", "수,출입", "통관,세관"],
+                       "부동산": ["", "건물", "분양", "아파트", "임야", "주택가", "부동산거래"],
+                       "서비스업": ["", "숙박업소", "유흥업", "요식업", "임대,리스업", "이사,택배"],
+                       "에너지": ["", "가스", "대체에너지", "석유", "수력", "연탄", "원자력", "전기", "주유소", "풍력", "태양광"],
+                       "유통": ["", "경매", "귀금속", "노점", "농수산물시장", "백화점", "도소매업", "쇼핑몰", "재래시장", "전자상가", "편의점", "마트", "온라인쇼핑"],
+                       "자동차": ["", "렌터카", "생산라인", "영업소", "정비", "중고차", "폐차", "수입차"],
+                       "전기전자": ["", "가전", "반도체", "컴퓨터", "휴대폰"],
+                       "제조업": ["", "공단 공장", "식음료", "조선", "주류", "철강", "화학", "섬유", "생활용품"],
+                       },
+                "사회": {"": [""],
+                       "경찰소방서": ["", "경찰청", "경찰서", "단속검문", "소방서", "치안", "해양경찰"],
+                       "공항항만": ["", "김포공항", "선박", "인천공항", "지방공항", "항공사", "항만시설"],
+                       "교육": ["", "고등학교", "교육기관", "대학교", "온라인교육", "영유아교육", "입시", "중학교", "초등학교", "특수학교", "학원", "학교폭력", "사교육"],
+                       "교통운수": ["", "고속도로", "기차", "버스", "승용차", "도로", "이륜차", "지하철", "택시", "트럭", "교통일반", "운전면허"],
+                       "노동": ["", "노동단체", "시민단체", "시위", "고용", "노사문제"],
+                       "법조": ["", "검사", "검찰", "교도소", "법원", "변호사", "사법연수원", "판사", "헌법재판소"],
+                       "복지": ["", "노동자", "노숙자", "노인", "미혼모", "복지기관", "입양", "장묘시설", "장애인", "취약계층"],
+                       "사건사고": ["", "교통사고", "성범죄", "부정부패", "폭력", "화재", "인명사고", "사기,절도", "안전사고", "사이버범죄"],
+                       "사람들": ["", "여성", "인물", "직장인", "은퇴자", "청소년"],
+                       "사회편집완본": [""],
+                       "외국인": ["", "관광객", "다문화가정", "불법체류", "외국인노동자", "외국인범죄"],
+                       "유해환경": ["", "대기오염", "도박", "마약", "방역", "소음", "수질오염", "유흥업소", "토양오염", "중금속오염", "폐기물"],
+                       "자연환경": ["", "강", "갯벌", "남극북극", "늪지", "동식물", "산", "섬", "시가지", "전원", "해양"]
+                       },
+                "문화과학": {"": [""],
+                         "과학통신": ["", "교육기관", "기술과학", "연구기관", "우주개발", "첨단과학", "통신"],
+                         "날씨풍경": ["", "봄", "여름", "가을", "겨울", "기상청", "자연재해"],
+                         "문화과학사건": [""],
+                         "문화과학편집완본": [""],
+                         "미디어": ["", "광고", "방송사(지상파)", "신문사", "케이블", "홈쇼핑"],
+                         "예술": ["", "무용", "뮤지컬", "문학", "미술", "연극", "영화", "음악", "패션", "연예"],
+                         "유적역사전통": ["", "공원", "기념물", "명승고적", "멍절", "박물관", "유적지", "전통문화"],
+                         "인터넷": [""],
+                         "의료건강": ["", "기관", "병원", "보건소", "생명공학", "약국", "웰빙", "음주", "질병", "흡연"],
+                         "종교": ["", "기독교", "기타종교", "불교", "사이비종교", "천주교"],
+                         "취미레저": ["", "경기장", "공연장", "극장가", "복권", "여행", "운동", "음반서점", "오락"]
+                         },
+                "스포츠": {"": [""],
+                        "골프": ["", "KPGA", "KLPGA", "PGA", "LPGA", "올림픽", "아시안게임", "아마추어골프", "기타골프"],
+                        "농구": ["", "남자프로농구", "여자프로농구", "NBA", "농구대표팀", "올림픽", "아시안게임", "아마추어농구", "기타농구"],
+                        "이벤트": ["", "런던올림픽"],
+                        "배구": ["", "냄자프로배구", "여자프로배구", "해외배구", "올림픽", "아시안게임", "아마추어배구", "기타배구"],
+                        "스포츠사건사고": [""],
+                        "스포츠편집완본": [""],
+                        "야구": ["", "프로야구", "메이저리그", "일본야구", "올림픽", "아시안게임", "WBC", "아마추어야구", "기타야구"],
+                        "종합": ["", "국내종합경기", "국제종합경기", "하계올림픽", "동계올림픽", "패럴림픽", "아시안게임", "동계스포츠", "모터스포츠", "E스포츠", "걱투기", "보드게임", "사회체육", "기관단체행정", "스포츠시설", "스포츠행사", "체육인", "기타스포츠"],
+                        "축구": ["", "프로축구", "해외축구", "남자국가대표축구", "여자국가대표축구", "올림픽", "아시안게임", "월드컵", "아마추어축구", "기타축구"]
+                        },
+                "국제": {"": [""],
+                       "국제편집완본": [""],
+                       "기구회담": ["", "UN회의", "국제회의"],
+                       "기후질병": ["", "환경오염", "기상이변", "질병"],
+                       "남미": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "미국": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "북중미": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "분쟁": ["", "영토분쟁", "인종분쟁", "종교분쟁"],
+                       "아시아": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "아프리카": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "오세아니아": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "유럽": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "일본": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "중동": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"],
+                       "중국": ["", "경제", "군사", "문화과학", "사건사고", "자연재해", "정치"]
+                       },
+                "북한": {"": [""],
+                       "경제": ["", "경제일반", "경제협력", "공업", "광업", "농림축수산", "유통", "토목건설"],
+                       "군사": ["", "국경", "군사일반", "미사일", "핵시설"],
+                       "문화": ["", "공연예술", "남북교류", "보도", "북한유적", "북한풍속"],
+                       "북한편집완본": [""],
+                       "사회": ["", "북한도시", "주민시설", "교육"],
+                       "정치": ["", "김정일", "김정은", "인물", "정치일반", "회의대화"],
+                       "통일": ["", "수용소", "이산가족", "일반", "탈북", "한국전쟁", "회담"]
+                       },
+                "뉴스": {"": [""],
+                       "아침뉴스": [""],
+                       "오전 뉴스": [""],
+                       "오후뉴스": [""],
+                       "저녁뉴스": [""],
+                       "8뉴스뉴스": [""],
+                       "마감뉴스": [""],
+                       "스포츠뉴스": [""],
+                       "속보특보": [""],
+                       "기타": [""],
+                       },
+                "기타": {"": [""]},
+                "미분류": {"": [""]},
+                "스브스뉴스": {"": [""]},
+                "상용": {"": [""]},
+                }
+
+
+class Model(QStandardItemModel):
+    def __init__(self, data):
+        QStandardItemModel.__init__(self)
+
+        for j, _subject in enumerate(data):
+            item = QStandardItem(_subject["upper"])
+            for k, mid in enumerate(_subject["mid"]):
+                item2 = QStandardItem(mid["mid"])
+                item.setChild(k, 0, item2)
+                if "low" in mid.keys():
+                    for l, low in enumerate(mid["low"]):
+                        child2 = QStandardItem(low)
+                        item2.setChild(l, 0, child2)
+            self.setItem(j, 0, item)
 
 
 class MyApp(QMainWindow, form_class):
@@ -32,8 +159,29 @@ class MyApp(QMainWindow, form_class):
         self.ingestTypeComboBox.addItem("Consolidation")
         self.ingestTypeComboBox.addItem("Normal")
 
-        # self.subjectComboBox.addItem("취재원본 (보도국)")
-        # self.subjectComboBox.addItem("스포츠")
+        self.subjectComboBox.addItem("취재원본 (보도국)")
+        self.subjectComboBox.addItem("원본-디지털")
+        self.subjectComboBox.currentIndexChanged.connect(self.subjectChanged)
+
+        self.categoryComboBox1.addItem("")
+        self.categoryComboBox1.addItem("정치")
+        self.categoryComboBox1.addItem("경제")
+        self.categoryComboBox1.addItem("사회")
+        self.categoryComboBox1.addItem("문화과학")
+        self.categoryComboBox1.addItem("스포츠")
+        self.categoryComboBox1.addItem("국제")
+        self.categoryComboBox1.addItem("북한")
+        self.categoryComboBox1.addItem("뉴스")
+        self.categoryComboBox1.addItem("기타")
+        self.categoryComboBox1.addItem("미분류")
+        self.categoryComboBox1.addItem("스브스뉴스")
+        self.categoryComboBox1.addItem("상용")
+        self.categoryComboBox1.currentIndexChanged.connect(
+            self.category1changed)
+
+        self.categoryComboBox2.addItem("")
+        self.categoryComboBox2.currentIndexChanged.connect(
+            self.category2changed)
 
         self.sourceComboBox.addItem("VCR")
         self.sourceComboBox.addItem("GRAPHIC")
@@ -44,24 +192,11 @@ class MyApp(QMainWindow, form_class):
         self.sourceComboBox.addItem("WEB")
         self.sourceComboBox.addItem("6mm(HDV)")
 
-        self.categoryComboBox.addItem("정치")
-        self.categoryComboBox.addItem("경제")
-        self.categoryComboBox.addItem("사회")
-        self.categoryComboBox.addItem("문화과학")
-        self.categoryComboBox.addItem("스포츠")
-        self.categoryComboBox.addItem("국제")
-        self.categoryComboBox.addItem("북한")
-        self.categoryComboBox.addItem("뉴스")
-        self.categoryComboBox.addItem("기타")
-        self.categoryComboBox.addItem("미분류")
-        self.categoryComboBox.addItem("스브스뉴스")
-        self.categoryComboBox.addItem("상용")
-
         self.restrictionComboBox.addItem("보도제작")
-        self.categoryComboBox.addItem("보도본부")
-        self.categoryComboBox.addItem("스포츠")
-        self.categoryComboBox.addItem("전체")
-        self.categoryComboBox.addItem("보도")
+        self.restrictionComboBox.addItem("보도본부")
+        self.restrictionComboBox.addItem("스포츠")
+        self.restrictionComboBox.addItem("전체")
+        self.restrictionComboBox.addItem("보도")
 
         self.setAcceptDrops(True)
 
@@ -73,6 +208,147 @@ class MyApp(QMainWindow, form_class):
         self.deleteButton.clicked.connect(self.delete_item)
         self.resetButton.clicked.connect(self.reset_list)
 
+    def category1changed(self):
+        self.categoryComboBox2.clear()
+        if self.categoryComboBox1.currentText() == "정치":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("국방")
+            self.categoryComboBox2.addItem("국회")
+            self.categoryComboBox2.addItem("선거")
+            self.categoryComboBox2.addItem("외교")
+            self.categoryComboBox2.addItem("정당")
+            self.categoryComboBox2.addItem("정치사건")
+            self.categoryComboBox2.addItem("정치편집완본")
+            self.categoryComboBox2.addItem("지방자치단체")
+            self.categoryComboBox2.addItem("청와대")
+            self.categoryComboBox2.addItem("용산대통령실")
+            self.categoryComboBox2.addItem("행정")
+
+        if self.categoryComboBox1.currentText() == "경제":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("1차금융")
+            self.categoryComboBox2.addItem("2차금융")
+            self.categoryComboBox2.addItem("건설")
+            self.categoryComboBox2.addItem("경제사건")
+            self.categoryComboBox2.addItem("경제편집원본")
+            self.categoryComboBox2.addItem("기업")
+            self.categoryComboBox2.addItem("농림수산")
+            self.categoryComboBox2.addItem("무역")
+            self.categoryComboBox2.addItem("부동산")
+            self.categoryComboBox2.addItem("서비스업")
+            self.categoryComboBox2.addItem("에너지")
+            self.categoryComboBox2.addItem("유통")
+            self.categoryComboBox2.addItem("자동차")
+            self.categoryComboBox2.addItem("전기전자")
+            self.categoryComboBox2.addItem("제조업")
+            self.categoryComboBox2.addItem("경제일반")
+
+        if self.categoryComboBox1.currentText() == "사회":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("경찰소방서")
+            self.categoryComboBox2.addItem("공항항만")
+            self.categoryComboBox2.addItem("교육")
+            self.categoryComboBox2.addItem("교통운수")
+            self.categoryComboBox2.addItem("노동")
+            self.categoryComboBox2.addItem("법조")
+            self.categoryComboBox2.addItem("복지")
+            self.categoryComboBox2.addItem("사건사고")
+            self.categoryComboBox2.addItem("사람들")
+            self.categoryComboBox2.addItem("사회편집완본")
+            self.categoryComboBox2.addItem("외국인")
+            self.categoryComboBox2.addItem("유해환경")
+            self.categoryComboBox2.addItem("자연환경")
+
+        if self.categoryComboBox1.currentText() == "문화과학":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("과학통신")
+            self.categoryComboBox2.addItem("날씨풍경")
+            self.categoryComboBox2.addItem("문화과학사건")
+            self.categoryComboBox2.addItem("문화과학편집완본")
+            self.categoryComboBox2.addItem("미디어")
+            self.categoryComboBox2.addItem("예술")
+            self.categoryComboBox2.addItem("유적역사전통")
+            self.categoryComboBox2.addItem("인터넷")
+            self.categoryComboBox2.addItem("의료건강")
+            self.categoryComboBox2.addItem("종교")
+            self.categoryComboBox2.addItem("취미레저")
+
+        if self.categoryComboBox1.currentText() == "스포츠":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("골프")
+            self.categoryComboBox2.addItem("농구")
+            self.categoryComboBox2.addItem("이벤트")
+            self.categoryComboBox2.addItem("배구")
+            self.categoryComboBox2.addItem("스포츠사건사고")
+            self.categoryComboBox2.addItem("스포츠편집완본")
+            self.categoryComboBox2.addItem("야구")
+            self.categoryComboBox2.addItem("종합")
+            self.categoryComboBox2.addItem("축구")
+
+        if self.categoryComboBox1.currentText() == "국제":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("국제편집완본")
+            self.categoryComboBox2.addItem("기구회담")
+            self.categoryComboBox2.addItem("기후질병")
+            self.categoryComboBox2.addItem("남미")
+            self.categoryComboBox2.addItem("미국")
+            self.categoryComboBox2.addItem("북중미")
+            self.categoryComboBox2.addItem("분쟁")
+            self.categoryComboBox2.addItem("아시아")
+            self.categoryComboBox2.addItem("아프리카")
+            self.categoryComboBox2.addItem("오세아니아")
+            self.categoryComboBox2.addItem("유럽")
+            self.categoryComboBox2.addItem("일본")
+            self.categoryComboBox2.addItem("중동")
+            self.categoryComboBox2.addItem("중국")
+
+        if self.categoryComboBox1.currentText() == "북한":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("경제")
+            self.categoryComboBox2.addItem("군사")
+            self.categoryComboBox2.addItem("문화")
+            self.categoryComboBox2.addItem("북한편집완본")
+            self.categoryComboBox2.addItem("사회")
+            self.categoryComboBox2.addItem("정치")
+            self.categoryComboBox2.addItem("통일")
+
+        if self.categoryComboBox1.currentText() == "뉴스":
+            self.categoryComboBox2.addItem("")
+            self.categoryComboBox2.addItem("아침뉴스")
+            self.categoryComboBox2.addItem("오전 뉴스")
+            self.categoryComboBox2.addItem("오후뉴스")
+            self.categoryComboBox2.addItem("저녁뉴스")
+            self.categoryComboBox2.addItem("8뉴스")
+            self.categoryComboBox2.addItem("마감뉴스")
+            self.categoryComboBox2.addItem("스포츠뉴스")
+            self.categoryComboBox2.addItem("속보특보")
+            self.categoryComboBox2.addItem("기타")
+
+        if self.categoryComboBox1.currentText() == "기타":
+            self.categoryComboBox2.addItem("")
+
+        if self.categoryComboBox1.currentText() == "미분류":
+            self.categoryComboBox2.addItem("")
+
+        if self.categoryComboBox1.currentText() == "스브스뉴스":
+            self.categoryComboBox2.addItem("")
+
+        if self.categoryComboBox1.currentText() == "상용":
+            self.categoryComboBox2.addItem("")
+
+    def category2changed(self):
+        self.categoryComboBox3.clear()
+
+        if self.categoryComboBox2.currentText() == "국방":
+            self.categoryComboBOx3.addItem("공군")
+            self.categoryComboBOx3.addItem("국방부")
+            self.categoryComboBOx3.addItem("남북대치")
+            self.categoryComboBOx3.addItem("방위산업")
+            self.categoryComboBOx3.addItem("병무")
+
+    def subjectChanged(self):
+        pass
+
     def reset_list(self):
         self.fileListWidget.clear()
 
@@ -81,7 +357,7 @@ class MyApp(QMainWindow, form_class):
 
     def create_xml(self):
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
-        path = config["xml"]["dir"]+filename
+        path = config["xml"]["dir"]+"//"+filename
         with open(path, "w") as f:
             f.write("")
 

@@ -70,7 +70,7 @@
       <x>20</x>
       <y>50</y>
       <width>1031</width>
-      <height>151</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -85,7 +85,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>110</y>
        <width>76</width>
        <height>16</height>
       </rect>
@@ -103,7 +103,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>110</y>
+       <y>140</y>
        <width>24</width>
        <height>16</height>
       </rect>
@@ -159,7 +159,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>20</y>
+       <y>110</y>
        <width>151</width>
        <height>22</height>
       </rect>
@@ -170,7 +170,7 @@
       </font>
      </property>
     </widget>
-    <widget class="QComboBox" name="categoryComboBox">
+    <widget class="QComboBox" name="categoryComboBox1">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -183,6 +183,9 @@
       <font>
        <family>Malgun Gothic</family>
       </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
      </property>
     </widget>
     <widget class="QComboBox" name="restrictionComboBox">
@@ -204,10 +207,79 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>110</y>
+       <y>140</y>
        <width>911</width>
        <height>20</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>영상구분</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="subjectComboBox">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>20</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="categoryComboBox2">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="categoryComboBox3">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
      </property>
     </widget>
    </widget>
@@ -215,9 +287,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>220</y>
       <width>1031</width>
-      <height>311</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="font">
@@ -232,7 +304,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -304,7 +376,7 @@
      <property name="geometry">
       <rect>
        <x>300</x>
-       <y>30</y>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -321,8 +393,8 @@
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>660</x>
-       <y>30</y>
+       <x>670</x>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -340,7 +412,7 @@
      <property name="geometry">
       <rect>
        <x>730</x>
-       <y>30</y>
+       <y>40</y>
        <width>291</width>
        <height>241</height>
       </rect>
@@ -366,7 +438,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>30</y>
+       <y>40</y>
        <width>201</width>
        <height>21</height>
       </rect>
@@ -376,7 +448,7 @@
      <property name="geometry">
       <rect>
        <x>370</x>
-       <y>30</y>
+       <y>40</y>
        <width>151</width>
        <height>20</height>
       </rect>
