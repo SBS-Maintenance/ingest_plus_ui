@@ -340,37 +340,37 @@ class MyApp(QMainWindow, form_class):
                 firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
         if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
             self.isGopro = True
-        self.items = self.items+temp_items
-        self.sort()
+        self.items = self.sort(self.items)+self.sort(temp_items)
         print(self.items)
-
-    def sort(self):
-        itemDict = {}
-        if self.isGopro:
-            self.items = [f for f in self.items if f.split(
-                ".")[-1].lower() == "mp4"]
-            gopro_dict = {}
-            for item in self.items:
-                gopro_dict[item[-7:-4]] = []
-            for item in self.items:
-                gopro_dict[item[-7:-4]].append(item)
-            self.items = []
-            for key in gopro_dict:
-                gopro_dict[key].sort(key=lambda x: x.split(
-                    "\\")[-1].split(".")[0][:-4])
-                for item in gopro_dict[key]:
-                    self.items.append(item)
-        else:
-            for item in self.items:
-                itemDict[item.split("\\")[-1]] = item
-            self.items = []
-            for key in (sorted(itemDict.keys())):
-                self.items.append(itemDict[key])
 
         self.fileListWidget.clear()
         for item in self.items:
-
             self.fileListWidget.addItem(QListWidgetItem(item))
+
+    def sort(self, targetList):
+        itemDict = {}
+        if self.isGopro:
+            targetList = [f for f in targetList if f.split(
+                ".")[-1].lower() == "mp4"]
+            gopro_dict = {}
+            for item in targetList:
+                gopro_dict[item[-7:-4]] = []
+            for item in targetList:
+                gopro_dict[item[-7:-4]].append(item)
+            targetList = []
+            for key, value in gopro_dict.items():
+                gopro_dict[key].sort(key=lambda x: x.split(
+                    "\\")[-1].split(".")[0][:-4])
+                for item in gopro_dict[key]:
+                    targetList.append(item)
+        else:
+            for item in targetList:
+                itemDict[item.split("\\")[-1]] = item
+            targetList = []
+            for key in (sorted(itemDict.keys())):
+                targetList.append(itemDict[key])
+
+        return targetList
 
 
 if __name__ == '__main__':
