@@ -5,7 +5,7 @@ a = Analysis(
     ['vts-ui.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('.\\window.ui', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

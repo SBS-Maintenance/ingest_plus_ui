@@ -16,7 +16,8 @@ import configparser
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-form_class = uic.loadUiType("window.ui")[0]
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
 folderDict = {"원본-디지털": ["D_EditDone", "D_CLN", "Download", "Partial Download", "InComing"],
               "취재원본 (보도국)": ["News"]}
 categoryDict = {"취재원본 (보도국)": {"정치": {"": [""],
@@ -151,14 +152,13 @@ class Model(QStandardItemModel):
 class MyApp(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.init_ui()
         self.show()
         self.items = []
         self.isGopro = False
 
     def init_ui(self):
-        self = uic.loadUi("./window.ui", self)
-
         self.ingestTypeComboBox.addItem("Consolidation")
         self.ingestTypeComboBox.addItem("Normal")
 
@@ -230,6 +230,7 @@ class MyApp(QMainWindow, form_class):
             self.categoryComboBox3.addItem(category3)
 
     def reset_list(self):
+        self.items = []
         self.fileListWidget.clear()
 
     def delete_item(self):
