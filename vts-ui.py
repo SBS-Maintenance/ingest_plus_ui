@@ -13,6 +13,8 @@ import datetime
 
 import configparser
 
+from natsort import natsorted
+
 config = configparser.ConfigParser()
 config.read("config.ini")
 
@@ -362,7 +364,7 @@ class MyApp(QMainWindow, form_class):
             for item in targetList:
                 itemDict[item.split("\\")[-1]] = item
             targetList = []
-            for key in (sorted(itemDict.keys())):
+            for key in (natsorted(itemDict.keys())):
                 targetList.append(itemDict[key])
 
         return targetList
