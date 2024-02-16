@@ -355,7 +355,7 @@ class MyApp(QMainWindow, form_class):
             for item in self.items:
                 gopro_dict[item[-7:-4]].append(item)
             self.items = []
-            for key in gopro_dict.keys():
+            for key in gopro_dict:
                 gopro_dict[key].sort(key=lambda x: x.split(
                     "\\")[-1].split(".")[0][:-4])
                 for item in gopro_dict[key]:
