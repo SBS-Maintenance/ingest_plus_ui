@@ -1,1 +1,1 @@
-pyinstaller -w -F  --add-data .\window.ui:.  .\vts-ui.py
+pyinstaller -w -F  --hidden-import=natsort.natsorted --add-data .\window.ui:.  .\vts-ui.py
