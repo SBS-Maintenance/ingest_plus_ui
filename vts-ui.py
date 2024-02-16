@@ -242,7 +242,6 @@ class MyApp(QMainWindow, form_class):
         self.items = []
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
-        print(self.items)
 
     def create_xml(self):
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
@@ -260,7 +259,6 @@ class MyApp(QMainWindow, form_class):
             source_info, "subject").text = self.subjectComboBox.currentText()
         SubElement(source_info, "folder").text = self.folderComboBox.currentText()
         SubElement(source_info, "folder").text = "News"
-        # SubElement(source_info, "event").text = self.eventComboBox.currentText()
         SubElement(source_info, "event").text = "미분류"
         SubElement(
             source_info, "ingest_src").text = self.sourceComboBox.currentText()
@@ -327,8 +325,6 @@ class MyApp(QMainWindow, form_class):
         if event.mimeData().hasUrls():
             for url in event.mimeData().urls():
                 path = url.toLocalFile().replace("/", "\\")
-                # item = QListWidgetItem(path)
-                # self.fileListWidget.addItem(item)
                 temp_items.append(path)
             event.accept()
         else:
@@ -340,8 +336,7 @@ class MyApp(QMainWindow, form_class):
                 firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
         if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
             self.isGopro = True
-        self.items = self.sort(self.items)+self.sort(temp_items)
-        print(self.items)
+        self.items = self.items+self.sort(temp_items)
 
         self.fileListWidget.clear()
         for item in self.items:
