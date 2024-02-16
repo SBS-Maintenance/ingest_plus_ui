@@ -213,8 +213,13 @@ class MyApp(QMainWindow, form_class):
         self.folderComboBox.clear()
         for folder in folderDict[self.subjectComboBox.currentText()]:
             self.folderComboBox.addItem(folder)
+        for category1 in categoryDict[self.subjectComboBox.currentText()].keys():
+            self.categoryComboBox1.addItem(category1)
 
     def category1changed(self):
+        if self.categoryComboBox1.currentText() == "":
+            return
+
         self.categoryComboBox2.clear()
         for category2 in categoryDict[self.subjectComboBox.currentText()][self.categoryComboBox1.currentText()].keys():
             self.categoryComboBox2.addItem(category2)
