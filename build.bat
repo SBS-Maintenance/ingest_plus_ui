@@ -1,0 +1,1 @@
+pyinstaller -w -F  --add-data .\window.ui:.  .\vts-ui.py

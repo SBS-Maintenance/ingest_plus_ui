@@ -234,7 +234,15 @@ class MyApp(QMainWindow, form_class):
         self.fileListWidget.clear()
 
     def delete_item(self):
-        self.fileListWidget.takeItem(self.fileListWidget.currentRow())
+        listItems = self.fileListWidget.selectedItems()
+        if not listItems:
+            return
+        for item in listItems:
+            self.fileListWidget.takeItem(self.fileListWidget.row(item))
+        self.items = []
+        for x in range(self.fileListWidget.count()):
+            self.items.append(self.fileListWidget.item(x).text())
+        print(self.items)
 
     def create_xml(self):
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
@@ -315,24 +323,26 @@ class MyApp(QMainWindow, form_class):
             event.ignore()
 
     def dropEvent(self, event):
+        temp_items = []
         if event.mimeData().hasUrls():
             for url in event.mimeData().urls():
                 path = url.toLocalFile().replace("/", "\\")
                 # item = QListWidgetItem(path)
                 # self.fileListWidget.addItem(item)
-                self.items.append(path)
+                temp_items.append(path)
             event.accept()
         else:
             event.ignore()
 
-        firstItem = self.items[0]
+        firstItem = temp_items[0]
         if (os.path.isdir(firstItem)):
-            self.items = [os.path.join(firstItem, f) for f in os.listdir(
+            temp_items = [os.path.join(firstItem, f) for f in os.listdir(
                 firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
         if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
             self.isGopro = True
-
+        self.items = self.items+temp_items
         self.sort()
+        print(self.items)
 
     def sort(self):
         itemDict = {}
@@ -357,7 +367,9 @@ class MyApp(QMainWindow, form_class):
             for key in (sorted(itemDict.keys())):
                 self.items.append(itemDict[key])
 
+        self.fileListWidget.clear()
         for item in self.items:
+
             self.fileListWidget.addItem(QListWidgetItem(item))
 
 
