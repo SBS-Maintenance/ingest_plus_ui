@@ -378,8 +378,11 @@ def sort(targetList):
         targetList = []
         for key in (natsorted(itemDict.keys())):
             if (os.path.isdir(itemDict[key])):
-                print(itemDict[key])
-                inside = os.listdir(itemDict[key])
+                inside = []
+                try:
+                    inside = os.listdir(itemDict[key])
+                except:
+                    pass
                 full_inside = []
                 for item in inside:
                     full_inside.append(os.path.join(itemDict[key], item))
