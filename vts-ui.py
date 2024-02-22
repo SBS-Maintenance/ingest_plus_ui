@@ -158,7 +158,6 @@ class MyApp(QMainWindow, form_class):
         self.init_ui()
         self.show()
         self.items = []
-        self.isGopro = False
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
@@ -340,12 +339,17 @@ class MyApp(QMainWindow, form_class):
 
 
 def sort(targetList):
+    isGopro = False
     firstItem = targetList[0]
     if (os.path.isdir(firstItem)):
         targetList = [os.path.join(firstItem, f) for f in os.listdir(
-            firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
-    if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
-        isGopro = True
+            # firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
+            firstItem)]
+    try:
+        if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
+            isGopro = True
+    except:
+        pass
     itemDict = {}
     if isGopro:
         targetList = [f for f in targetList if f.split(
@@ -362,11 +366,21 @@ def sort(targetList):
             for item in gopro_dict[key]:
                 targetList.append(item)
     else:
+
         for item in targetList:
             itemDict[item.split("\\")[-1]] = item
         targetList = []
         for key in (natsorted(itemDict.keys())):
-            targetList.append(itemDict[key])
+            if (os.path.isdir(itemDict[key])):
+                print(itemDict[key])
+                inside = os.listdir(itemDict[key])
+                full_inside = []
+                for item in inside:
+                    full_inside.append(os.path.join(itemDict[key], item))
+                print(full_inside)
+                targetList = targetList+sort(full_inside)
+            else:
+                targetList.append(itemDict[key])
 
     return targetList
 
