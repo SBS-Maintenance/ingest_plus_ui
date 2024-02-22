@@ -3,7 +3,7 @@ import os
 
 import pymediainfo
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QTreeView, QTreeWidget, QTreeWidgetItem
-from PyQt5 import uic
+from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt, QEvent
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
@@ -182,6 +182,8 @@ class MyApp(QMainWindow, form_class):
         self.categoryComboBox2.currentIndexChanged.connect(
             self.category2changed)
 
+        self.contentTextEdit.setAcceptDrops(False)
+
         self.sourceComboBox.addItem("VCR")
         self.sourceComboBox.addItem("GRAPHIC")
         self.sourceComboBox.addItem("RSW")
@@ -196,6 +198,9 @@ class MyApp(QMainWindow, form_class):
         self.restrictionComboBox.addItem("스포츠")
         self.restrictionComboBox.addItem("전체")
         self.restrictionComboBox.addItem("보도")
+
+        self.fileListWidget.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection)
 
         self.setAcceptDrops(True)
 
@@ -343,7 +348,6 @@ def sort(targetList):
     firstItem = targetList[0]
     if (os.path.isdir(firstItem)):
         targetList = [os.path.join(firstItem, f) for f in os.listdir(
-            # firstItem) if (os.path.isfile(os.path.join(firstItem, f)))]
             firstItem)]
     try:
         if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
@@ -366,7 +370,6 @@ def sort(targetList):
             for item in gopro_dict[key]:
                 targetList.append(item)
     else:
-
         for item in targetList:
             itemDict[item.split("\\")[-1]] = item
         targetList = []
