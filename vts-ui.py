@@ -345,6 +345,9 @@ class MyApp(QMainWindow, form_class):
 
 def sort(targetList):
     isGopro = False
+    if (len(targetList) == 0):
+        return []
+
     firstItem = targetList[0]
     if (os.path.isdir(firstItem)):
         targetList = [os.path.join(firstItem, f) for f in os.listdir(
