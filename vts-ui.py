@@ -306,12 +306,18 @@ class MyApp(QMainWindow, form_class):
         currentItem = self.fileListWidget.takeItem(currentRow)
         self.fileListWidget.insertItem(currentRow - 1, currentItem)
         self.fileListWidget.setCurrentRow(currentRow-1)
+        self.items = []
+        for x in range(self.fileListWidget.count()):
+            self.items.append(self.fileListWidget.item(x).text())
 
     def item_down(self):
         currentRow = self.fileListWidget.currentRow()
         currentItem = self.fileListWidget.takeItem(currentRow)
         self.fileListWidget.insertItem(currentRow + 1, currentItem)
         self.fileListWidget.setCurrentRow(currentRow+1)
+        self.items = []
+        for x in range(self.fileListWidget.count()):
+            self.items.append(self.fileListWidget.item(x).text())
 
     def dragMoveEvent(self, event):
         if event.mimeData().hasUrls():
