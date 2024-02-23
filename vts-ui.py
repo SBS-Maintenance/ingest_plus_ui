@@ -4,9 +4,10 @@ import os
 import pymediainfo
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QTreeView, QTreeWidget, QTreeWidgetItem
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtCore import Qt, QEvent
+from PyQt5.QtCore import Qt, QEvent, QThread, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
+import struct
 import socket
 import select
 
@@ -25,14 +26,25 @@ from natsort import natsorted
 config = configparser.ConfigParser()
 config.read("config.ini")
 
+
 STATUS_PORT = config["ports"]["status"]
+STATUS_SOCKET = socket.socket(
+    family=socket.AF_INET, type=socket.SOCK_DGRAM, proto=socket.IPPROTO_UDP)
+STATUS_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+STATUS_SOCKET.bind(("", int(STATUS_PORT)))
+mreq = struct.pack("4sl", socket.inet_aton(
+    "224.1.1.1"), socket.INADDR_ANY)
+STATUS_SOCKET.setsockopt(
+    socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
 FAILURE_PORT = config["ports"]["failure"]
+FAILURE_SOCKET = socket.socket(
+    family=socket.AF_INET, type=socket.SOCK_DGRAM, proto=socket.IPPROTO_UDP)
+FAILURE_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+FAILURE_SOCKET.bind(("", int(FAILURE_PORT)))
+FAILURE_SOCKET.setsockopt(
+    socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 
-STATUS_SOCKET = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-STATUS_SOCKET.bind(("127.0.0.1", int(STATUS_PORT)))
-
-FAILURE_SOCKET = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-FAILURE_SOCKET.bind(("127.0.0.1", int(FAILURE_PORT)))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
@@ -167,6 +179,21 @@ class Model(QStandardItemModel):
             self.setItem(j, 0, item)
 
 
+class ListenThread(QThread):
+    received = pyqtSignal(object)
+
+    def __init__(self, parent, socket):
+        QThread.__init__(self, parent)
+        self.socket = socket
+
+    def run(self):
+        with STATUS_SOCKET:
+            while True:
+                reti, retw, rete = select.select([self.socket], [], [])
+                msg, addr = self.socket.recvfrom(1024)
+                self.received.emit(msg.decode())
+
+
 class MyApp(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
@@ -174,24 +201,26 @@ class MyApp(QMainWindow, form_class):
         self.init_ui()
         self.show()
         self.items = []
-        self.failure_list=[]
-        threading.Thread(target=self.listen_status, daemon=True).start()
-        threading.Thread(target=self.listen_failure, daemon=True).start()
+        self.failure_list = []
 
-    def listen_status(self):
-        while True:
-            reti, retw, rete = select.select([STATUS_SOCKET], [], [])
-            for s in reti:
-                msg, addr = STATUS_SOCKET.recvfrom(1024)
-                self.statusPlainTextEdit.setPlainText(msg.decode())
+        self.listen_status_thread = ListenThread(self, STATUS_SOCKET)
+        self.listen_status_thread.received.connect(self.on_status_received)
+        self.listen_status_thread.start()
 
-    def listen_failure(self):
-        while True:
-            reti, retw, rete = select.select([FAILURE_SOCKET], [], [])
-            for s in reti:
-                msg, addr = FAILURE_SOCKET.recvfrom(1024)
-                self.failure_list.append(json.loads(msg.decode()))
-                print(self.failure_list)
+        self.listen_failure_thread = ListenThread(self, FAILURE_SOCKET)
+        self.listen_failure_thread.received.connect(self.on_failure_received)
+        self.listen_failure_thread.start()
+
+    def on_status_received(self, msg):
+        recv = json.loads(msg)
+        print(recv)
+        recv_str = ""
+        for k in recv:
+            recv_str = recv_str+f"{k}:{recv[k]}\n"
+        self.statusPlainTextEdit.setPlainText(recv_str)
+
+    def on_failure_received(self, msg):
+        print(msg)
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
@@ -251,7 +280,7 @@ class MyApp(QMainWindow, form_class):
         self.failureTreeWidget.setColumnWidth(1, 120)
         self.failureTreeWidget.setColumnWidth(2, 100)
         self.failureTreeWidget.setColumnWidth(0, 310)
-        self.root=self.failureTreeWidget.invisibleRootItem()
+        self.root = self.failureTreeWidget.invisibleRootItem()
 
     def subjectChanged(self):
         self.categoryComboBox1.clear()
