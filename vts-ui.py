@@ -7,16 +7,32 @@ from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt, QEvent
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
+import socket
+import select
+
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 import datetime
 
 import configparser
 
+import threading
+
+import json
+
 from natsort import natsorted
 
 config = configparser.ConfigParser()
 config.read("config.ini")
+
+STATUS_PORT = config["ports"]["status"]
+FAILURE_PORT = config["ports"]["failure"]
+
+STATUS_SOCKET = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+STATUS_SOCKET.bind(("127.0.0.1", int(STATUS_PORT)))
+
+FAILURE_SOCKET = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+FAILURE_SOCKET.bind(("127.0.0.1", int(FAILURE_PORT)))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
@@ -158,6 +174,24 @@ class MyApp(QMainWindow, form_class):
         self.init_ui()
         self.show()
         self.items = []
+        self.failure_list=[]
+        threading.Thread(target=self.listen_status, daemon=True).start()
+        threading.Thread(target=self.listen_failure, daemon=True).start()
+
+    def listen_status(self):
+        while True:
+            reti, retw, rete = select.select([STATUS_SOCKET], [], [])
+            for s in reti:
+                msg, addr = STATUS_SOCKET.recvfrom(1024)
+                self.statusPlainTextEdit.setPlainText(msg.decode())
+
+    def listen_failure(self):
+        while True:
+            reti, retw, rete = select.select([FAILURE_SOCKET], [], [])
+            for s in reti:
+                msg, addr = FAILURE_SOCKET.recvfrom(1024)
+                self.failure_list.append(json.loads(msg.decode()))
+                print(self.failure_list)
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
@@ -211,6 +245,13 @@ class MyApp(QMainWindow, form_class):
 
         self.deleteButton.clicked.connect(self.delete_item)
         self.resetButton.clicked.connect(self.reset_list)
+
+        self.failureTreeWidget.setColumnCount(3)
+        self.failureTreeWidget.setHeaderLabels(["제목", "인제스트실패", "전송실패"])
+        self.failureTreeWidget.setColumnWidth(1, 120)
+        self.failureTreeWidget.setColumnWidth(2, 100)
+        self.failureTreeWidget.setColumnWidth(0, 310)
+        self.root=self.failureTreeWidget.invisibleRootItem()
 
     def subjectChanged(self):
         self.categoryComboBox1.clear()

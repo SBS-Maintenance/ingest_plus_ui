@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </size>
   </property>
@@ -529,7 +529,7 @@
    <widget class="QPushButton" name="upButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
+      <x>880</x>
       <y>560</y>
       <width>51</width>
       <height>51</height>
@@ -547,7 +547,7 @@
    <widget class="QPushButton" name="downButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
+      <x>880</x>
       <y>630</y>
       <width>51</width>
       <height>51</height>
@@ -565,8 +565,8 @@
    <widget class="QPushButton" name="deleteButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>690</y>
+      <x>960</x>
+      <y>560</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -595,7 +595,7 @@
      </font>
     </property>
     <property name="text">
-     <string>XML 생성</string>
+     <string>인제스트</string>
     </property>
    </widget>
    <widget class="QComboBox" name="ingestTypeComboBox">
@@ -626,8 +626,8 @@
    <widget class="QPushButton" name="resetButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>750</y>
+      <x>960</x>
+      <y>630</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -635,6 +635,60 @@
     <property name="text">
      <string>초기화</string>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>30</y>
+      <width>591</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>현재 상태</string>
+    </property>
+    <widget class="QPlainTextEdit" name="statusPlainTextEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>561</width>
+       <height>331</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>440</y>
+      <width>591</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>실패 목록</string>
+    </property>
+    <widget class="QTreeWidget" name="failureTreeWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>551</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
