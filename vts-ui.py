@@ -4,8 +4,8 @@ import os
 import pymediainfo
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QTreeView, QTreeWidget, QTreeWidgetItem
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtCore import Qt, QEvent, QThread, pyqtSignal
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtCore import Qt, QEvent, QThread, pyqtSignal, QDate
+from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem
 
 import struct
 import socket
@@ -17,8 +17,6 @@ import datetime
 
 import configparser
 
-import threading
-
 import json
 
 from natsort import natsorted
@@ -29,7 +27,7 @@ config.read("config.ini")
 
 STATUS_PORT = config["ports"]["status"]
 STATUS_SOCKET = socket.socket(
-    family=socket.AF_INET, type=socket.SOCK_DGRAM, proto=socket.IPPROTO_UDP)
+    socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 STATUS_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 STATUS_SOCKET.bind(("", int(STATUS_PORT)))
 mreq = struct.pack("4sl", socket.inet_aton(
@@ -39,7 +37,7 @@ STATUS_SOCKET.setsockopt(
 
 FAILURE_PORT = config["ports"]["failure"]
 FAILURE_SOCKET = socket.socket(
-    family=socket.AF_INET, type=socket.SOCK_DGRAM, proto=socket.IPPROTO_UDP)
+    socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 FAILURE_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 FAILURE_SOCKET.bind(("", int(FAILURE_PORT)))
 FAILURE_SOCKET.setsockopt(
@@ -48,8 +46,10 @@ FAILURE_SOCKET.setsockopt(
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
+
 folderDict = {"원본-디지털": ["D_EditDone", "D_CLN", "Download", "Partial Download", "InComing"],
               "취재원본 (보도국)": ["News"]}
+
 categoryDict = {"취재원본 (보도국)": {"정치": {"": [""],
                                       "국방": ["", "공군", "국방부", "남북대치", "방위산업",
                                              "병무", "예비군", "육군", "종합훈련", "주한미군", "특수부대", "파병", "학군단", "해군"],
@@ -162,6 +162,19 @@ categoryDict = {"취재원본 (보도국)": {"정치": {"": [""],
                 "원본-디지털": {"": {"": [""]}}
                 }
 
+sources = ["VCR", "GRAPHIC", "RSW", "CAP", "XDCAM", "TH", "WEB", "6mm(HDV)"]
+
+restrictions = ["보도제작", "보도본부", "스포츠", "전체", "보도"]
+
+
+class Job():
+    def __init__(self):
+        self.xml = ""
+        self.title = ""
+        self.files = {}
+        self.ingest_status = ""
+        self.ftp_status = ""
+
 
 class Model(QStandardItemModel):
     def __init__(self, data):
@@ -182,16 +195,20 @@ class Model(QStandardItemModel):
 class ListenThread(QThread):
     received = pyqtSignal(object)
 
-    def __init__(self, parent, socket):
+    def __init__(self, parent, sock):
         QThread.__init__(self, parent)
-        self.socket = socket
+        self.sock = sock
+        self.shouldWork = True
 
     def run(self):
         with STATUS_SOCKET:
-            while True:
-                reti, retw, rete = select.select([self.socket], [], [])
-                msg, addr = self.socket.recvfrom(1024)
+            while self.shouldWork:
+                select.select([self.sock], [], [])
+                msg = self.sock.recvfrom(1024)[0]
                 self.received.emit(msg.decode())
+
+    def stop(self):
+        self.shouldWork = False
 
 
 class MyApp(QMainWindow, form_class):
@@ -200,6 +217,10 @@ class MyApp(QMainWindow, form_class):
         self.setupUi(self)
         self.init_ui()
         self.show()
+
+        self.job_list = []
+        self.load_jobs()
+
         self.items = []
         self.failure_list = []
 
@@ -211,11 +232,22 @@ class MyApp(QMainWindow, form_class):
         self.listen_failure_thread.received.connect(self.on_failure_received)
         self.listen_failure_thread.start()
 
+    def load_jobs(self):
+        if (os.path.exists("work/jobs.txt")):
+            with open("work/jobs.txt", "r", encoding="utf-8") as f:
+                self.job_list = json.loads(f.read())
+                for i, job in enumerate(self.job_list):
+                    item = QTreeWidgetItem()
+                    item.setText(0, job["source_info"]["title"])
+                    item.setText(1, job["ingest_status"])
+                    item.setText(2, job["ftp_status"])
+                    self.root.addChild(item)
+
     def on_status_received(self, msg):
         recv = json.loads(msg)
-        print(recv)
         recv_str = ""
-        for k in recv:
+        keys = ["enc1", "enc2", "enc3", "audio1", "proc1"]
+        for k in keys:
             recv_str = recv_str+f"{k}:{recv[k]}\n"
         self.statusPlainTextEdit.setPlainText(recv_str)
 
@@ -247,20 +279,11 @@ class MyApp(QMainWindow, form_class):
 
         self.contentTextEdit.setAcceptDrops(False)
 
-        self.sourceComboBox.addItem("VCR")
-        self.sourceComboBox.addItem("GRAPHIC")
-        self.sourceComboBox.addItem("RSW")
-        self.sourceComboBox.addItem("CAP")
-        self.sourceComboBox.addItem("XDCAM")
-        self.sourceComboBox.addItem("TH")
-        self.sourceComboBox.addItem("WEB")
-        self.sourceComboBox.addItem("6mm(HDV)")
+        for src in sources:
+            self.sourceComboBox.addItem(src)
 
-        self.restrictionComboBox.addItem("보도제작")
-        self.restrictionComboBox.addItem("보도본부")
-        self.restrictionComboBox.addItem("스포츠")
-        self.restrictionComboBox.addItem("전체")
-        self.restrictionComboBox.addItem("보도")
+        for r in restrictions:
+            self.restrictionComboBox.addItem(r)
 
         self.fileListWidget.setSelectionMode(
             QtWidgets.QAbstractItemView.ExtendedSelection)
@@ -275,12 +298,70 @@ class MyApp(QMainWindow, form_class):
         self.deleteButton.clicked.connect(self.delete_item)
         self.resetButton.clicked.connect(self.reset_list)
 
-        self.failureTreeWidget.setColumnCount(3)
-        self.failureTreeWidget.setHeaderLabels(["제목", "인제스트실패", "전송실패"])
-        self.failureTreeWidget.setColumnWidth(1, 120)
-        self.failureTreeWidget.setColumnWidth(2, 100)
-        self.failureTreeWidget.setColumnWidth(0, 310)
-        self.root = self.failureTreeWidget.invisibleRootItem()
+        self.jobTreeWidget.setColumnCount(3)
+        self.jobTreeWidget.setHeaderLabels(["제목", "인제스트", "전송"])
+        self.jobTreeWidget.setColumnWidth(1, 80)
+        self.jobTreeWidget.setColumnWidth(2, 80)
+        self.jobTreeWidget.setColumnWidth(0, 410)
+        self.root = self.jobTreeWidget.invisibleRootItem()
+        self.jobTreeWidget.itemClicked.connect(self.onTreeItemClicked)
+
+    def onTreeItemClicked(self, item, column):
+        job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
+
+        index = self.ingestTypeComboBox.findText(
+            job["source_info"]["ingest_type"])
+        if (index >= 0):
+            self.ingestTypeComboBox.setCurrentIndex(index)
+
+        index = self.subjectComboBox.findText(
+            job["source_info"]["subject"])
+        if (index >= 0):
+            self.subjectComboBox.setCurrentIndex(index)
+
+        index = self.folderComboBox.findText(
+            job["source_info"]["folder"])
+        if (index >= 0):
+            self.folderComboBox.setCurrentIndex(index)
+
+        index = self.sourceComboBox.findText(
+            job["source_info"]["ingest_src"])
+        if (index >= 0):
+            self.sourceComboBox.setCurrentIndex(index)
+
+        for i in range(1, 4):
+            eval(f"self.categoryComboBox{i}.setCurrentIndex(self.categoryComboBox{
+                 i}.findText(job['source_info']['category{i}']))")
+
+        index = self.restrictionComboBox.findText(
+            job["source_info"]["restriction"])
+        if (index >= 0):
+            self.restrictionComboBox.setCurrentIndex(index)
+
+        self.titleLineEdit.setText(job["source_info"]["title"])
+
+        self.deptLineEdit.setText(job["creation_info"]["department"])
+
+        self.journalistLineEdit.setText(
+            job["creation_info"]["journalist"])
+
+        self.videoReporterLineEdit.setText(
+            job["creation_info"]["video_reporter"])
+
+        self.placeLineEdit.setText(job["creation_info"]["place"])
+
+        date = job["creation_info"]["date"].split("-")
+        year = date[0]
+        month = date[1]
+        day = date[2]
+        dateVar = QDate(int(year), int(month), int(day))
+        self.videoDateWidget.setSelectedDate(dateVar)
+
+        self.contentTextEdit.setPlainText(job["creation_info"]["contents"])
+
+        self.fileListWidget.clear()
+        for i, file in enumerate(job["files"]):
+            self.fileListWidget.addItem(QListWidgetItem(job["files"][str(i)]))
 
     def subjectChanged(self):
         self.categoryComboBox1.clear()
@@ -320,8 +401,11 @@ class MyApp(QMainWindow, form_class):
             self.items.append(self.fileListWidget.item(x).text())
 
     def create_xml(self):
+        job = {}
+
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
         path = config["xml"]["dir"]+"//"+filename
+        job["xml"] = path
         with open(path, "w") as f:
             f.write("")
 
@@ -329,47 +413,103 @@ class MyApp(QMainWindow, form_class):
         job_info = SubElement(root, "job_info")
 
         source_info = SubElement(job_info, "source_info")
+        job["source_info"] = {}
+
         SubElement(
             source_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
+        job["source_info"]["ingest_type"] = self.ingestTypeComboBox.currentText()
+
         SubElement(
             source_info, "subject").text = self.subjectComboBox.currentText()
+        job["source_info"]["subject"] = self.subjectComboBox.currentText()
+
         SubElement(source_info, "folder").text = self.folderComboBox.currentText()
-        SubElement(source_info, "folder").text = "News"
+        job["source_info"]["folder"] = self.folderComboBox.currentText()
+
         SubElement(source_info, "event").text = "미분류"
+        job["source_info"]["event"] = "미분류"
+
         SubElement(
             source_info, "ingest_src").text = self.sourceComboBox.currentText()
+        job["source_info"]["ingest_src"] = self.sourceComboBox.currentText()
+
         SubElement(
             source_info, "category1").text = self.categoryComboBox1.currentText()
+        job["source_info"]["category1"] = self.categoryComboBox1.currentText()
+
         SubElement(
             source_info, "category2").text = self.categoryComboBox2.currentText()
+        job["source_info"]["category2"] = self.categoryComboBox2.currentText()
         SubElement(
             source_info, "category3").text = self.categoryComboBox3.currentText()
+        job["source_info"]["category3"] = self.categoryComboBox3.currentText()
         SubElement(
             source_info, "restriction").text = self.restrictionComboBox.currentText()
+        job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
+
         SubElement(source_info, "title").text = self.titleLineEdit.text()
+        job["source_info"]["title"] = self.titleLineEdit.text()
 
         creation_info = SubElement(job_info, "creation_info")
+        job["creation_info"] = {}
+
         SubElement(creation_info, "department").text = self.deptLineEdit.text()
+        job["creation_info"]["department"] = self.deptLineEdit.text()
+
         SubElement(creation_info,
                    "journalist").text = self.journalistLineEdit.text()
+        job["creation_info"]["journalist"] = self.journalistLineEdit.text()
+
         SubElement(creation_info,
                    "video_reporter").text = self.videoReporterLineEdit.text()
+        job["creation_info"]["video_reporter"] = self.videoReporterLineEdit.text()
+
         SubElement(creation_info, "place").text = self.placeLineEdit.text()
+        job["creation_info"]["place"] = self.placeLineEdit.text()
+
         SubElement(creation_info,
                    "date").text = datetime.datetime.strptime(self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
+        job["creation_info"]["date"] = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
+
         SubElement(creation_info,
                    "contents").text = self.contentTextEdit.toPlainText()
+        job["creation_info"]["contents"] = self.contentTextEdit.toPlainText()
 
         file_list = SubElement(job_info, "file_list")
+        job["files"] = {}
         for i in range(self.fileListWidget.count()):
             file = SubElement(file_list, "file")
             SubElement(file, "order").text = str(i)
             SubElement(
                 file, "full_path").text = self.fileListWidget.item(i).text()
+            job["files"][i] = self.fileListWidget.item(i).text()
 
         tree = ElementTree(root)
         tree.write(path, encoding="utf-8", xml_declaration=True)
+
+        job["ingest_status"] = "작업중"
+        job["ftp_status"] = "작업중"
+
+        while len(self.job_list) > 10:
+            for i, j in enumerate(self.job_list):
+                if self.job_list[i]["ingest_status"] == "done" and self.job_list[i]["ftp_status"] == "done":
+                    self.job_list.pop(i)
+                    break
+            break
+
+        self.job_list.append(job)
+        with open("work/jobs.txt", "w", encoding="utf-8") as f:
+            f.write(json.dumps(self.job_list))
         QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
+
+        self.jobTreeWidget.clear()
+        for i, j in enumerate(self.job_list):
+            item = QTreeWidgetItem()
+            item.setText(0, j["source_info"]["title"])
+            item.setText(1, j["ingest_status"])
+            item.setText(2, j["ftp_status"])
+            self.root.addChild(item)
 
     def item_up(self):
         currentRow = self.fileListWidget.currentRow()
@@ -418,6 +558,15 @@ class MyApp(QMainWindow, form_class):
         for item in self.items:
             self.fileListWidget.addItem(QListWidgetItem(item))
 
+    def closeEvent(self, a0: QCloseEvent | None) -> None:
+        self.listen_failure_thread.stop()
+        self.listen_status_thread.stop()
+        self.listen_failure_thread.terminate()
+        self.listen_status_thread.terminate()
+        self.listen_failure_thread.wait()
+        self.listen_status_thread.wait()
+        super().closeEvent(a0)
+
 
 def sort(targetList):
     isGopro = False
@@ -462,7 +611,6 @@ def sort(targetList):
                 full_inside = []
                 for item in inside:
                     full_inside.append(os.path.join(itemDict[key], item))
-                print(full_inside)
                 targetList = targetList+sort(full_inside)
             else:
                 targetList.append(itemDict[key])

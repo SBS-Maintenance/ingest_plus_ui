@@ -641,8 +641,8 @@
      <rect>
       <x>1080</x>
       <y>30</y>
-      <width>591</width>
-      <height>381</height>
+      <width>601</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="title">
@@ -656,8 +656,8 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>561</width>
-       <height>331</height>
+       <width>581</width>
+       <height>271</height>
       </rect>
      </property>
     </widget>
@@ -666,21 +666,21 @@
     <property name="geometry">
      <rect>
       <x>1080</x>
-      <y>440</y>
-      <width>591</width>
-      <height>311</height>
+      <y>360</y>
+      <width>601</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="title">
-     <string>실패 목록</string>
+     <string>작업 목록</string>
     </property>
-    <widget class="QTreeWidget" name="failureTreeWidget">
+    <widget class="QTreeWidget" name="jobTreeWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>551</width>
-       <height>271</height>
+       <width>581</width>
+       <height>451</height>
       </rect>
      </property>
      <column>

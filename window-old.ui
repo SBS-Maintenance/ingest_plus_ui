@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1055</width>
+    <width>1700</width>
     <height>903</height>
    </size>
   </property>
@@ -70,7 +70,7 @@
       <x>20</x>
       <y>50</y>
       <width>1031</width>
-      <height>151</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -81,47 +81,11 @@
     <property name="title">
      <string>소재 정보</string>
     </property>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>48</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>영상구분</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>36</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>이벤트</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>110</y>
        <width>76</width>
        <height>16</height>
       </rect>
@@ -138,8 +102,8 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>110</y>
+       <x>30</x>
+       <y>140</y>
        <width>24</width>
        <height>16</height>
       </rect>
@@ -153,6 +117,184 @@
      </property>
      <property name="text">
       <string>제목</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>카테고리</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>사용제한</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="sourceComboBox">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>110</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="categoryComboBox1">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="restrictionComboBox">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>80</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="titleLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>140</y>
+       <width>911</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>영상구분</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="subjectComboBox">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>20</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="categoryComboBox2">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="categoryComboBox3">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>50</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
+     </property>
+     <property name="modelColumn">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="folderComboBox">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>151</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Malgun Gothic</family>
+      </font>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
@@ -173,150 +315,14 @@
       <string>폴더</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>50</y>
-       <width>48</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>카테고리</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>80</y>
-       <width>48</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-     <property name="text">
-      <string>사용제한</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="subjectComboBox">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>20</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="eventComboBox">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>50</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="sourceComboBox">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>80</y>
-       <width>121</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="folderComboBox">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>20</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="categoryComboBox">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>50</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="restrictionComboBox">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>80</y>
-       <width>151</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Malgun Gothic</family>
-      </font>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="titleLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>110</y>
-       <width>951</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>220</y>
       <width>1031</width>
-      <height>311</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="font">
@@ -331,7 +337,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -403,7 +409,7 @@
      <property name="geometry">
       <rect>
        <x>300</x>
-       <y>30</y>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -420,8 +426,8 @@
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>660</x>
-       <y>30</y>
+       <x>670</x>
+       <y>40</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -439,7 +445,7 @@
      <property name="geometry">
       <rect>
        <x>730</x>
-       <y>30</y>
+       <y>40</y>
        <width>291</width>
        <height>241</height>
       </rect>
@@ -465,7 +471,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>30</y>
+       <y>40</y>
        <width>201</width>
        <height>21</height>
       </rect>
@@ -475,7 +481,7 @@
      <property name="geometry">
       <rect>
        <x>370</x>
-       <y>30</y>
+       <y>40</y>
        <width>151</width>
        <height>20</height>
       </rect>
@@ -523,7 +529,7 @@
    <widget class="QPushButton" name="upButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
+      <x>880</x>
       <y>560</y>
       <width>51</width>
       <height>51</height>
@@ -541,7 +547,7 @@
    <widget class="QPushButton" name="downButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
+      <x>880</x>
       <y>630</y>
       <width>51</width>
       <height>51</height>
@@ -559,8 +565,8 @@
    <widget class="QPushButton" name="deleteButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>690</y>
+      <x>960</x>
+      <y>560</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -589,7 +595,7 @@
      </font>
     </property>
     <property name="text">
-     <string>XML 생성</string>
+     <string>인제스트</string>
     </property>
    </widget>
    <widget class="QComboBox" name="ingestTypeComboBox">
@@ -620,8 +626,8 @@
    <widget class="QPushButton" name="resetButton">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>750</y>
+      <x>960</x>
+      <y>630</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -629,6 +635,60 @@
     <property name="text">
      <string>초기화</string>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>30</y>
+      <width>591</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>현재 상태</string>
+    </property>
+    <widget class="QPlainTextEdit" name="statusPlainTextEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>561</width>
+       <height>331</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>440</y>
+      <width>591</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>실패 목록</string>
+    </property>
+    <widget class="QTreeWidget" name="failureTreeWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>551</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

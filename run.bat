@@ -1,0 +1,1 @@
+venv\Scripts\pythonw.exe vts-ui.py
