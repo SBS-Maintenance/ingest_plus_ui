@@ -17,8 +17,6 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
-LOCK = Lock()
-
 config = configparser.ConfigParser()
 config.read("config.ini")
 
@@ -259,8 +257,6 @@ class MyApp(QMainWindow, form_class):
                     self.root.addChild(item)
 
     def on_status_received(self, msg: str) -> None:
-        global LOCK
-        LOCK.acquire()
         self.statusPlainTextEdit.setPlainText(msg)
         for index, job in enumerate(self.job_list):
             if job["source_info"]["title"] in self.finished_title_list:
@@ -269,8 +265,6 @@ class MyApp(QMainWindow, form_class):
                     1, self.job_list[index]["ingest_status"])
                 self.root.child(index).setText(
                     2, self.job_list[index]["ftp_status"])
-                print(index, job["source_info"]["title"],
-                      self.root.child(index).text(1))
             elif job["source_info"]["title"] in self.failed_title_list:
                 self.job_list[index]["ingest_status"] = "실패"
             item = QTreeWidgetItem()
@@ -278,20 +272,15 @@ class MyApp(QMainWindow, form_class):
         for i in range(self.root.childCount()):
             item = self.root.child(i)
             if (self.job_list[i]["ingest_status"] == "완료"):
-                button = QPushButton()
-                button.setText("재시도")
                 self.jobTreeWidget.removeItemWidget(item, 1)
             if (self.job_list[i]["ingest_status"] == "실패"):
                 button = QPushButton()
                 button.setText("재시도")
                 self.jobTreeWidget.setItemWidget(item, 1, button)
-
             if (self.job_list[i]["ftp_status"] == "실패"):
                 button = QPushButton()
                 button.setText("재시도")
                 self.jobTreeWidget.setItemWidget(item, 2, button)
-
-        LOCK.release()
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
