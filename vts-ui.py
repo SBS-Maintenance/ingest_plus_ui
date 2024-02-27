@@ -2,9 +2,9 @@ import sys
 import os
 
 import pymediainfo
-from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QTreeView, QTreeWidget, QTreeWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem, QStyledItemDelegate, QPushButton, QStyleOptionButton, QStyle
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtCore import Qt, QEvent, QThread, pyqtSignal, QDate
+from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate, QVariant, QRect
 from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem
 
 import struct
@@ -166,14 +166,8 @@ sources = ["VCR", "GRAPHIC", "RSW", "CAP", "XDCAM", "TH", "WEB", "6mm(HDV)"]
 
 restrictions = ["보도제작", "보도본부", "스포츠", "전체", "보도"]
 
-
-class Job():
-    def __init__(self):
-        self.xml = ""
-        self.title = ""
-        self.files = {}
-        self.ingest_status = ""
-        self.ftp_status = ""
+if (not os.path.exists("work")):
+    os.makedirs("work")
 
 
 class Model(QStandardItemModel):
@@ -228,9 +222,9 @@ class MyApp(QMainWindow, form_class):
         self.listen_status_thread.received.connect(self.on_status_received)
         self.listen_status_thread.start()
 
-        self.listen_failure_thread = ListenThread(self, FAILURE_SOCKET)
-        self.listen_failure_thread.received.connect(self.on_failure_received)
-        self.listen_failure_thread.start()
+        self.listen_queue_thread = ListenThread(self, FAILURE_SOCKET)
+        self.listen_queue_thread.received.connect(self.on_queue_received)
+        self.listen_queue_thread.start()
 
     def load_jobs(self):
         if (os.path.exists("work/jobs.txt")):
@@ -239,6 +233,7 @@ class MyApp(QMainWindow, form_class):
                 for i, job in enumerate(self.job_list):
                     item = QTreeWidgetItem()
                     item.setText(0, job["source_info"]["title"])
+
                     item.setText(1, job["ingest_status"])
                     item.setText(2, job["ftp_status"])
                     self.root.addChild(item)
@@ -251,8 +246,12 @@ class MyApp(QMainWindow, form_class):
             recv_str = recv_str+f"{k}:{recv[k]}\n"
         self.statusPlainTextEdit.setPlainText(recv_str)
 
-    def on_failure_received(self, msg):
+    def on_queue_received(self, msg):
         print(msg)
+
+        for i in range(self.root.childCount()):
+            item = self.root.child(i)
+            print(self.job_list[i]["ingest_status"])
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
@@ -363,6 +362,19 @@ class MyApp(QMainWindow, form_class):
         for i, file in enumerate(job["files"]):
             self.fileListWidget.addItem(QListWidgetItem(job["files"][str(i)]))
 
+        # temp code for showing status
+        for i in range(self.root.childCount()):
+            item = self.root.child(i)
+            if (self.job_list[i]["ingest_status"] == "실패"):
+                button = QPushButton()
+                button.setText("재시도")
+                self.jobTreeWidget.setItemWidget(item, 1, button)
+
+            if (self.job_list[i]["ftp_status"] == "실패"):
+                button = QPushButton()
+                button.setText("재시도")
+                self.jobTreeWidget.setItemWidget(item, 2, button)
+
     def subjectChanged(self):
         self.categoryComboBox1.clear()
         self.categoryComboBox2.clear()
@@ -387,7 +399,7 @@ class MyApp(QMainWindow, form_class):
             self.categoryComboBox3.addItem(category3)
 
     def reset_list(self):
-        self.items = []
+        self.items.clear()
         self.fileListWidget.clear()
 
     def delete_item(self):
@@ -396,7 +408,7 @@ class MyApp(QMainWindow, form_class):
             return
         for item in listItems:
             self.fileListWidget.takeItem(self.fileListWidget.row(item))
-        self.items = []
+        self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
@@ -483,17 +495,17 @@ class MyApp(QMainWindow, form_class):
             SubElement(file, "order").text = str(i)
             SubElement(
                 file, "full_path").text = self.fileListWidget.item(i).text()
-            job["files"][i] = self.fileListWidget.item(i).text()
+            job["files"][str(i)] = self.fileListWidget.item(i).text()
 
         tree = ElementTree(root)
         tree.write(path, encoding="utf-8", xml_declaration=True)
 
-        job["ingest_status"] = "작업중"
-        job["ftp_status"] = "작업중"
+        job["ingest_status"] = "실패"
+        job["ftp_status"] = ""
 
         while len(self.job_list) > 10:
             for i, j in enumerate(self.job_list):
-                if self.job_list[i]["ingest_status"] == "done" and self.job_list[i]["ftp_status"] == "done":
+                if self.job_list[i]["ingest_status"] == "완료" and self.job_list[i]["ftp_status"] == "완료":
                     self.job_list.pop(i)
                     break
             break
@@ -516,7 +528,7 @@ class MyApp(QMainWindow, form_class):
         currentItem = self.fileListWidget.takeItem(currentRow)
         self.fileListWidget.insertItem(currentRow - 1, currentItem)
         self.fileListWidget.setCurrentRow(currentRow-1)
-        self.items = []
+        self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
@@ -525,7 +537,7 @@ class MyApp(QMainWindow, form_class):
         currentItem = self.fileListWidget.takeItem(currentRow)
         self.fileListWidget.insertItem(currentRow + 1, currentItem)
         self.fileListWidget.setCurrentRow(currentRow+1)
-        self.items = []
+        self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
@@ -559,11 +571,11 @@ class MyApp(QMainWindow, form_class):
             self.fileListWidget.addItem(QListWidgetItem(item))
 
     def closeEvent(self, a0: QCloseEvent | None) -> None:
-        self.listen_failure_thread.stop()
+        self.listen_queue_thread.stop()
         self.listen_status_thread.stop()
-        self.listen_failure_thread.terminate()
+        self.listen_queue_thread.terminate()
         self.listen_status_thread.terminate()
-        self.listen_failure_thread.wait()
+        self.listen_queue_thread.wait()
         self.listen_status_thread.wait()
         super().closeEvent(a0)
 
