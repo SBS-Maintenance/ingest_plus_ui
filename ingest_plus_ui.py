@@ -7,6 +7,8 @@ import struct
 import socket
 import select
 from xml.etree.ElementTree import Element, SubElement, ElementTree
+from time import sleep
+from threading import Thread, Lock
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,  QPushButton,   QAbstractItemView
 from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate
@@ -15,18 +17,25 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
+LOCK = Lock()
+
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-STATUS_PORT = config["ports"]["status"]
+STATUS_PORT = int(config["ports"]["status"])
 STATUS_SOCKET = socket.socket(
     socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 STATUS_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-STATUS_SOCKET.bind(("", int(STATUS_PORT)))
+STATUS_SOCKET.bind(("", STATUS_PORT))
 mreq = struct.pack("4sl", socket.inet_aton(
     "224.1.1.1"), socket.INADDR_ANY)
 STATUS_SOCKET.setsockopt(
     socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
+
+HOST_IP = "10.10.108.203"
+HOST_PORT = STATUS_PORT
+SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 FAILURE_PORT = config["ports"]["failure"]
 FAILURE_SOCKET = socket.socket(
@@ -186,14 +195,33 @@ class ListenThread(QThread):
         QThread.__init__(self, parent)
         self.sock = sock
         self.should_work = True
+        self.parent = parent
+        Thread(target=self.send_msg, daemon=True).start()
+
+    def send_msg(self):
+        while self.should_work:
+            SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
+            sleep(1)
+            SEND_SOCKET.sendto("get_title_finished".encode(),
+                               (HOST_IP, HOST_PORT))
+            sleep(10)
 
     def run(self):
         with STATUS_SOCKET:
             while self.should_work:
                 select.select([self.sock], [], [])
-                msg = self.sock.recvfrom(1024)[0]
+                msg = self.sock.recvfrom(4096)[0]
                 self.received.emit(msg.decode())
-                self.sock.send(msg.encode())
+                js: dict = json.loads(msg.decode())
+                if "get_title" in js.keys():
+                    # print("모든 작업: ", js["get_title"])
+                    self.parent.title_list = js["get_title"]
+                elif "get_title_finished" in js.keys():
+                    # print("성공한 작업: ", js["get_title_finished"])
+                    self.parent.finished_title_list = js["get_title_finished"]
+                    self.parent.failed_title_list = [
+                        x for x in self.parent.title_list if x not in self.parent.finished_title_list]
+                    # print("실패한 작업: ", self.parent.failed_title_list)
 
     def stop(self):
         self.should_work = False
@@ -210,15 +238,13 @@ class MyApp(QMainWindow, form_class):
         self.load_jobs()
 
         self.items = []
-        self.failure_list = []
+        self.title_list = []
+        self.finished_title_list = []
+        self.failed_title_list = []
 
         self.listen_status_thread = ListenThread(self, STATUS_SOCKET)
         self.listen_status_thread.received.connect(self.on_status_received)
         self.listen_status_thread.start()
-
-        self.listen_queue_thread = ListenThread(self, FAILURE_SOCKET)
-        self.listen_queue_thread.received.connect(self.on_queue_received)
-        self.listen_queue_thread.start()
 
     def load_jobs(self) -> None:
         if (os.path.exists("work/jobs.txt")):
@@ -233,19 +259,39 @@ class MyApp(QMainWindow, form_class):
                     self.root.addChild(item)
 
     def on_status_received(self, msg: str) -> None:
-        recv = json.loads(msg)
-        recv_str = ""
-        keys = ["enc1", "enc2", "enc3", "audio1", "proc1"]
-        for k in keys:
-            recv_str = recv_str+f"{k}:{recv[k]}\n"
-        self.statusPlainTextEdit.setPlainText(recv_str)
-
-    def on_queue_received(self, msg: str) -> None:
-        print(msg)
+        global LOCK
+        LOCK.acquire()
+        self.statusPlainTextEdit.setPlainText(msg)
+        for index, job in enumerate(self.job_list):
+            if job["source_info"]["title"] in self.finished_title_list:
+                self.job_list[index]["ingest_status"] = "완료"
+                self.root.child(index).setText(
+                    1, self.job_list[index]["ingest_status"])
+                self.root.child(index).setText(
+                    2, self.job_list[index]["ftp_status"])
+                print(index, job["source_info"]["title"],
+                      self.root.child(index).text(1))
+            elif job["source_info"]["title"] in self.failed_title_list:
+                self.job_list[index]["ingest_status"] = "실패"
+            item = QTreeWidgetItem()
 
         for i in range(self.root.childCount()):
-            item: QTreeWidgetItem = self.root.child(i)
-            print(self.job_list[i]["ingest_status"])
+            item = self.root.child(i)
+            if (self.job_list[i]["ingest_status"] == "완료"):
+                button = QPushButton()
+                button.setText("재시도")
+                self.jobTreeWidget.removeItemWidget(item, 1)
+            if (self.job_list[i]["ingest_status"] == "실패"):
+                button = QPushButton()
+                button.setText("재시도")
+                self.jobTreeWidget.setItemWidget(item, 1, button)
+
+            if (self.job_list[i]["ftp_status"] == "실패"):
+                button = QPushButton()
+                button.setText("재시도")
+                self.jobTreeWidget.setItemWidget(item, 2, button)
+
+        LOCK.release()
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
@@ -356,19 +402,6 @@ class MyApp(QMainWindow, form_class):
         for i, file in enumerate(job["files"]):
             self.fileListWidget.addItem(QListWidgetItem(job["files"][str(i)]))
 
-        # temp code for showing status
-        for i in range(self.root.childCount()):
-            item = self.root.child(i)
-            if (self.job_list[i]["ingest_status"] == "실패"):
-                button = QPushButton()
-                button.setText("재시도")
-                self.jobTreeWidget.setItemWidget(item, 1, button)
-
-            if (self.job_list[i]["ftp_status"] == "실패"):
-                button = QPushButton()
-                button.setText("재시도")
-                self.jobTreeWidget.setItemWidget(item, 2, button)
-
     def subjectChanged(self):
         self.categoryComboBox1.clear()
         self.categoryComboBox2.clear()
@@ -453,6 +486,12 @@ class MyApp(QMainWindow, form_class):
             source_info, "restriction").text = self.restrictionComboBox.currentText()
         job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
 
+        titles = []
+        for item in self.job_list:
+            titles.append(item["source_info"]["title"])
+        if (self.titleLineEdit.text() in titles):
+            QMessageBox.warning(self, "오류", "제목이 중복됩니다. 다른 제목을 입력하십시오.")
+            return None
         SubElement(source_info, "title").text = self.titleLineEdit.text()
         job["source_info"]["title"] = self.titleLineEdit.text()
 
@@ -503,19 +542,16 @@ class MyApp(QMainWindow, form_class):
                     self.job_list.pop(i)
                     break
             break
+        item = QTreeWidgetItem()
+        item.setText(0, job["source_info"]["title"])
+        item.setText(1, job["ingest_status"])
+        item.setText(2, job["ftp_status"])
+        self.root.addChild(item)
 
         self.job_list.append(job)
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
             f.write(json.dumps(self.job_list))
         QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
-
-        self.jobTreeWidget.clear()
-        for i, j in enumerate(self.job_list):
-            item = QTreeWidgetItem()
-            item.setText(0, j["source_info"]["title"])
-            item.setText(1, j["ingest_status"])
-            item.setText(2, j["ftp_status"])
-            self.root.addChild(item)
 
     def item_up(self):
         current_row: int = self.fileListWidget.currentRow()
@@ -567,11 +603,8 @@ class MyApp(QMainWindow, form_class):
             self.fileListWidget.addItem(QListWidgetItem(item))
 
     def closeEvent(self, a0: QCloseEvent | None) -> None:
-        self.listen_queue_thread.stop()
         self.listen_status_thread.stop()
-        self.listen_queue_thread.terminate()
         self.listen_status_thread.terminate()
-        self.listen_queue_thread.wait()
         self.listen_status_thread.wait()
         super().closeEvent(a0)
 
