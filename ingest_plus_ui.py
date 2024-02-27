@@ -212,14 +212,11 @@ class ListenThread(QThread):
                 self.received.emit(msg.decode())
                 js: dict = json.loads(msg.decode())
                 if "get_title" in js.keys():
-                    # print("모든 작업: ", js["get_title"])
                     self.parent.title_list = js["get_title"]
                 elif "get_title_finished" in js.keys():
-                    # print("성공한 작업: ", js["get_title_finished"])
                     self.parent.finished_title_list = js["get_title_finished"]
                     self.parent.failed_title_list = [
                         x for x in self.parent.title_list if x not in self.parent.finished_title_list]
-                    # print("실패한 작업: ", self.parent.failed_title_list)
 
     def stop(self):
         self.should_work = False
@@ -268,6 +265,9 @@ class MyApp(QMainWindow, form_class):
             elif job["source_info"]["title"] in self.failed_title_list:
                 self.job_list[index]["ingest_status"] = "실패"
             item = QTreeWidgetItem()
+
+        with open("work/jobs.txt", "w", encoding="utf-8") as f:
+            f.write(json.dumps(self.job_list))
 
         for i in range(self.root.childCount()):
             item = self.root.child(i)
@@ -527,17 +527,19 @@ class MyApp(QMainWindow, form_class):
 
         while len(self.job_list) > 10:
             for i, j in enumerate(self.job_list):
-                if self.job_list[i]["ingest_status"] == "완료" and self.job_list[i]["ftp_status"] == "완료":
+                # if self.job_list[i]["ingest_status"] == "완료" and self.job_list[i]["ftp_status"] == "완료":
+                if self.job_list[i]["ingest_status"] == "완료":
                     self.job_list.pop(i)
+                    self.root.takeChild(i)
                     break
             break
         item = QTreeWidgetItem()
         item.setText(0, job["source_info"]["title"])
         item.setText(1, job["ingest_status"])
         item.setText(2, job["ftp_status"])
+        self.job_list.append(job)
         self.root.addChild(item)
 
-        self.job_list.append(job)
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
             f.write(json.dumps(self.job_list))
         QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
