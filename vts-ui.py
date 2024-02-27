@@ -1,29 +1,22 @@
 import sys
 import os
-
-import pymediainfo
-from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem, QStyledItemDelegate, QPushButton, QStyleOptionButton, QStyle
-from PyQt5 import uic, QtWidgets
-from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate, QVariant, QRect
-from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem
-
+import datetime
+import configparser
+import json
 import struct
 import socket
 import select
-
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
-import datetime
-
-import configparser
-
-import json
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,  QPushButton,   QAbstractItemView
+from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate
+from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem
+from PyQt5 import uic
 
 from natsort import natsorted
 
 config = configparser.ConfigParser()
 config.read("config.ini")
-
 
 STATUS_PORT = config["ports"]["status"]
 STATUS_SOCKET = socket.socket(
@@ -180,7 +173,7 @@ class Model(QStandardItemModel):
                 item2 = QStandardItem(mid["mid"])
                 item.setChild(k, 0, item2)
                 if "low" in mid.keys():
-                    for l, low in enumerate(mid["low"]):
+                    for l, low in enumerate(mid["low"]):  # noqa: E741
                         child2 = QStandardItem(low)
                         item2.setChild(l, 0, child2)
             self.setItem(j, 0, item)
@@ -189,20 +182,21 @@ class Model(QStandardItemModel):
 class ListenThread(QThread):
     received = pyqtSignal(object)
 
-    def __init__(self, parent, sock):
+    def __init__(self, parent, sock: socket):
         QThread.__init__(self, parent)
         self.sock = sock
-        self.shouldWork = True
+        self.should_work = True
 
     def run(self):
         with STATUS_SOCKET:
-            while self.shouldWork:
+            while self.should_work:
                 select.select([self.sock], [], [])
                 msg = self.sock.recvfrom(1024)[0]
                 self.received.emit(msg.decode())
+                self.sock.send(msg.encode())
 
     def stop(self):
-        self.shouldWork = False
+        self.should_work = False
 
 
 class MyApp(QMainWindow, form_class):
@@ -226,7 +220,7 @@ class MyApp(QMainWindow, form_class):
         self.listen_queue_thread.received.connect(self.on_queue_received)
         self.listen_queue_thread.start()
 
-    def load_jobs(self):
+    def load_jobs(self) -> None:
         if (os.path.exists("work/jobs.txt")):
             with open("work/jobs.txt", "r", encoding="utf-8") as f:
                 self.job_list = json.loads(f.read())
@@ -238,7 +232,7 @@ class MyApp(QMainWindow, form_class):
                     item.setText(2, job["ftp_status"])
                     self.root.addChild(item)
 
-    def on_status_received(self, msg):
+    def on_status_received(self, msg: str) -> None:
         recv = json.loads(msg)
         recv_str = ""
         keys = ["enc1", "enc2", "enc3", "audio1", "proc1"]
@@ -246,11 +240,11 @@ class MyApp(QMainWindow, form_class):
             recv_str = recv_str+f"{k}:{recv[k]}\n"
         self.statusPlainTextEdit.setPlainText(recv_str)
 
-    def on_queue_received(self, msg):
+    def on_queue_received(self, msg: str) -> None:
         print(msg)
 
         for i in range(self.root.childCount()):
-            item = self.root.child(i)
+            item: QTreeWidgetItem = self.root.child(i)
             print(self.job_list[i]["ingest_status"])
 
     def init_ui(self):
@@ -285,7 +279,7 @@ class MyApp(QMainWindow, form_class):
             self.restrictionComboBox.addItem(r)
 
         self.fileListWidget.setSelectionMode(
-            QtWidgets.QAbstractItemView.ExtendedSelection)
+            QAbstractItemView.ExtendedSelection)
 
         self.setAcceptDrops(True)
 
@@ -305,9 +299,9 @@ class MyApp(QMainWindow, form_class):
         self.root = self.jobTreeWidget.invisibleRootItem()
         self.jobTreeWidget.itemClicked.connect(self.onTreeItemClicked)
 
-    def onTreeItemClicked(self, item, column):
+    def onTreeItemClicked(self, item: QStandardItem, column):
         job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
-
+        index = 0
         index = self.ingestTypeComboBox.findText(
             job["source_info"]["ingest_type"])
         if (index >= 0):
@@ -349,12 +343,12 @@ class MyApp(QMainWindow, form_class):
 
         self.placeLineEdit.setText(job["creation_info"]["place"])
 
-        date = job["creation_info"]["date"].split("-")
-        year = date[0]
-        month = date[1]
-        day = date[2]
-        dateVar = QDate(int(year), int(month), int(day))
-        self.videoDateWidget.setSelectedDate(dateVar)
+        date: list = job["creation_info"]["date"].split("-")
+        year: str = date[0]
+        month: str = date[1]
+        day: str = date[2]
+        date_var = QDate(int(year), int(month), int(day))
+        self.videoDateWidget.setSelectedDate(date_var)
 
         self.contentTextEdit.setPlainText(job["creation_info"]["contents"])
 
@@ -403,10 +397,10 @@ class MyApp(QMainWindow, form_class):
         self.fileListWidget.clear()
 
     def delete_item(self):
-        listItems = self.fileListWidget.selectedItems()
-        if not listItems:
+        list_items: list = self.fileListWidget.selectedItems()
+        if not list_items:
             return
-        for item in listItems:
+        for item in list_items:
             self.fileListWidget.takeItem(self.fileListWidget.row(item))
         self.items.clear()
         for x in range(self.fileListWidget.count()):
@@ -524,19 +518,21 @@ class MyApp(QMainWindow, form_class):
             self.root.addChild(item)
 
     def item_up(self):
-        currentRow = self.fileListWidget.currentRow()
-        currentItem = self.fileListWidget.takeItem(currentRow)
-        self.fileListWidget.insertItem(currentRow - 1, currentItem)
-        self.fileListWidget.setCurrentRow(currentRow-1)
+        current_row: int = self.fileListWidget.currentRow()
+        current_item: QListWidgetItem = self.fileListWidget.takeItem(
+            current_row)
+        self.fileListWidget.insertItem(current_row - 1, current_item)
+        self.fileListWidget.setCurrentRow(current_row-1)
         self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
     def item_down(self):
-        currentRow = self.fileListWidget.currentRow()
-        currentItem = self.fileListWidget.takeItem(currentRow)
-        self.fileListWidget.insertItem(currentRow + 1, currentItem)
-        self.fileListWidget.setCurrentRow(currentRow+1)
+        current_row: int = self.fileListWidget.currentRow()
+        current_item: QListWidgetItem = self.fileListWidget.takeItem(
+            current_row)
+        self.fileListWidget.insertItem(current_row + 1, current_item)
+        self.fileListWidget.setCurrentRow(current_row+1)
         self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
@@ -558,7 +554,7 @@ class MyApp(QMainWindow, form_class):
         temp_items = []
         if event.mimeData().hasUrls():
             for url in event.mimeData().urls():
-                path = url.toLocalFile().replace("/", "\\")
+                path: str = url.toLocalFile().replace("/", "\\")
                 temp_items.append(path)
             event.accept()
         else:
@@ -580,54 +576,54 @@ class MyApp(QMainWindow, form_class):
         super().closeEvent(a0)
 
 
-def sort(targetList):
-    isGopro = False
-    if (len(targetList) == 0):
+def sort(target_list):
+    is_gopro: bool = False
+    if (len(target_list) == 0):
         return []
 
-    firstItem = targetList[0]
-    if (os.path.isdir(firstItem)):
-        targetList = [os.path.join(firstItem, f) for f in os.listdir(
-            firstItem)]
+    first_item: str = target_list[0]
+    if (os.path.isdir(first_item)):
+        target_list = [os.path.join(first_item, f) for f in os.listdir(
+            first_item)]
     try:
-        if (firstItem.split("\\")[-1] == "100GOPRO" or firstItem.split("\\")[-2] == "100GOPRO"):
-            isGopro = True
-    except:
+        if (first_item.split("\\")[-1] == "100GOPRO" or first_item.split("\\")[-2] == "100GOPRO"):
+            is_gopro = True
+    except:  # noqa: E722
         pass
-    itemDict = {}
-    if isGopro:
-        targetList = [f for f in targetList if f.split(
+    item_dict = {}
+    if is_gopro:
+        target_list = [f for f in target_list if f.split(
             ".")[-1].lower() == "mp4"]
         gopro_dict = {}
-        for item in targetList:
+        for item in target_list:
             gopro_dict[item[-7:-4]] = []
-        for item in targetList:
+        for item in target_list:
             gopro_dict[item[-7:-4]].append(item)
-        targetList = []
+        target_list.clear()
         for key, value in gopro_dict.items():
             gopro_dict[key].sort(key=lambda x: x.split(
                 "\\")[-1].split(".")[0][:-4])
             for item in gopro_dict[key]:
-                targetList.append(item)
+                target_list.append(item)
     else:
-        for item in targetList:
-            itemDict[item.split("\\")[-1]] = item
-        targetList = []
-        for key in (natsorted(itemDict.keys())):
-            if (os.path.isdir(itemDict[key])):
+        for item in target_list:
+            item_dict[item.split("\\")[-1]] = item
+        target_list.clear()
+        for key in (natsorted(item_dict.keys())):
+            if (os.path.isdir(item_dict[key])):
                 inside = []
                 try:
-                    inside = os.listdir(itemDict[key])
-                except:
+                    inside = os.listdir(item_dict[key])
+                except:  # noqa: E722
                     pass
                 full_inside = []
                 for item in inside:
-                    full_inside.append(os.path.join(itemDict[key], item))
-                targetList = targetList+sort(full_inside)
+                    full_inside.append(os.path.join(item_dict[key], item))
+                target_list = target_list+sort(full_inside)
             else:
-                targetList.append(itemDict[key])
+                target_list.append(item_dict[key])
 
-    return targetList
+    return target_list
 
 
 if __name__ == '__main__':
