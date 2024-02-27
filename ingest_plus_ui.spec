@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['vts-ui.py'],
+    ['ingest_plus_ui.py'],
     pathex=[],
     binaries=[],
     datas=[('.\\window.ui', '.')],
@@ -21,7 +21,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='vts-ui',
+    name='ingest_plus_ui',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

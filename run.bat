@@ -1,1 +1,1 @@
-venv\Scripts\pythonw.exe vts-ui.py
+venv\Scripts\pythonw.exe ingest_plus_ui.py

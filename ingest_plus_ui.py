@@ -301,7 +301,7 @@ class MyApp(QMainWindow, form_class):
 
     def onTreeItemClicked(self, item: QStandardItem, column):
         job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
-        index = 0
+
         index = self.ingestTypeComboBox.findText(
             job["source_info"]["ingest_type"])
         if (index >= 0):
