@@ -541,12 +541,14 @@ class MyApp(QMainWindow, form_class):
         job["source_info"]["title"] = self.titleLineEdit.text()
 
         title = self.titleLineEdit.text()
+        i = 0
         while (title in titles):
             try:
                 title = "-".join(title.split(
                     "-")[0:-1])+"-"+str(int(title.split("-")[-1])+1)
             except:
                 title = title+"-1"
+            i = i+1
 
         SubElement(source_info, "title").text = title
         job["source_info"]["title"] = title
