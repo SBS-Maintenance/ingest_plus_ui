@@ -208,10 +208,13 @@ class ListenThread(QThread):
     def get_status(self):
         while self.should_work:
             SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.5)
+            sleep(0.2)
             SEND_SOCKET.sendto("get_title_finished".encode(),
                                (HOST_IP, HOST_PORT))
-            sleep(5)
+            sleep(0.2)
+            SEND_SOCKET.sendto("get_title_fail".encode(),
+                               (HOST_IP, HOST_PORT))
+            sleep(3)
 
     def send_msg(self, msg: str):
         SEND_SOCKET.sendto(msg.encode(), (HOST_IP, HOST_PORT))
@@ -306,14 +309,14 @@ class MyApp(QMainWindow, form_class):
             item = self.root.child(i)
             if (self.job_list[i]["ingest_status"] == "완료"):
                 self.jobTreeWidget.removeItemWidget(item, 1)
-            if (self.job_list[i]["ingest_status"] == "실패"):
-                button = QPushButton()
-                button.setText("재시도")
-                self.jobTreeWidget.setItemWidget(item, 1, button)
-            if (self.job_list[i]["ftp_status"] == "실패"):
-                button = QPushButton()
-                button.setText("재시도")
-                self.jobTreeWidget.setItemWidget(item, 2, button)
+            # if (self.job_list[i]["ingest_status"] == "실패"):
+            #     button = QPushButton()
+            #     button.setText("재시도")
+            #     self.jobTreeWidget.setItemWidget(item, 1, button)
+            # if (self.job_list[i]["ftp_status"] == "실패"):
+            #     button = QPushButton()
+            #     button.setText("재시도")
+            #     self.jobTreeWidget.setItemWidget(item, 2, button)
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
