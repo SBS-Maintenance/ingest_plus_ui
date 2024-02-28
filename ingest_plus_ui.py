@@ -19,6 +19,9 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
+import zlib
+
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -49,6 +52,11 @@ STATUS_SOCKET.setsockopt(
 HOST_IP = config["ip"]["unicast"]
 HOST_PORT = int(config["ports"]["unicast"])
 SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+
+def unsigned32(n):
+    return n & 0xffffffff
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
@@ -470,6 +478,9 @@ class MyApp(QMainWindow, form_class):
             self.items.append(self.fileListWidget.item(x).text())
 
     def create_xml(self):
+        titles = []
+        for item in self.job_list:
+            titles.append(item["source_info"]["title"])
         job = {}
 
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
@@ -516,14 +527,16 @@ class MyApp(QMainWindow, form_class):
             source_info, "restriction").text = self.restrictionComboBox.currentText()
         job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
 
-        titles = []
-        for item in self.job_list:
-            titles.append(item["source_info"]["title"])
-        if (self.titleLineEdit.text() in titles):
-            QMessageBox.warning(self, "오류", "제목이 중복됩니다. 다른 제목을 입력하십시오.")
-            return None
         SubElement(source_info, "title").text = self.titleLineEdit.text()
         job["source_info"]["title"] = self.titleLineEdit.text()
+
+        if (self.titleLineEdit.text() in titles):
+            title = self.titleLineEdit.text()+"-" + \
+                str(unsigned32(zlib.crc32((self.titleLineEdit.text(
+                )+datetime.datetime.now().strftime("%Y/%m/%d, %H:%M:%S")).encode())))
+            SubElement(source_info, "title").text = title
+            job["source_info"]["title"] = title
+            self.titleLineEdit.setText(title)
 
         creation_info = SubElement(job_info, "creation_info")
         job["creation_info"] = {}
