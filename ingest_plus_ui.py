@@ -19,7 +19,9 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
-import zlib
+import random
+
+from functools import partial
 
 
 logger = logging.getLogger(__name__)
@@ -28,6 +30,9 @@ formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 streamhandler = logging.StreamHandler()
 streamhandler.setFormatter(formatter)
 logger.addHandler(streamhandler)
+filehandler = logging.FileHandler("log//logfile.log")
+filehandler.setFormatter(formatter)
+logger.addHandler(filehandler)
 timedfilehandler = logging.handlers.TimedRotatingFileHandler(
     filename="log//logfile.log", when="midnight", interval=1, encoding="utf-8")
 timedfilehandler.setFormatter(formatter)
@@ -215,14 +220,14 @@ class ListenThread(QThread):
 
     def get_status(self):
         while self.should_work:
-            SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.2)
-            SEND_SOCKET.sendto("get_title_finished".encode(),
-                               (HOST_IP, HOST_PORT))
-            sleep(0.2)
             SEND_SOCKET.sendto("get_title_fail".encode(),
                                (HOST_IP, HOST_PORT))
-            sleep(3)
+            sleep(0.05)
+            SEND_SOCKET.sendto("get_title_finished".encode(),
+                               (HOST_IP, HOST_PORT))
+            sleep(0.05)
+            SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
+            sleep(5)
 
     def send_msg(self, msg: str):
         SEND_SOCKET.sendto(msg.encode(), (HOST_IP, HOST_PORT))
@@ -272,6 +277,8 @@ class MyApp(QMainWindow, form_class):
         self.current_title = []
         self.finished_title_list = []
         self.failed_title_list = []
+
+        self.selected_job_row = -1
 
         self.failed_src_list = []
 
@@ -379,6 +386,9 @@ class MyApp(QMainWindow, form_class):
         self.jobTreeWidget.itemClicked.connect(self.onTreeItemClicked)
 
     def onTreeItemClicked(self, item: QStandardItem, column):
+        self.selected_job_row = self.jobTreeWidget.indexFromItem(item).row()
+        logging.info(self.selected_job_row)
+
         job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
 
         index = self.ingestTypeComboBox.findText(
@@ -530,13 +540,17 @@ class MyApp(QMainWindow, form_class):
         SubElement(source_info, "title").text = self.titleLineEdit.text()
         job["source_info"]["title"] = self.titleLineEdit.text()
 
-        if (self.titleLineEdit.text() in titles):
-            title = self.titleLineEdit.text()+"-" + \
-                str(unsigned32(zlib.crc32((self.titleLineEdit.text(
-                )+datetime.datetime.now().strftime("%Y/%m/%d, %H:%M:%S")).encode())))
-            SubElement(source_info, "title").text = title
-            job["source_info"]["title"] = title
-            self.titleLineEdit.setText(title)
+        title = self.titleLineEdit.text()
+        while (title in titles):
+            try:
+                title = "-".join(title.split(
+                    "-")[0:-1])+"-"+str(int(title.split("-")[-1])+1)
+            except:
+                title = title+"-1"
+
+        SubElement(source_info, "title").text = title
+        job["source_info"]["title"] = title
+        self.titleLineEdit.setText(title)
 
         creation_info = SubElement(job_info, "creation_info")
         job["creation_info"] = {}
@@ -579,13 +593,9 @@ class MyApp(QMainWindow, form_class):
         job["ingest_status"] = "대기"
         job["ftp_status"] = ""
 
-        while len(self.job_list) > 10:
-            for i, j in enumerate(self.job_list):
-                # if self.job_list[i]["ingest_status"] == "완료" and self.job_list[i]["ftp_status"] == "완료":
-                if self.job_list[i]["ingest_status"] == "완료":
-                    self.job_list.pop(i)
-                    self.root.takeChild(i)
-                    break
+        while len(self.job_list) > 30:
+            self.job_list.pop(0)
+            self.root.takeChild(0)
             break
         item = QTreeWidgetItem()
         item.setText(0, job["source_info"]["title"])
