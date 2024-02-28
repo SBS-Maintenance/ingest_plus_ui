@@ -9,13 +9,28 @@ import select
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 from time import sleep
 from threading import Thread, Lock
+import logging
+import logging.handlers
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,  QPushButton,   QAbstractItemView
 from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate
-from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem, QColor
 from PyQt5 import uic
 
 from natsort import natsorted
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
+streamhandler = logging.StreamHandler()
+streamhandler.setFormatter(formatter)
+logger.addHandler(streamhandler)
+timedfilehandler = logging.handlers.TimedRotatingFileHandler(
+    filename="log//logfile.log", when="midnight", interval=1, encoding="utf-8")
+timedfilehandler.setFormatter(formatter)
+timedfilehandler.suffix = "%Y%m%d"
+logger.addHandler(timedfilehandler)
+
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -26,23 +41,14 @@ STATUS_SOCKET = socket.socket(
 STATUS_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 STATUS_SOCKET.bind(("", STATUS_PORT))
 mreq = struct.pack("4sl", socket.inet_aton(
-    "224.1.1.1"), socket.INADDR_ANY)
+    config["ip"]["multicast"]), socket.INADDR_ANY)
 STATUS_SOCKET.setsockopt(
     socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 
 
-HOST_IP = "10.10.108.203"
-HOST_PORT = STATUS_PORT
+HOST_IP = config["ip"]["unicast"]
+HOST_PORT = int(config["ports"]["unicast"])
 SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-FAILURE_PORT = config["ports"]["failure"]
-FAILURE_SOCKET = socket.socket(
-    socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-FAILURE_SOCKET.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-FAILURE_SOCKET.bind(("", int(FAILURE_PORT)))
-FAILURE_SOCKET.setsockopt(
-    socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
-
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
@@ -169,6 +175,9 @@ restrictions = ["보도제작", "보도본부", "스포츠", "전체", "보도"]
 if (not os.path.exists("work")):
     os.makedirs("work")
 
+if (not os.path.exists("log")):
+    os.makedirs("log")
+
 
 class Model(QStandardItemModel):
     def __init__(self, data):
@@ -194,15 +203,20 @@ class ListenThread(QThread):
         self.sock = sock
         self.should_work = True
         self.parent = parent
-        Thread(target=self.send_msg, daemon=True).start()
+        Thread(target=self.get_status, daemon=True).start()
 
-    def send_msg(self):
+    def get_status(self):
         while self.should_work:
             SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
-            sleep(1)
+            sleep(0.5)
             SEND_SOCKET.sendto("get_title_finished".encode(),
                                (HOST_IP, HOST_PORT))
-            sleep(10)
+            sleep(5)
+
+    def send_msg(self, msg: str):
+        SEND_SOCKET.sendto(msg.encode(), (HOST_IP, HOST_PORT))
+        sleep(0.5)
+        return True
 
     def run(self):
         with STATUS_SOCKET:
@@ -211,12 +225,23 @@ class ListenThread(QThread):
                 msg = self.sock.recvfrom(4096)[0]
                 self.received.emit(msg.decode())
                 js: dict = json.loads(msg.decode())
+                temp_fin_title_list = []
+                temp_fail_src_list = []
                 if "get_title" in js.keys():
-                    self.parent.title_list = js["get_title"]
+                    temp_titles = js["get_title"]
+                    if (len([x for x in temp_titles if x not in self.parent.finished_title_list]) == 1):
+                        self.parent.current_title = [
+                            x for x in temp_titles if x not in self.parent.finished_title_list][0]
+                elif "get_title_fail" in js.keys():
+                    self.parent.failed_title_list = js["get_title_fail"]
                 elif "get_title_finished" in js.keys():
-                    self.parent.finished_title_list = js["get_title_finished"]
-                    self.parent.failed_title_list = [
-                        x for x in self.parent.title_list if x not in self.parent.finished_title_list]
+                    temp_fin_title_list = js["get_title_finished"]
+                    self.parent.finished_title_list = [
+                        x for x in temp_fin_title_list if x not in self.parent.failed_title_list]
+                elif "get_src_fail" in js.keys():
+                    temp_fail_src_list = js["get_src_fail"]
+                    self.parent.failed_src_list = [
+                        os.path.normpath(x) for x in temp_fail_src_list]
 
     def stop(self):
         self.should_work = False
@@ -233,9 +258,11 @@ class MyApp(QMainWindow, form_class):
         self.load_jobs()
 
         self.items = []
-        self.title_list = []
+        self.current_title = []
         self.finished_title_list = []
         self.failed_title_list = []
+
+        self.failed_src_list = []
 
         self.listen_status_thread = ListenThread(self, STATUS_SOCKET)
         self.listen_status_thread.received.connect(self.on_status_received)
@@ -264,6 +291,12 @@ class MyApp(QMainWindow, form_class):
                     2, self.job_list[index]["ftp_status"])
             elif job["source_info"]["title"] in self.failed_title_list:
                 self.job_list[index]["ingest_status"] = "실패"
+                self.root.child(index).setText(
+                    1, self.job_list[index]["ingest_status"])
+            elif job["source_info"]["title"] == self.current_title:
+                self.job_list[index]["ingest_status"] = "작업중"
+                self.root.child(index).setText(
+                    1, self.job_list[index]["ingest_status"])
             item = QTreeWidgetItem()
 
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
@@ -387,9 +420,14 @@ class MyApp(QMainWindow, form_class):
 
         self.contentTextEdit.setPlainText(job["creation_info"]["contents"])
 
+        self.listen_status_thread.send_msg("get_src_fail")
+
         self.fileListWidget.clear()
         for i, file in enumerate(job["files"]):
-            self.fileListWidget.addItem(QListWidgetItem(job["files"][str(i)]))
+            item = QListWidgetItem(job["files"][str(i)])
+            if (os.path.normpath(job["files"][str(i)]) in self.failed_src_list):
+                item.setBackground(QColor("#ff0000"))
+            self.fileListWidget.addItem(item)
 
     def subjectChanged(self):
         self.categoryComboBox1.clear()
@@ -522,7 +560,7 @@ class MyApp(QMainWindow, form_class):
         tree = ElementTree(root)
         tree.write(path, encoding="utf-8", xml_declaration=True)
 
-        job["ingest_status"] = "실패"
+        job["ingest_status"] = "대기"
         job["ftp_status"] = ""
 
         while len(self.job_list) > 10:
