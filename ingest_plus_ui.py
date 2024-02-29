@@ -26,15 +26,13 @@ formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 streamhandler = logging.StreamHandler()
 streamhandler.setFormatter(formatter)
 logger.addHandler(streamhandler)
-filehandler = logging.FileHandler("log//logfile.log")
-filehandler.setFormatter(formatter)
-logger.addHandler(filehandler)
 timedfilehandler = logging.handlers.TimedRotatingFileHandler(
     filename="log//logfile.log", when="midnight", interval=1, encoding="utf-8")
 timedfilehandler.setFormatter(formatter)
 timedfilehandler.suffix = "%Y%m%d"
 logger.addHandler(timedfilehandler)
 
+logger.info("as")
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -53,10 +51,6 @@ STATUS_SOCKET.setsockopt(
 HOST_IP = config["ip"]["unicast"]
 HOST_PORT = int(config["ports"]["unicast"])
 SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-
-def unsigned32(n):
-    return n & 0xffffffff
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
