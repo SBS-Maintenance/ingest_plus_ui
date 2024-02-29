@@ -690,6 +690,32 @@
      </column>
     </widget>
    </widget>
+   <widget class="QPushButton" name="filePushButton">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>700</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>파일 추가</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="dirPushButton">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>760</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>폴더 추가</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

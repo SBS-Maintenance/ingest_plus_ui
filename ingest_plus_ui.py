@@ -8,20 +8,16 @@ import socket
 import select
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 from time import sleep
-from threading import Thread, Lock
+from threading import Thread
 import logging
 import logging.handlers
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,  QPushButton,   QAbstractItemView
-from PyQt5.QtCore import QObject, Qt, QEvent, QThread, pyqtSignal, QDate
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,   QAbstractItemView, QFileDialog
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QDate
 from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem, QColor
 from PyQt5 import uic
 
 from natsort import natsorted
-
-import random
-
-from functools import partial
 
 
 logger = logging.getLogger(__name__)
@@ -385,6 +381,25 @@ class MyApp(QMainWindow, form_class):
         self.root = self.jobTreeWidget.invisibleRootItem()
         self.jobTreeWidget.itemClicked.connect(self.onTreeItemClicked)
 
+        self.filePushButton.clicked.connect(self.add_files)
+        self.dirPushButton.clicked.connect(self.add_folders)
+
+    def add_files(self):
+        fnames = QFileDialog.getOpenFileNames(self, "파일 추가")[0]
+        self.items = self.items+sort(fnames)
+
+        self.fileListWidget.clear()
+        for item in self.items:
+            self.fileListWidget.addItem(QListWidgetItem(item))
+
+    def add_folders(self):
+        dname = QFileDialog.getExistingDirectory(self, "폴더 추가")
+        self.items = self.items+sort([dname])
+
+        self.fileListWidget.clear()
+        for item in self.items:
+            self.fileListWidget.addItem(QListWidgetItem(item))
+
     def onTreeItemClicked(self, item: QStandardItem, column):
         self.selected_job_row = self.jobTreeWidget.indexFromItem(item).row()
         logging.info(self.selected_job_row)
@@ -713,7 +728,8 @@ def sort(target_list):
             else:
                 target_list.append(item_dict[key])
 
-    return target_list
+    # return target_list
+    return [os.path.normpath(x) for x in target_list]
 
 
 if __name__ == '__main__':
