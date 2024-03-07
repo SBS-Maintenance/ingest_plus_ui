@@ -511,16 +511,16 @@ class MyApp(QMainWindow, form_class):
         root = Element("sbsvts")
         job_info = SubElement(root, "job_info")
 
+        SubElement(
+            job_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
+        job["ingest_type"] = self.ingestTypeComboBox.currentText()
+
         source_info = SubElement(job_info, "source_info")
         job["source_info"] = {}
 
         SubElement(
-            source_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
-        job["source_info"]["ingest_type"] = self.ingestTypeComboBox.currentText()
-
-        SubElement(
-            source_info, "subject").text = self.subjectComboBox.currentText()
-        job["source_info"]["subject"] = self.subjectComboBox.currentText()
+            source_info, "centralmediatypecode").text = self.centralmediatypecodeComboBox.currentText()
+        job["source_info"]["centralmediatypecode"] = self.centralmediatypecodeComboBox.currentText()
 
         SubElement(source_info, "folder").text = self.folderComboBox.currentText()
         job["source_info"]["folder"] = self.folderComboBox.currentText()
