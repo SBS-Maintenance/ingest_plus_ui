@@ -327,9 +327,10 @@ class MyApp(QMainWindow, form_class):
         self.ingestTypeComboBox.addItem("Consolidation")
         self.ingestTypeComboBox.addItem("Normal")
 
-        self.subjectComboBox.addItem("취재원본 (보도국)")
-        self.subjectComboBox.addItem("원본-디지털")
-        self.subjectComboBox.currentIndexChanged.connect(self.subjectChanged)
+        self.centralmediatypecodeComboBox.addItem("취재원본 (보도국)")
+        self.centralmediatypecodeComboBox.addItem("원본-디지털")
+        self.centralmediatypecodeComboBox.currentIndexChanged.connect(
+            self.centralmediatypecodeChanged)
 
         for folder in folderDict["취재원본 (보도국)"]:
             self.folderComboBox.addItem(folder)
@@ -405,10 +406,10 @@ class MyApp(QMainWindow, form_class):
         if (index >= 0):
             self.ingestTypeComboBox.setCurrentIndex(index)
 
-        index = self.subjectComboBox.findText(
-            job["source_info"]["subject"])
+        index = self.centralmediatypecodeComboBox.findText(
+            job["source_info"]["centralmediatypecode"])
         if (index >= 0):
-            self.subjectComboBox.setCurrentIndex(index)
+            self.centralmediatypecodeComboBox.setCurrentIndex(index)
 
         index = self.folderComboBox.findText(
             job["source_info"]["folder"])
@@ -459,14 +460,14 @@ class MyApp(QMainWindow, form_class):
                 item.setBackground(QColor("#ff0000"))
             self.fileListWidget.addItem(item)
 
-    def subjectChanged(self):
+    def centralmediatypecodeChanged(self):
         self.categoryComboBox1.clear()
         self.categoryComboBox2.clear()
         self.categoryComboBox3.clear()
         self.folderComboBox.clear()
-        for folder in folderDict[self.subjectComboBox.currentText()]:
+        for folder in folderDict[self.centralmediatypecodeComboBox.currentText()]:
             self.folderComboBox.addItem(folder)
-        for category1 in categoryDict[self.subjectComboBox.currentText()].keys():
+        for category1 in categoryDict[self.centralmediatypecodeComboBox.currentText()].keys():
             self.categoryComboBox1.addItem(category1)
 
     def category1changed(self):
@@ -474,12 +475,12 @@ class MyApp(QMainWindow, form_class):
             return
 
         self.categoryComboBox2.clear()
-        for category2 in categoryDict[self.subjectComboBox.currentText()][self.categoryComboBox1.currentText()].keys():
+        for category2 in categoryDict[self.centralmediatypecodeComboBox.currentText()][self.categoryComboBox1.currentText()].keys():
             self.categoryComboBox2.addItem(category2)
 
     def category2changed(self):
         self.categoryComboBox3.clear()
-        for category3 in categoryDict[self.subjectComboBox.currentText()][self.categoryComboBox1.currentText()][self.categoryComboBox2.currentText()]:
+        for category3 in categoryDict[self.centralmediatypecodeComboBox.currentText()][self.categoryComboBox1.currentText()][self.categoryComboBox2.currentText()]:
             self.categoryComboBox3.addItem(category3)
 
     def reset_list(self):
