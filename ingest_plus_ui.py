@@ -402,7 +402,7 @@ class MyApp(QMainWindow, form_class):
         job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
 
         index = self.ingestTypeComboBox.findText(
-            job["source_info"]["ingest_type"])
+            job["ingest_type"])
         if (index >= 0):
             self.ingestTypeComboBox.setCurrentIndex(index)
 
@@ -509,7 +509,7 @@ class MyApp(QMainWindow, form_class):
         with open(path, "w") as f:
             f.write("")
 
-        root = Element("sbsvts")
+        root = Element("sbs_ingest_plus")
         job_info = SubElement(root, "job_info")
 
         SubElement(
