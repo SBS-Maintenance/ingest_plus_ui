@@ -53,15 +53,36 @@ HOST_IP = config["ip"]["unicast"]
 HOST_PORT = int(config["ports"]["unicast"])
 SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+WEEKDAYS = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+
+
 source_news_folder = ".//source_news_folder.json"
-source_digital_event = ".//source_digital_event.json"
 source_news_category = ".//source_news_category.json"
+source_digital_event = ".//source_digital_event.json"
+source_digital_folder = ".//source_digital_folder.json"
 
 news_folder_list = []
 with open(source_news_folder, encoding="utf-8") as folder_json:
-    news_folder_list = json.load(folder_json)["ChildNodes"]
+    folders = json.load(folder_json)
+    news_folder_list.append({"KsimTree": folders["KsimTree"]})
+    for folder in folders["ChildNodes"]:
+        news_folder_list.append(folder)
+        if (folder["ChildNodes"]):
+            for folder in folder["ChildNodes"]:
+                news_folder_list.append(folder)
 
 digital_folder_list = []
+with open(source_digital_folder, encoding="utf-8") as folder_json:
+    folders = json.load(folder_json)
+    digital_folder_list.append({"KsimTree": folders["KsimTree"]})
+    for folder in folders["ChildNodes"]:
+        digital_folder_list.append(folder)
+        if (folder["ChildNodes"]):
+            for folder in folder["ChildNodes"]:
+                digital_folder_list.append(folder)
+
+target_list = {"취재원본 (보도국)": news_folder_list,
+               "원본-디지털": digital_folder_list}
 
 event_list = []
 with open(source_digital_event, encoding="utf-8") as event_json:
@@ -75,14 +96,9 @@ category2_list = [""]
 for category2 in category1_list[0]["ChildNodes"]:
     category2_list.append(category2["KsimTree"]["Name"])
 
-WEEKDAYS = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
-
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 form_class = uic.loadUiType(BASE_DIR + r'\\window.ui')[0]
-
-folderDict = {"원본-디지털": ["D_EditDone", "D_CLN", "Download", "Partial Download", "InComing"],
-              "취재원본 (보도국)": ["News"]}
 
 sources = ["VCR", "GRAPHIC", "RSW", "CAP", "XDCAM", "TH", "WEB", "6mm(HDV)"]
 
@@ -236,7 +252,10 @@ class MyApp(QMainWindow, form_class):
         self.centralmediatypecodeComboBox.currentIndexChanged.connect(
             self.centralmediatypecodeChanged)
 
-        self.folderComboBox.addItem("News")
+        for folder in news_folder_list:
+            if (folder["KsimTree"]["Flag"] == 10002 or folder["KsimTree"]["Flag"] == 0):
+                if (folder["KsimTree"]["Name"] not in WEEKDAYS):
+                    self.folderComboBox.addItem(folder["KsimTree"]["Name"])
 
         for category1 in category1_list:
             self.categoryComboBox1.addItem(category1["KsimTree"]["Name"])
@@ -372,13 +391,17 @@ class MyApp(QMainWindow, form_class):
         self.folderComboBox.clear()
         self.folderComboBox.clear()
         if (self.centralmediatypecodeComboBox.currentText() == "취재원본 (보도국)"):
-            self.folderComboBox.addItem("News")
+            for folder in news_folder_list:
+                if (folder["KsimTree"]["Flag"] == 10002 or folder["KsimTree"]["Flag"] == 0):
+                    if (folder["KsimTree"]["Name"] not in WEEKDAYS):
+                        self.folderComboBox.addItem(folder["KsimTree"]["Name"])
             for category1 in category1_list:
                 self.categoryComboBox1.addItem(category1["KsimTree"]["Name"])
 
-        elif (self.centralmediatypecodeComboBox.currentText() == "원본-디지털)"):
+        elif (self.centralmediatypecodeComboBox.currentText() == "원본-디지털"):
             for folder in digital_folder_list:
-                self.folderComboBox.addItem(folder)
+                if (folder["KsimTree"]["Flag"] == 10002 or folder["KsimTree"]["Flag"] == 0):
+                    self.folderComboBox.addItem(folder["KsimTree"]["Name"])
 
     def category1changed(self):
         self.categoryComboBox2.clear()
@@ -459,13 +482,19 @@ class MyApp(QMainWindow, form_class):
 
         weekday_name = WEEKDAYS[time.localtime().tm_wday]
         folder_Id = ""
-        folder_name = ""
+        folder_name = self.folderComboBox.currentText()
         folder_path = ""
-        for folder in news_folder_list:
-            if (folder["KsimTree"]["Name"] == weekday_name):
-                folder_Id = str(folder["KsimTree"]["Id"])
-                folder_name = folder["KsimTree"]["Name"]
-                folder_path = folder["KsimTree"]["Path"]
+
+        if (folder_name == "News"):
+            for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
+                if (folder["KsimTree"]["Name"] == weekday_name):
+                    folder_Id = str(folder["KsimTree"]["Id"])
+                    folder_path = folder["KsimTree"]["Path"]
+        else:
+            for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
+                if (folder["KsimTree"]["Name"] == folder_name):
+                    folder_Id = str(folder["KsimTree"]["Id"])
+                    folder_path = folder["KsimTree"]["Path"]
 
         folder = SubElement(source_info, "folder")
         SubElement(folder, "folder_name").text = folder_name
@@ -502,7 +531,7 @@ class MyApp(QMainWindow, form_class):
         category_path = ""
         category_Id = ""
         if (category3 != ""):
-            for temp_cat_1 in category_list:
+            for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
                     temp_cat_2_list = temp_cat_1["ChildNodes"]
                     for temp_cat_2 in temp_cat_2_list:
@@ -515,7 +544,7 @@ class MyApp(QMainWindow, form_class):
                                     category_Id = str(
                                         temp_cat_3["KsimTree"]["Id"])
         elif (category2 != ""):
-            for temp_cat_1 in category_list:
+            for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
                     temp_cat_2_list = temp_cat_1["ChildNodes"]
                     for temp_cat_2 in temp_cat_2_list:
@@ -524,7 +553,7 @@ class MyApp(QMainWindow, form_class):
                             category_path = temp_cat_2["KsimTree"]["Path"]
                             category_Id = str(temp_cat_2["KsimTree"]["Id"])
         else:
-            for temp_cat_1 in category_list:
+            for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
                     category_name = temp_cat_1["KsimTree"]["Name"]
                     category_path = temp_cat_1["KsimTree"]["Path"]

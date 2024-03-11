@@ -1,0 +1,64 @@
+{
+  "KsimTree": {
+    "Id": 2009701,
+    "Name": "Digital",
+    "Path": "전체\\Digital",
+    "Flag": 0
+  },
+  "ChildNodes": [
+    {
+      "KsimTree": {
+        "Id": 2009702,
+        "Name": "D_EditDone",
+        "Path": "전체\\Digital\\D_EditDone",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009703,
+        "Name": "D_CLN",
+        "Path": "전체\\Digital\\D_CLN",
+        "Flag": 8075449
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009704,
+        "Name": "D_촬영원본",
+        "Path": "전체\\Digital\\D_촬영원본",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009705,
+        "Name": "Download",
+        "Path": "전체\\Digital\\Download",
+        "Flag": 8075449
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009706,
+        "Name": "Partial Download",
+        "Path": "전체\\Digital\\Partial Download",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009707,
+        "Name": "InComing",
+        "Path": "전체\\Digital\\InComing",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    }
+  ]
+}
