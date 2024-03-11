@@ -1,0 +1,55 @@
+{
+  "KsimTree": {
+    "Id": 20063,
+    "Name": "보도",
+    "Path": "전체\\보도",
+    "Flag": 1701607796
+  },
+  "ChildNodes": [
+    {
+      "KsimTree": {
+        "Id": 20439,
+        "Name": "미분류",
+        "Path": "전체\\보도\\미분류",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2001534,
+        "Name": "연평도",
+        "Path": "전체\\보도\\연평도",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2001535,
+        "Name": "천안함",
+        "Path": "전체\\보도\\천안함",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2003827,
+        "Name": "미래-일본 이집트 중국 필리핀",
+        "Path": "전체\\보도\\미래-일본 이집트 중국 필리핀",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2004221,
+        "Name": "김정일 사망",
+        "Path": "전체\\보도\\김정일 사망",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    }
+  ]
+}

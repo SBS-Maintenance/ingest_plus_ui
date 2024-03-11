@@ -1,0 +1,5135 @@
+{
+  "KsimTree": {
+    "Id": 2,
+    "Name": "전체",
+    "Path": "전체",
+    "Flag": 0
+  },
+  "ChildNodes": [
+    {
+      "KsimTree": {
+        "Id": 20111,
+        "Name": "정치",
+        "Path": "전체\\정치",
+        "Flag": 17301829
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000134,
+            "Name": "국방",
+            "Path": "전체\\정치\\국방",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000297,
+                "Name": "공군",
+                "Path": "전체\\정치\\국방\\공군",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000294,
+                "Name": "국방부",
+                "Path": "전체\\정치\\국방\\국방부",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000306,
+                "Name": "남북대치",
+                "Path": "전체\\정치\\국방\\남북대치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000305,
+                "Name": "방위산업",
+                "Path": "전체\\정치\\국방\\방위산업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000304,
+                "Name": "병무",
+                "Path": "전체\\정치\\국방\\병무",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000300,
+                "Name": "예비군",
+                "Path": "전체\\정치\\국방\\예비군",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000295,
+                "Name": "육군",
+                "Path": "전체\\정치\\국방\\육군",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000301,
+                "Name": "종합훈련",
+                "Path": "전체\\정치\\국방\\종합훈련",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000299,
+                "Name": "주한미군",
+                "Path": "전체\\정치\\국방\\주한미군",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000298,
+                "Name": "특수부대",
+                "Path": "전체\\정치\\국방\\특수부대",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000302,
+                "Name": "파병",
+                "Path": "전체\\정치\\국방\\파병",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000307,
+                "Name": "학군단",
+                "Path": "전체\\정치\\국방\\학군단",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000296,
+                "Name": "해군",
+                "Path": "전체\\정치\\국방\\해군",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 20317,
+            "Name": "국회",
+            "Path": "전체\\정치\\국회",
+            "Flag": -842150451
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000261,
+                "Name": "국회기관",
+                "Path": "전체\\정치\\국회\\국회기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000262,
+                "Name": "본회의",
+                "Path": "전체\\정치\\국회\\본회의",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000263,
+                "Name": "상임위원회",
+                "Path": "전체\\정치\\국회\\상임위원회",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000264,
+                "Name": "대표회담",
+                "Path": "전체\\정치\\국회\\대표회담",
+                "Flag": 1641075026
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000265,
+                "Name": "국회의원",
+                "Path": "전체\\정치\\국회\\국회의원",
+                "Flag": 15
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000266,
+                "Name": "국정감사",
+                "Path": "전체\\정치\\국회\\국정감사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004043,
+                "Name": "청문회",
+                "Path": "전체\\정치\\국회\\청문회",
+                "Flag": 81790720
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006573,
+                "Name": "토론회",
+                "Path": "전체\\정치\\국회\\토론회",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000135,
+            "Name": "선거",
+            "Path": "전체\\정치\\선거",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000309,
+                "Name": "국회의원",
+                "Path": "전체\\정치\\선거\\국회의원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000308,
+                "Name": "대통령",
+                "Path": "전체\\정치\\선거\\대통령",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000311,
+                "Name": "선거관리위원회",
+                "Path": "전체\\정치\\선거\\선거관리위원회",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000310,
+                "Name": "지방자치단체",
+                "Path": "전체\\정치\\선거\\지방자치단체",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 20322,
+            "Name": "외교",
+            "Path": "전체\\정치\\외교",
+            "Flag": -842150451
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000293,
+                "Name": "교민이민",
+                "Path": "전체\\정치\\외교\\교민이민",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000289,
+                "Name": "외교부",
+                "Path": "전체\\정치\\외교\\외교부",
+                "Flag": 7301632
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000290,
+                "Name": "재외공관",
+                "Path": "전체\\정치\\외교\\재외공관",
+                "Flag": 372
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000291,
+                "Name": "주한공관",
+                "Path": "전체\\정치\\외교\\주한공관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000292,
+                "Name": "회담",
+                "Path": "전체\\정치\\외교\\회담",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000131,
+            "Name": "정당",
+            "Path": "전체\\정치\\정당",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000269,
+                "Name": "군소정당",
+                "Path": "전체\\정치\\정당\\군소정당",
+                "Flag": 7932972
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000267,
+                "Name": "여당",
+                "Path": "전체\\정치\\정당\\여당",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000268,
+                "Name": "야당",
+                "Path": "전체\\정치\\정당\\야당",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000598,
+            "Name": "정치사건",
+            "Path": "전체\\정치\\정치사건",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000599,
+            "Name": "정치편집완본",
+            "Path": "전체\\정치\\정치편집완본",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 20321,
+            "Name": "지방자치단체",
+            "Path": "전체\\정치\\지방자치단체",
+            "Flag": -842150451
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000278,
+                "Name": "서울특별시",
+                "Path": "전체\\정치\\지방자치단체\\서울특별시",
+                "Flag": 7933395
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000279,
+                "Name": "광역시",
+                "Path": "전체\\정치\\지방자치단체\\광역시",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000280,
+                "Name": "경기도",
+                "Path": "전체\\정치\\지방자치단체\\경기도",
+                "Flag": -340740096
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000281,
+                "Name": "강원도",
+                "Path": "전체\\정치\\지방자치단체\\강원도",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000282,
+                "Name": "충청도",
+                "Path": "전체\\정치\\지방자치단체\\충청도",
+                "Flag": 1641078176
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000283,
+                "Name": "전라도",
+                "Path": "전체\\정치\\지방자치단체\\전라도",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000284,
+                "Name": "경상도",
+                "Path": "전체\\정치\\지방자치단체\\경상도",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000285,
+                "Name": "제주도",
+                "Path": "전체\\정치\\지방자치단체\\제주도",
+                "Flag": -2135627084
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000286,
+                "Name": "이북5도",
+                "Path": "전체\\정치\\지방자치단체\\이북5도",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000287,
+                "Name": "세종시",
+                "Path": "전체\\정치\\지방자치단체\\세종시",
+                "Flag": 7933818
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 20316,
+            "Name": "청와대",
+            "Path": "전체\\정치\\청와대",
+            "Flag": -842150451
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000249,
+                "Name": "청와대외경",
+                "Path": "전체\\정치\\청와대\\청와대외경",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000250,
+                "Name": "정상회담",
+                "Path": "전체\\정치\\청와대\\정상회담",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000251,
+                "Name": "영수회담",
+                "Path": "전체\\정치\\청와대\\영수회담",
+                "Flag": 7932126
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000252,
+                "Name": "집무기자회견담화",
+                "Path": "전체\\정치\\청와대\\집무기자회견담화",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000253,
+                "Name": "오찬만찬",
+                "Path": "전체\\정치\\청와대\\오찬만찬",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000254,
+                "Name": "회의및행사",
+                "Path": "전체\\정치\\청와대\\회의및행사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000255,
+                "Name": "수석",
+                "Path": "전체\\정치\\청와대\\수석",
+                "Flag": 1641076397
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000256,
+                "Name": "접견및수여식",
+                "Path": "전체\\정치\\청와대\\접견및수여식",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000257,
+                "Name": "업무보고",
+                "Path": "전체\\정치\\청와대\\업무보고",
+                "Flag": 764260237
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000258,
+                "Name": "가족행사",
+                "Path": "전체\\정치\\청와대\\가족행사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000259,
+                "Name": "현장방문",
+                "Path": "전체\\정치\\청와대\\현장방문",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006574,
+                "Name": "해외순방",
+                "Path": "전체\\정치\\청와대\\해외순방",
+                "Flag": 2621453
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2009668,
+            "Name": "용산대통령실",
+            "Path": "전체\\정치\\용산대통령실",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2009669,
+                "Name": "용산대통령실외경",
+                "Path": "전체\\정치\\용산대통령실\\용산대통령실외경",
+                "Flag": 2621453
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009670,
+                "Name": "정상회담",
+                "Path": "전체\\정치\\용산대통령실\\정상회담",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009671,
+                "Name": "영수회담",
+                "Path": "전체\\정치\\용산대통령실\\영수회담",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009672,
+                "Name": "집무기자회견담화",
+                "Path": "전체\\정치\\용산대통령실\\집무기자회견담화",
+                "Flag": 2621453
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009673,
+                "Name": "오찬만찬",
+                "Path": "전체\\정치\\용산대통령실\\오찬만찬",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009675,
+                "Name": "회의및행사",
+                "Path": "전체\\정치\\용산대통령실\\회의및행사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009677,
+                "Name": "수석",
+                "Path": "전체\\정치\\용산대통령실\\수석",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009678,
+                "Name": "접견및수여식",
+                "Path": "전체\\정치\\용산대통령실\\접견및수여식",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009679,
+                "Name": "업무보고",
+                "Path": "전체\\정치\\용산대통령실\\업무보고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009680,
+                "Name": "가족행사",
+                "Path": "전체\\정치\\용산대통령실\\가족행사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009681,
+                "Name": "현장방문",
+                "Path": "전체\\정치\\용산대통령실\\현장방문",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2009682,
+                "Name": "해외순방",
+                "Path": "전체\\정치\\용산대통령실\\해외순방",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000132,
+            "Name": "행정",
+            "Path": "전체\\정치\\행정",
+            "Flag": 644285922
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000275,
+                "Name": "관계기관",
+                "Path": "전체\\정치\\행정\\관계기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000271,
+                "Name": "국무총리",
+                "Path": "전체\\정치\\행정\\국무총리",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000273,
+                "Name": "정부청사",
+                "Path": "전체\\정치\\행정\\정부청사",
+                "Flag": 1641075707
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006575,
+                "Name": "정부청사(세종)",
+                "Path": "전체\\정치\\행정\\정부청사(세종)",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006576,
+                "Name": "정부청사(대전)",
+                "Path": "전체\\정치\\행정\\정부청사(대전)",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006610,
+                "Name": "정부청사(중앙)",
+                "Path": "전체\\정치\\행정\\정부청사(중앙)",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 20112,
+        "Name": "경제",
+        "Path": "전체\\경제",
+        "Flag": 17301999
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000143,
+            "Name": "1차금융",
+            "Path": "전체\\경제\\1차금융",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000209,
+                "Name": "기관",
+                "Path": "전체\\경제\\1차금융\\기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000206,
+                "Name": "시중은행",
+                "Path": "전체\\경제\\1차금융\\시중은행",
+                "Flag": 7930011
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000205,
+                "Name": "한국은행",
+                "Path": "전체\\경제\\1차금융\\한국은행",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004597,
+                "Name": "화폐 통화 환율",
+                "Path": "전체\\경제\\1차금융\\화폐 통화 환율",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000144,
+            "Name": "2차금융",
+            "Path": "전체\\경제\\2차금융",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000216,
+                "Name": "개인신용",
+                "Path": "전체\\경제\\2차금융\\개인신용",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000212,
+                "Name": "대부업",
+                "Path": "전체\\경제\\2차금융\\대부업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000211,
+                "Name": "보험",
+                "Path": "전체\\경제\\2차금융\\보험",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000213,
+                "Name": "신용카드",
+                "Path": "전체\\경제\\2차금융\\신용카드",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000215,
+                "Name": "제2금융",
+                "Path": "전체\\경제\\2차금융\\제2금융",
+                "Flag": 7930434
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000210,
+                "Name": "증권",
+                "Path": "전체\\경제\\2차금융\\증권",
+                "Flag": 1641074536
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000141,
+            "Name": "건설",
+            "Path": "전체\\경제\\건설",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2004595,
+                "Name": "교량 터널 도로",
+                "Path": "전체\\경제\\건설\\교량 터널 도로",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004594,
+                "Name": "아파트 빌딩",
+                "Path": "전체\\경제\\건설\\아파트 빌딩",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004596,
+                "Name": "재개발 택지개발",
+                "Path": "전체\\경제\\건설\\재개발 택지개발",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000619,
+            "Name": "경제사건",
+            "Path": "전체\\경제\\경제사건",
+            "Flag": -842150451
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000620,
+            "Name": "경제편집완본",
+            "Path": "전체\\경제\\경제편집완본",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000142,
+            "Name": "기업",
+            "Path": "전체\\경제\\기업",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000198,
+                "Name": "경제단체",
+                "Path": "전체\\경제\\기업\\경제단체",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000202,
+                "Name": "공기업",
+                "Path": "전체\\경제\\기업\\공기업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000204,
+                "Name": "외국기업",
+                "Path": "전체\\경제\\기업\\외국기업",
+                "Flag": 538976315
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000199,
+                "Name": "대기업",
+                "Path": "전체\\경제\\기업\\대기업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000201,
+                "Name": "중소기업",
+                "Path": "전체\\경제\\기업\\중소기업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000147,
+            "Name": "농림수산",
+            "Path": "전체\\경제\\농림수산",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000238,
+                "Name": "광업",
+                "Path": "전체\\경제\\농림수산\\광업",
+                "Flag": 20581
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000236,
+                "Name": "농업",
+                "Path": "전체\\경제\\농림수산\\농업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000235,
+                "Name": "어업",
+                "Path": "전체\\경제\\농림수산\\어업",
+                "Flag": 808532224
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000237,
+                "Name": "임업",
+                "Path": "전체\\경제\\농림수산\\임업",
+                "Flag": 1641073247
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000234,
+                "Name": "축산업",
+                "Path": "전체\\경제\\농림수산\\축산업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000136,
+            "Name": "무역",
+            "Path": "전체\\경제\\무역",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000153,
+                "Name": "물류기지",
+                "Path": "전체\\경제\\무역\\물류기지",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006578,
+                "Name": "수.출입",
+                "Path": "전체\\경제\\무역\\수.출입",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006580,
+                "Name": "통관.세관",
+                "Path": "전체\\경제\\무역\\통관.세관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000146,
+            "Name": "부동산",
+            "Path": "전체\\경제\\부동산",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000601,
+                "Name": "건물",
+                "Path": "전체\\경제\\부동산\\건물",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000226,
+                "Name": "분양",
+                "Path": "전체\\경제\\부동산\\분양",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000225,
+                "Name": "아파트",
+                "Path": "전체\\경제\\부동산\\아파트",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000228,
+                "Name": "임야",
+                "Path": "전체\\경제\\부동산\\임야",
+                "Flag": 1641073590
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000224,
+                "Name": "주택가",
+                "Path": "전체\\경제\\부동산\\주택가",
+                "Flag": 7930857
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006581,
+                "Name": "부동산거래",
+                "Path": "전체\\경제\\부동산\\부동산거래",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000145,
+            "Name": "서비스업",
+            "Path": "전체\\경제\\서비스업",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000222,
+                "Name": "숙박업소",
+                "Path": "전체\\경제\\서비스업\\숙박업소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000219,
+                "Name": "유흥업",
+                "Path": "전체\\경제\\서비스업\\유흥업",
+                "Flag": 1641072913
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000217,
+                "Name": "요식업",
+                "Path": "전체\\경제\\서비스업\\요식업",
+                "Flag": -325734400
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006582,
+                "Name": "임대.리스업",
+                "Path": "전체\\경제\\서비스업\\임대.리스업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006583,
+                "Name": "이사.택배",
+                "Path": "전체\\경제\\서비스업\\이사.택배",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000148,
+            "Name": "에너지",
+            "Path": "전체\\경제\\에너지",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000240,
+                "Name": "가스",
+                "Path": "전체\\경제\\에너지\\가스",
+                "Flag": 1634100580
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000248,
+                "Name": "대체에너지",
+                "Path": "전체\\경제\\에너지\\대체에너지",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000239,
+                "Name": "석유",
+                "Path": "전체\\경제\\에너지\\석유",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000242,
+                "Name": "수력",
+                "Path": "전체\\경제\\에너지\\수력",
+                "Flag": 7931703
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000243,
+                "Name": "연탄",
+                "Path": "전체\\경제\\에너지\\연탄",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000241,
+                "Name": "원자력",
+                "Path": "전체\\경제\\에너지\\원자력",
+                "Flag": 84084480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000244,
+                "Name": "전기",
+                "Path": "전체\\경제\\에너지\\전기",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000245,
+                "Name": "주유소",
+                "Path": "전체\\경제\\에너지\\주유소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000246,
+                "Name": "풍력",
+                "Path": "전체\\경제\\에너지\\풍력",
+                "Flag": 1641075716
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000247,
+                "Name": "태양광",
+                "Path": "전체\\경제\\에너지\\태양광",
+                "Flag": 4680
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000140,
+            "Name": "유통",
+            "Path": "전체\\경제\\유통",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000190,
+                "Name": "경매",
+                "Path": "전체\\경제\\유통\\경매",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000189,
+                "Name": "귀금속",
+                "Path": "전체\\경제\\유통\\귀금속",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000185,
+                "Name": "노점",
+                "Path": "전체\\경제\\유통\\노점",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004593,
+                "Name": "농수산물시장",
+                "Path": "전체\\경제\\유통\\농수산물시장",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000178,
+                "Name": "백화점",
+                "Path": "전체\\경제\\유통\\백화점",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000182,
+                "Name": "도소매업",
+                "Path": "전체\\경제\\유통\\도소매업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000191,
+                "Name": "쇼핑몰",
+                "Path": "전체\\경제\\유통\\쇼핑몰",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000180,
+                "Name": "재래시장",
+                "Path": "전체\\경제\\유통\\재래시장",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000186,
+                "Name": "전자상가",
+                "Path": "전체\\경제\\유통\\전자상가",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000181,
+                "Name": "편의점",
+                "Path": "전체\\경제\\유통\\편의점",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000179,
+                "Name": "마트",
+                "Path": "전체\\경제\\유통\\마트",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006584,
+                "Name": "온라인쇼핑",
+                "Path": "전체\\경제\\유통\\온라인쇼핑",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000138,
+            "Name": "자동차",
+            "Path": "전체\\경제\\자동차",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000168,
+                "Name": "렌터카",
+                "Path": "전체\\경제\\자동차\\렌터카",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000163,
+                "Name": "생산라인",
+                "Path": "전체\\경제\\자동차\\생산라인",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004592,
+                "Name": "영업소",
+                "Path": "전체\\경제\\자동차\\영업소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000170,
+                "Name": "정비",
+                "Path": "전체\\경제\\자동차\\정비",
+                "Flag": 1953720693
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000171,
+                "Name": "중고차",
+                "Path": "전체\\경제\\자동차\\중고차",
+                "Flag": -1276406368
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000172,
+                "Name": "폐차",
+                "Path": "전체\\경제\\자동차\\폐차",
+                "Flag": 83429120
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006585,
+                "Name": "수입차",
+                "Path": "전체\\경제\\자동차\\수입차",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000139,
+            "Name": "전기전자",
+            "Path": "전체\\경제\\전기전자",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000173,
+                "Name": "가전",
+                "Path": "전체\\경제\\전기전자\\가전",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000174,
+                "Name": "반도체",
+                "Path": "전체\\경제\\전기전자\\반도체",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000177,
+                "Name": "컴퓨터",
+                "Path": "전체\\경제\\전기전자\\컴퓨터",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000176,
+                "Name": "휴대폰",
+                "Path": "전체\\경제\\전기전자\\휴대폰",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000137,
+            "Name": "제조업",
+            "Path": "전체\\경제\\제조업",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2004591,
+                "Name": "공단 공장",
+                "Path": "전체\\경제\\제조업\\공단 공장",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000161,
+                "Name": "식음료",
+                "Path": "전체\\경제\\제조업\\식음료",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000154,
+                "Name": "조선",
+                "Path": "전체\\경제\\제조업\\조선",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000162,
+                "Name": "주류",
+                "Path": "전체\\경제\\제조업\\주류",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000155,
+                "Name": "철강",
+                "Path": "전체\\경제\\제조업\\철강",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000156,
+                "Name": "화학",
+                "Path": "전체\\경제\\제조업\\화학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006586,
+                "Name": "섬유",
+                "Path": "전체\\경제\\제조업\\섬유",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006587,
+                "Name": "생활용품",
+                "Path": "전체\\경제\\제조업\\생활용품",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2006577,
+            "Name": "경제일반",
+            "Path": "전체\\경제\\경제일반",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 20113,
+        "Name": "사회",
+        "Path": "전체\\사회",
+        "Flag": 17301971
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000317,
+            "Name": "경찰소방서",
+            "Path": "전체\\사회\\경찰소방서",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000349,
+                "Name": "경찰청",
+                "Path": "전체\\사회\\경찰소방서\\경찰청",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000350,
+                "Name": "경찰서",
+                "Path": "전체\\사회\\경찰소방서\\경찰서",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000621,
+                "Name": "단속검문",
+                "Path": "전체\\사회\\경찰소방서\\단속검문",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000354,
+                "Name": "소방서",
+                "Path": "전체\\사회\\경찰소방서\\소방서",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000353,
+                "Name": "치안",
+                "Path": "전체\\사회\\경찰소방서\\치안",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000351,
+                "Name": "해양경찰",
+                "Path": "전체\\사회\\경찰소방서\\해양경찰",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000316,
+            "Name": "공항항만",
+            "Path": "전체\\사회\\공항항만",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000344,
+                "Name": "김포공항",
+                "Path": "전체\\사회\\공항항만\\김포공항",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000348,
+                "Name": "선박",
+                "Path": "전체\\사회\\공항항만\\선박",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000343,
+                "Name": "인천공항",
+                "Path": "전체\\사회\\공항항만\\인천공항",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000345,
+                "Name": "지방공항",
+                "Path": "전체\\사회\\공항항만\\지방공항",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000346,
+                "Name": "항공사",
+                "Path": "전체\\사회\\공항항만\\항공사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000347,
+                "Name": "항만시설",
+                "Path": "전체\\사회\\공항항만\\항만시설",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000320,
+            "Name": "교육",
+            "Path": "전체\\사회\\교육",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000373,
+                "Name": "고등학교",
+                "Path": "전체\\사회\\교육\\고등학교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000371,
+                "Name": "교육기관",
+                "Path": "전체\\사회\\교육\\교육기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000372,
+                "Name": "대학교",
+                "Path": "전체\\사회\\교육\\대학교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000381,
+                "Name": "온라인교육",
+                "Path": "전체\\사회\\교육\\온라인교육",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000377,
+                "Name": "영유아교육",
+                "Path": "전체\\사회\\교육\\영유아교육",
+                "Flag": 372
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000622,
+                "Name": "입시",
+                "Path": "전체\\사회\\교육\\입시",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000374,
+                "Name": "중학교",
+                "Path": "전체\\사회\\교육\\중학교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000375,
+                "Name": "초등학교",
+                "Path": "전체\\사회\\교육\\초등학교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000376,
+                "Name": "특수학교",
+                "Path": "전체\\사회\\교육\\특수학교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000378,
+                "Name": "학원",
+                "Path": "전체\\사회\\교육\\학원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004383,
+                "Name": "학교폭력",
+                "Path": "전체\\사회\\교육\\학교폭력",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006588,
+                "Name": "사교육",
+                "Path": "전체\\사회\\교육\\사교육",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000315,
+            "Name": "교통운수",
+            "Path": "전체\\사회\\교통운수",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000335,
+                "Name": "고속도로",
+                "Path": "전체\\사회\\교통운수\\고속도로",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000340,
+                "Name": "기차",
+                "Path": "전체\\사회\\교통운수\\기차",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000338,
+                "Name": "버스",
+                "Path": "전체\\사회\\교통운수\\버스",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000336,
+                "Name": "승용차",
+                "Path": "전체\\사회\\교통운수\\승용차",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000334,
+                "Name": "도로",
+                "Path": "전체\\사회\\교통운수\\도로",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000341,
+                "Name": "이륜차",
+                "Path": "전체\\사회\\교통운수\\이륜차",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000339,
+                "Name": "지하철",
+                "Path": "전체\\사회\\교통운수\\지하철",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000337,
+                "Name": "택시",
+                "Path": "전체\\사회\\교통운수\\택시",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000342,
+                "Name": "트럭",
+                "Path": "전체\\사회\\교통운수\\트럭",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006589,
+                "Name": "교통일반",
+                "Path": "전체\\사회\\교통운수\\교통일반",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006590,
+                "Name": "운전면허",
+                "Path": "전체\\사회\\교통운수\\운전면허",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000319,
+            "Name": "노동",
+            "Path": "전체\\사회\\노동",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000365,
+                "Name": "노동단체",
+                "Path": "전체\\사회\\노동\\노동단체",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000366,
+                "Name": "시민단체",
+                "Path": "전체\\사회\\노동\\시민단체",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000367,
+                "Name": "시위",
+                "Path": "전체\\사회\\노동\\시위",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006591,
+                "Name": "고용",
+                "Path": "전체\\사회\\노동\\고용",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006592,
+                "Name": "노사문제",
+                "Path": "전체\\사회\\노동\\노사문제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000314,
+            "Name": "법조",
+            "Path": "전체\\사회\\법조",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000331,
+                "Name": "검사",
+                "Path": "전체\\사회\\법조\\검사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000326,
+                "Name": "검찰",
+                "Path": "전체\\사회\\법조\\검찰",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000333,
+                "Name": "교도소",
+                "Path": "전체\\사회\\법조\\교도소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000327,
+                "Name": "법원",
+                "Path": "전체\\사회\\법조\\법원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000328,
+                "Name": "변호사",
+                "Path": "전체\\사회\\법조\\변호사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000330,
+                "Name": "사법연수원",
+                "Path": "전체\\사회\\법조\\사법연수원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000332,
+                "Name": "판사",
+                "Path": "전체\\사회\\법조\\판사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000329,
+                "Name": "헌법재판소",
+                "Path": "전체\\사회\\법조\\헌법재판소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000322,
+            "Name": "복지",
+            "Path": "전체\\사회\\복지",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000387,
+                "Name": "노동자",
+                "Path": "전체\\사회\\복지\\노동자",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2002816,
+                "Name": "노숙자",
+                "Path": "전체\\사회\\복지\\노숙자",
+                "Flag": 1278280228
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000388,
+                "Name": "노인",
+                "Path": "전체\\사회\\복지\\노인",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000392,
+                "Name": "미혼모",
+                "Path": "전체\\사회\\복지\\미혼모",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000390,
+                "Name": "복지기관",
+                "Path": "전체\\사회\\복지\\복지기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000393,
+                "Name": "입양",
+                "Path": "전체\\사회\\복지\\입양",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000389,
+                "Name": "장묘시설",
+                "Path": "전체\\사회\\복지\\장묘시설",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000391,
+                "Name": "장애인",
+                "Path": "전체\\사회\\복지\\장애인",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000623,
+                "Name": "취약계층",
+                "Path": "전체\\사회\\복지\\취약계층",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000318,
+            "Name": "사건사고",
+            "Path": "전체\\사회\\사건사고",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000362,
+                "Name": "교통사고",
+                "Path": "전체\\사회\\사건사고\\교통사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000357,
+                "Name": "성범죄",
+                "Path": "전체\\사회\\사건사고\\성범죄",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000363,
+                "Name": "부정부패",
+                "Path": "전체\\사회\\사건사고\\부정부패",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000355,
+                "Name": "폭력",
+                "Path": "전체\\사회\\사건사고\\폭력",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006266,
+                "Name": "화재",
+                "Path": "전체\\사회\\사건사고\\화재",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006593,
+                "Name": "인명사고",
+                "Path": "전체\\사회\\사건사고\\인명사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006594,
+                "Name": "사기.절도",
+                "Path": "전체\\사회\\사건사고\\사기.절도",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006595,
+                "Name": "안전사고",
+                "Path": "전체\\사회\\사건사고\\안전사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006596,
+                "Name": "사이버범죄",
+                "Path": "전체\\사회\\사건사고\\사이버범죄",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000325,
+            "Name": "사람들",
+            "Path": "전체\\사회\\사람들",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000415,
+                "Name": "여성",
+                "Path": "전체\\사회\\사람들\\여성",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000416,
+                "Name": "인물",
+                "Path": "전체\\사회\\사람들\\인물",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000414,
+                "Name": "직장인",
+                "Path": "전체\\사회\\사람들\\직장인",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006597,
+                "Name": "은퇴자",
+                "Path": "전체\\사회\\사람들\\은퇴자",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006598,
+                "Name": "청소년",
+                "Path": "전체\\사회\\사람들\\청소년",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000635,
+            "Name": "사회편집완본",
+            "Path": "전체\\사회\\사회편집완본",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000321,
+            "Name": "외국인",
+            "Path": "전체\\사회\\외국인",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000383,
+                "Name": "관광객",
+                "Path": "전체\\사회\\외국인\\관광객",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000385,
+                "Name": "다문화가정",
+                "Path": "전체\\사회\\외국인\\다문화가정",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000384,
+                "Name": "불법체류",
+                "Path": "전체\\사회\\외국인\\불법체류",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000382,
+                "Name": "외국인노동자",
+                "Path": "전체\\사회\\외국인\\외국인노동자",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000386,
+                "Name": "외국인범죄",
+                "Path": "전체\\사회\\외국인\\외국인범죄",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000323,
+            "Name": "유해환경",
+            "Path": "전체\\사회\\유해환경",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000401,
+                "Name": "대기오염",
+                "Path": "전체\\사회\\유해환경\\대기오염",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000395,
+                "Name": "도박",
+                "Path": "전체\\사회\\유해환경\\도박",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000396,
+                "Name": "마약",
+                "Path": "전체\\사회\\유해환경\\마약",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000624,
+                "Name": "방역",
+                "Path": "전체\\사회\\유해환경\\방역",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000403,
+                "Name": "소음",
+                "Path": "전체\\사회\\유해환경\\소음",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000402,
+                "Name": "수질오염",
+                "Path": "전체\\사회\\유해환경\\수질오염",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000397,
+                "Name": "유흥업소",
+                "Path": "전체\\사회\\유해환경\\유흥업소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006599,
+                "Name": "토양오염",
+                "Path": "전체\\사회\\유해환경\\토양오염",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006600,
+                "Name": "중금속오염",
+                "Path": "전체\\사회\\유해환경\\중금속오염",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006601,
+                "Name": "폐기물",
+                "Path": "전체\\사회\\유해환경\\폐기물",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000324,
+            "Name": "자연환경",
+            "Path": "전체\\사회\\자연환경",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000626,
+                "Name": "강",
+                "Path": "전체\\사회\\자연환경\\강",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000407,
+                "Name": "갯벌",
+                "Path": "전체\\사회\\자연환경\\갯벌",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000632,
+                "Name": "남극북극",
+                "Path": "전체\\사회\\자연환경\\남극북극",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000408,
+                "Name": "늪지",
+                "Path": "전체\\사회\\자연환경\\늪지",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000412,
+                "Name": "동식물",
+                "Path": "전체\\사회\\자연환경\\동식물",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000625,
+                "Name": "산",
+                "Path": "전체\\사회\\자연환경\\산",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000628,
+                "Name": "섬",
+                "Path": "전체\\사회\\자연환경\\섬",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000629,
+                "Name": "시가지",
+                "Path": "전체\\사회\\자연환경\\시가지",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000630,
+                "Name": "전원",
+                "Path": "전체\\사회\\자연환경\\전원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000634,
+                "Name": "해양",
+                "Path": "전체\\사회\\자연환경\\해양",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2000420,
+        "Name": "문화과학",
+        "Path": "전체\\문화과학",
+        "Flag": 575269764
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000421,
+            "Name": "과학통신",
+            "Path": "전체\\문화과학\\과학통신",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000434,
+                "Name": "교육기관",
+                "Path": "전체\\문화과학\\과학통신\\교육기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000436,
+                "Name": "기술과학",
+                "Path": "전체\\문화과학\\과학통신\\기술과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000433,
+                "Name": "연구기관",
+                "Path": "전체\\문화과학\\과학통신\\연구기관",
+                "Flag": 3869317
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000435,
+                "Name": "우주개발",
+                "Path": "전체\\문화과학\\과학통신\\우주개발",
+                "Flag": 105891840
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000437,
+                "Name": "첨단과학",
+                "Path": "전체\\문화과학\\과학통신\\첨단과학",
+                "Flag": 1055402184
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000430,
+                "Name": "통신",
+                "Path": "전체\\문화과학\\과학통신\\통신",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000422,
+            "Name": "날씨풍경",
+            "Path": "전체\\문화과학\\날씨풍경",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000438,
+                "Name": "봄",
+                "Path": "전체\\문화과학\\날씨풍경\\봄",
+                "Flag": 2000319
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000439,
+                "Name": "여름",
+                "Path": "전체\\문화과학\\날씨풍경\\여름",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000440,
+                "Name": "가을",
+                "Path": "전체\\문화과학\\날씨풍경\\가을",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000441,
+                "Name": "겨울",
+                "Path": "전체\\문화과학\\날씨풍경\\겨울",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000442,
+                "Name": "기상청",
+                "Path": "전체\\문화과학\\날씨풍경\\기상청",
+                "Flag": 3869740
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000444,
+                "Name": "자연재해",
+                "Path": "전체\\문화과학\\날씨풍경\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000640,
+            "Name": "문화과학사건",
+            "Path": "전체\\문화과학\\문화과학사건",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000641,
+            "Name": "문화과학편집완본",
+            "Path": "전체\\문화과학\\문화과학편집완본",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000423,
+            "Name": "미디어",
+            "Path": "전체\\문화과학\\미디어",
+            "Flag": 83691264
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2004045,
+                "Name": "광고",
+                "Path": "전체\\문화과학\\미디어\\광고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000445,
+                "Name": "방송사(지상파)",
+                "Path": "전체\\문화과학\\미디어\\방송사(지상파)",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000446,
+                "Name": "신문사",
+                "Path": "전체\\문화과학\\미디어\\신문사",
+                "Flag": 1055402355
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000449,
+                "Name": "케이블",
+                "Path": "전체\\문화과학\\미디어\\케이블",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000448,
+                "Name": "홈쇼핑",
+                "Path": "전체\\문화과학\\미디어\\홈쇼핑",
+                "Flag": 17301887
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000425,
+            "Name": "예술",
+            "Path": "전체\\문화과학\\예술",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000461,
+                "Name": "무용",
+                "Path": "전체\\문화과학\\예술\\무용",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000462,
+                "Name": "뮤지컬",
+                "Path": "전체\\문화과학\\예술\\뮤지컬",
+                "Flag": 17301760
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000460,
+                "Name": "문학",
+                "Path": "전체\\문화과학\\예술\\문학",
+                "Flag": 3870586
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000458,
+                "Name": "미술",
+                "Path": "전체\\문화과학\\예술\\미술",
+                "Flag": 17301727
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000455,
+                "Name": "연극",
+                "Path": "전체\\문화과학\\예술\\연극",
+                "Flag": 1055402778
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000456,
+                "Name": "영화",
+                "Path": "전체\\문화과학\\예술\\영화",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000459,
+                "Name": "음악",
+                "Path": "전체\\문화과학\\예술\\음악",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000457,
+                "Name": "패션",
+                "Path": "전체\\문화과학\\예술\\패션",
+                "Flag": 1191241752
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006602,
+                "Name": "연예",
+                "Path": "전체\\문화과학\\예술\\연예",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000426,
+            "Name": "유적역사전통",
+            "Path": "전체\\문화과학\\유적역사전통",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000466,
+                "Name": "공원",
+                "Path": "전체\\문화과학\\유적역사전통\\공원",
+                "Flag": 3866779
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000465,
+                "Name": "기념물",
+                "Path": "전체\\문화과학\\유적역사전통\\기념물",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000467,
+                "Name": "명승고적",
+                "Path": "전체\\문화과학\\유적역사전통\\명승고적",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000469,
+                "Name": "명절",
+                "Path": "전체\\문화과학\\유적역사전통\\명절",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000463,
+                "Name": "박물관",
+                "Path": "전체\\문화과학\\유적역사전통\\박물관",
+                "Flag": 538976288
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000464,
+                "Name": "유적지",
+                "Path": "전체\\문화과학\\유적역사전통\\유적지",
+                "Flag": 1818585446
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000470,
+                "Name": "전통문화",
+                "Path": "전체\\문화과학\\유적역사전통\\전통문화",
+                "Flag": 1035344205
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000428,
+            "Name": "인터넷",
+            "Path": "전체\\문화과학\\인터넷",
+            "Flag": 1055403553
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000427,
+            "Name": "의료건강",
+            "Path": "전체\\문화과학\\의료건강",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000478,
+                "Name": "기관",
+                "Path": "전체\\문화과학\\의료건강\\기관",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000471,
+                "Name": "병원",
+                "Path": "전체\\문화과학\\의료건강\\병원",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000476,
+                "Name": "보건소",
+                "Path": "전체\\문화과학\\의료건강\\보건소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000480,
+                "Name": "생명공학",
+                "Path": "전체\\문화과학\\의료건강\\생명공학",
+                "Flag": 15
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000475,
+                "Name": "약국",
+                "Path": "전체\\문화과학\\의료건강\\약국",
+                "Flag": 3867202
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000479,
+                "Name": "웰빙",
+                "Path": "전체\\문화과학\\의료건강\\웰빙",
+                "Flag": 1035344052
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000639,
+                "Name": "음주",
+                "Path": "전체\\문화과학\\의료건강\\음주",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000474,
+                "Name": "질병",
+                "Path": "전체\\문화과학\\의료건강\\질병",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000638,
+                "Name": "흡연",
+                "Path": "전체\\문화과학\\의료건강\\흡연",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000424,
+            "Name": "종교",
+            "Path": "전체\\문화과학\\종교",
+            "Flag": 3868894
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000452,
+                "Name": "기독교",
+                "Path": "전체\\문화과학\\종교\\기독교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000454,
+                "Name": "기타종교",
+                "Path": "전체\\문화과학\\종교\\기타종교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000451,
+                "Name": "불교",
+                "Path": "전체\\문화과학\\종교\\불교",
+                "Flag": 3870163
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004047,
+                "Name": "사이비종교",
+                "Path": "전체\\문화과학\\종교\\사이비종교",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000453,
+                "Name": "천주교",
+                "Path": "전체\\문화과학\\종교\\천주교",
+                "Flag": -842150656
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000429,
+            "Name": "취미레저",
+            "Path": "전체\\문화과학\\취미레저",
+            "Flag": 20113
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000495,
+                "Name": "경기장",
+                "Path": "전체\\문화과학\\취미레저\\경기장",
+                "Flag": 943272192
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000494,
+                "Name": "공연장",
+                "Path": "전체\\문화과학\\취미레저\\공연장",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000493,
+                "Name": "극장가",
+                "Path": "전체\\문화과학\\취미레저\\극장가",
+                "Flag": 3868048
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000490,
+                "Name": "복권",
+                "Path": "전체\\문화과학\\취미레저\\복권",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000488,
+                "Name": "여행",
+                "Path": "전체\\문화과학\\취미레저\\여행",
+                "Flag": 1035344415
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000489,
+                "Name": "운동",
+                "Path": "전체\\문화과학\\취미레저\\운동",
+                "Flag": 20337
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000486,
+                "Name": "음반서점",
+                "Path": "전체\\문화과학\\취미레저\\음반서점",
+                "Flag": 1684825344
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006603,
+                "Name": "오락",
+                "Path": "전체\\문화과학\\취미레저\\오락",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2000496,
+        "Name": "스포츠",
+        "Path": "전체\\스포츠",
+        "Flag": 0
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000501,
+            "Name": "골프",
+            "Path": "전체\\스포츠\\골프",
+            "Flag": 83691264
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000529,
+                "Name": "KPGA",
+                "Path": "전체\\스포츠\\골프\\KPGA",
+                "Flag": 3869740
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000530,
+                "Name": "KLPGA",
+                "Path": "전체\\스포츠\\골프\\KLPGA",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000527,
+                "Name": "PGA",
+                "Path": "전체\\스포츠\\골프\\PGA",
+                "Flag": 1852795252
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000528,
+                "Name": "LPGA",
+                "Path": "전체\\스포츠\\골프\\LPGA",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000531,
+                "Name": "올림픽",
+                "Path": "전체\\스포츠\\골프\\올림픽",
+                "Flag": 925905920
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000532,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\골프\\아시안게임",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000533,
+                "Name": "아마추어골프",
+                "Path": "전체\\스포츠\\골프\\아마추어골프",
+                "Flag": 1035346650
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000534,
+                "Name": "기타골프",
+                "Path": "전체\\스포츠\\골프\\기타골프",
+                "Flag": 1
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000499,
+            "Name": "농구",
+            "Path": "전체\\스포츠\\농구",
+            "Flag": 1953244731
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000516,
+                "Name": "남자프로농구",
+                "Path": "전체\\스포츠\\농구\\남자프로농구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000517,
+                "Name": "여자프로농구",
+                "Path": "전체\\스포츠\\농구\\여자프로농구",
+                "Flag": 1185341442
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000518,
+                "Name": "NBA",
+                "Path": "전체\\스포츠\\농구\\NBA",
+                "Flag": 1730569580
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000645,
+                "Name": "농구대표팀",
+                "Path": "전체\\스포츠\\농구\\농구대표팀",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000519,
+                "Name": "올림픽",
+                "Path": "전체\\스포츠\\농구\\올림픽",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000520,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\농구\\아시안게임",
+                "Flag": 3869317
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000646,
+                "Name": "아마추어농구",
+                "Path": "전체\\스포츠\\농구\\아마추어농구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000521,
+                "Name": "기타농구",
+                "Path": "전체\\스포츠\\농구\\기타농구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2005663,
+            "Name": "이벤트",
+            "Path": "전체\\스포츠\\이벤트",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2005664,
+                "Name": "런던올림픽",
+                "Path": "전체\\스포츠\\이벤트\\런던올림픽",
+                "Flag": 2621453
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000500,
+            "Name": "배구",
+            "Path": "전체\\스포츠\\배구",
+            "Flag": 1634100580
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2005665,
+                "Name": "남자프로배구",
+                "Path": "전체\\스포츠\\배구\\남자프로배구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005666,
+                "Name": "여자프로배구",
+                "Path": "전체\\스포츠\\배구\\여자프로배구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000523,
+                "Name": "해외배구",
+                "Path": "전체\\스포츠\\배구\\해외배구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000524,
+                "Name": "올림픽",
+                "Path": "전체\\스포츠\\배구\\올림픽",
+                "Flag": 1035346803
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000525,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\배구\\아시안게임",
+                "Flag": 15
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000647,
+                "Name": "아마추어배구",
+                "Path": "전체\\스포츠\\배구\\아마추어배구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000526,
+                "Name": "기타배구",
+                "Path": "전체\\스포츠\\배구\\기타배구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2004072,
+            "Name": "스포츠사건사고",
+            "Path": "전체\\스포츠\\스포츠사건사고",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003128,
+            "Name": "스포츠편집완본",
+            "Path": "전체\\스포츠\\스포츠편집완본",
+            "Flag": 286892032
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000497,
+            "Name": "야구",
+            "Path": "전체\\스포츠\\야구",
+            "Flag": 1035347014
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000503,
+                "Name": "프로야구",
+                "Path": "전체\\스포츠\\야구\\프로야구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000504,
+                "Name": "메이저리그",
+                "Path": "전체\\스포츠\\야구\\메이저리그",
+                "Flag": -333300480
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000505,
+                "Name": "일본야구",
+                "Path": "전체\\스포츠\\야구\\일본야구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000506,
+                "Name": "올림픽",
+                "Path": "전체\\스포츠\\야구\\올림픽",
+                "Flag": 1035347873
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000507,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\야구\\아시안게임",
+                "Flag": 4682
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000642,
+                "Name": "WBC",
+                "Path": "전체\\스포츠\\야구\\WBC",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000643,
+                "Name": "아마추어야구",
+                "Path": "전체\\스포츠\\야구\\아마추어야구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000508,
+                "Name": "기타야구",
+                "Path": "전체\\스포츠\\야구\\기타야구",
+                "Flag": 1852404527
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000502,
+            "Name": "종합",
+            "Path": "전체\\스포츠\\종합",
+            "Flag": 3868471
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000548,
+                "Name": "국내종합경기",
+                "Path": "전체\\스포츠\\종합\\국내종합경기",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000549,
+                "Name": "국제종합경기",
+                "Path": "전체\\스포츠\\종합\\국제종합경기",
+                "Flag": -1729355264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005667,
+                "Name": "하계올림픽",
+                "Path": "전체\\스포츠\\종합\\하계올림픽",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005668,
+                "Name": "동계올림픽",
+                "Path": "전체\\스포츠\\종합\\동계올림픽",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005669,
+                "Name": "패럴림픽",
+                "Path": "전체\\스포츠\\종합\\패럴림픽",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000547,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\종합\\아시안게임",
+                "Flag": 3870586
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000553,
+                "Name": "동계스포츠",
+                "Path": "전체\\스포츠\\종합\\동계스포츠",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000552,
+                "Name": "모터스포츠",
+                "Path": "전체\\스포츠\\종합\\모터스포츠",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000550,
+                "Name": "E스포츠",
+                "Path": "전체\\스포츠\\종합\\E스포츠",
+                "Flag": 372
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000555,
+                "Name": "격투기",
+                "Path": "전체\\스포츠\\종합\\격투기",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005670,
+                "Name": "보드게임",
+                "Path": "전체\\스포츠\\종합\\보드게임",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000540,
+                "Name": "사회체육",
+                "Path": "전체\\스포츠\\종합\\사회체육",
+                "Flag": -340740096
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2005671,
+                "Name": "기관단체행정",
+                "Path": "전체\\스포츠\\종합\\기관단체행정",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000544,
+                "Name": "스포츠시설",
+                "Path": "전체\\스포츠\\종합\\스포츠시설",
+                "Flag": 1730573432
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000541,
+                "Name": "스포츠행사",
+                "Path": "전체\\스포츠\\종합\\스포츠행사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000542,
+                "Name": "체육인",
+                "Path": "전체\\스포츠\\종합\\체육인",
+                "Flag": 1035348997
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000551,
+                "Name": "기타스포츠",
+                "Path": "전체\\스포츠\\종합\\기타스포츠",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000498,
+            "Name": "축구",
+            "Path": "전체\\스포츠\\축구",
+            "Flag": 2000041
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2004842,
+                "Name": "프로축구",
+                "Path": "전체\\스포츠\\축구\\프로축구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004844,
+                "Name": "해외축구",
+                "Path": "전체\\스포츠\\축구\\해외축구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000509,
+                "Name": "남자국가대표축구",
+                "Path": "전체\\스포츠\\축구\\남자국가대표축구",
+                "Flag": 1933276268
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000510,
+                "Name": "여자국가대표축구",
+                "Path": "전체\\스포츠\\축구\\여자국가대표축구",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000511,
+                "Name": "올림픽",
+                "Path": "전체\\스포츠\\축구\\올림픽",
+                "Flag": 3868894
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000512,
+                "Name": "아시안게임",
+                "Path": "전체\\스포츠\\축구\\아시안게임",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000513,
+                "Name": "월드컵",
+                "Path": "전체\\스포츠\\축구\\월드컵",
+                "Flag": 639778048
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000644,
+                "Name": "아마추어축구",
+                "Path": "전체\\스포츠\\축구\\아마추어축구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000514,
+                "Name": "기타축구",
+                "Path": "전체\\스포츠\\축구\\기타축구",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2000648,
+        "Name": "국제",
+        "Path": "전체\\국제",
+        "Flag": 0
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000662,
+            "Name": "국제편집완본",
+            "Path": "전체\\국제\\국제편집완본",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000661,
+            "Name": "기구회담",
+            "Path": "전체\\국제\\기구회담",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2006604,
+                "Name": "UN회의",
+                "Path": "전체\\국제\\기구회담\\UN회의",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006605,
+                "Name": "국제회의",
+                "Path": "전체\\국제\\기구회담\\국제회의",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000659,
+            "Name": "기후질병",
+            "Path": "전체\\국제\\기후질병",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000755,
+                "Name": "환경오염",
+                "Path": "전체\\국제\\기후질병\\환경오염",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006606,
+                "Name": "기상이변",
+                "Path": "전체\\국제\\기후질병\\기상이변",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006607,
+                "Name": "질병",
+                "Path": "전체\\국제\\기후질병\\질병",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000655,
+            "Name": "남미",
+            "Path": "전체\\국제\\남미",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000718,
+                "Name": "경제",
+                "Path": "전체\\국제\\남미\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000719,
+                "Name": "군사",
+                "Path": "전체\\국제\\남미\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004535,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\남미\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004064,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\남미\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004065,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\남미\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000717,
+                "Name": "정치",
+                "Path": "전체\\국제\\남미\\정치",
+                "Flag": 34
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000656,
+            "Name": "미국",
+            "Path": "전체\\국제\\미국",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000727,
+                "Name": "경제",
+                "Path": "전체\\국제\\미국\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000728,
+                "Name": "군사",
+                "Path": "전체\\국제\\미국\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004536,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\미국\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004066,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\미국\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004067,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\미국\\자연재해",
+                "Flag": 1727585219
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000726,
+                "Name": "정치",
+                "Path": "전체\\국제\\미국\\정치",
+                "Flag": 2000497
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000654,
+            "Name": "북중미",
+            "Path": "전체\\국제\\북중미",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000709,
+                "Name": "경제",
+                "Path": "전체\\국제\\북중미\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000710,
+                "Name": "군사",
+                "Path": "전체\\국제\\북중미\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004537,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\북중미\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004062,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\북중미\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004063,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\북중미\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000708,
+                "Name": "정치",
+                "Path": "전체\\국제\\북중미\\정치",
+                "Flag": 83691264
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000660,
+            "Name": "분쟁",
+            "Path": "전체\\국제\\분쟁",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000758,
+                "Name": "영토분쟁",
+                "Path": "전체\\국제\\분쟁\\영토분쟁",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000760,
+                "Name": "인종분쟁",
+                "Path": "전체\\국제\\분쟁\\인종분쟁",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000759,
+                "Name": "종교분쟁",
+                "Path": "전체\\국제\\분쟁\\종교분쟁",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000650,
+            "Name": "아시아",
+            "Path": "전체\\국제\\아시아",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000673,
+                "Name": "경제",
+                "Path": "전체\\국제\\아시아\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000674,
+                "Name": "군사",
+                "Path": "전체\\국제\\아시아\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004538,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\아시아\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004054,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\아시아\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004055,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\아시아\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000672,
+                "Name": "정치",
+                "Path": "전체\\국제\\아시아\\정치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000653,
+            "Name": "아프리카",
+            "Path": "전체\\국제\\아프리카",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000700,
+                "Name": "경제",
+                "Path": "전체\\국제\\아프리카\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000701,
+                "Name": "군사",
+                "Path": "전체\\국제\\아프리카\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004539,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\아프리카\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004060,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\아프리카\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004061,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\아프리카\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000699,
+                "Name": "정치",
+                "Path": "전체\\국제\\아프리카\\정치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000651,
+            "Name": "오세아니아",
+            "Path": "전체\\국제\\오세아니아",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000682,
+                "Name": "경제",
+                "Path": "전체\\국제\\오세아니아\\경제",
+                "Flag": 1953720693
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000683,
+                "Name": "군사",
+                "Path": "전체\\국제\\오세아니아\\군사",
+                "Flag": -1276406368
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004540,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\오세아니아\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004056,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\오세아니아\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004057,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\오세아니아\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000681,
+                "Name": "정치",
+                "Path": "전체\\국제\\오세아니아\\정치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000649,
+            "Name": "유럽",
+            "Path": "전체\\국제\\유럽",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000664,
+                "Name": "경제",
+                "Path": "전체\\국제\\유럽\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000665,
+                "Name": "군사",
+                "Path": "전체\\국제\\유럽\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004541,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\유럽\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004051,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\유럽\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004053,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\유럽\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000663,
+                "Name": "정치",
+                "Path": "전체\\국제\\유럽\\정치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000658,
+            "Name": "일본",
+            "Path": "전체\\국제\\일본",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000745,
+                "Name": "경제",
+                "Path": "전체\\국제\\일본\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000746,
+                "Name": "군사",
+                "Path": "전체\\국제\\일본\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004542,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\일본\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004070,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\일본\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004071,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\일본\\자연재해",
+                "Flag": 80216264
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000744,
+                "Name": "정치",
+                "Path": "전체\\국제\\일본\\정치",
+                "Flag": 4682
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000652,
+            "Name": "중동",
+            "Path": "전체\\국제\\중동",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000691,
+                "Name": "경제",
+                "Path": "전체\\국제\\중동\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000692,
+                "Name": "군사",
+                "Path": "전체\\국제\\중동\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004543,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\중동\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004058,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\중동\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004059,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\중동\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000690,
+                "Name": "정치",
+                "Path": "전체\\국제\\중동\\정치",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000657,
+            "Name": "중국",
+            "Path": "전체\\국제\\중국",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000736,
+                "Name": "경제",
+                "Path": "전체\\국제\\중국\\경제",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000737,
+                "Name": "군사",
+                "Path": "전체\\국제\\중국\\군사",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004544,
+                "Name": "문화과학",
+                "Path": "전체\\국제\\중국\\문화과학",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004068,
+                "Name": "사건사고",
+                "Path": "전체\\국제\\중국\\사건사고",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004069,
+                "Name": "자연재해",
+                "Path": "전체\\국제\\중국\\자연재해",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000735,
+                "Name": "정치",
+                "Path": "전체\\국제\\중국\\정치",
+                "Flag": 2000513
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2000558,
+        "Name": "북한",
+        "Path": "북한",
+        "Flag": 0
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2000772,
+            "Name": "경제",
+            "Path": "북한\\경제",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000782,
+                "Name": "경제일반",
+                "Path": "북한\\경제\\경제일반",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2004384,
+                "Name": "경제협력",
+                "Path": "북한\\경제\\경제협력",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000783,
+                "Name": "공업",
+                "Path": "북한\\경제\\공업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000785,
+                "Name": "광업",
+                "Path": "북한\\경제\\광업",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000784,
+                "Name": "농림축수산",
+                "Path": "북한\\경제\\농림축수산",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000786,
+                "Name": "유통",
+                "Path": "북한\\경제\\유통",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000787,
+                "Name": "토목건설",
+                "Path": "북한\\경제\\토목건설",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000775,
+            "Name": "군사",
+            "Path": "북한\\군사",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000802,
+                "Name": "국경",
+                "Path": "북한\\군사\\국경",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000797,
+                "Name": "군사일반",
+                "Path": "북한\\군사\\군사일반",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000804,
+                "Name": "미사일",
+                "Path": "북한\\군사\\미사일",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000803,
+                "Name": "핵시설",
+                "Path": "북한\\군사\\핵시설",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000776,
+            "Name": "문화",
+            "Path": "북한\\문화",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000810,
+                "Name": "공연예술",
+                "Path": "북한\\문화\\공연예술",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000808,
+                "Name": "남북교류",
+                "Path": "북한\\문화\\남북교류",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000809,
+                "Name": "보도",
+                "Path": "북한\\문화\\보도",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000806,
+                "Name": "북한유적",
+                "Path": "북한\\문화\\북한유적",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000807,
+                "Name": "북한풍속",
+                "Path": "북한\\문화\\북한풍속",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000811,
+                "Name": "영화",
+                "Path": "북한\\문화\\영화",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2003129,
+            "Name": "북한편집완본",
+            "Path": "북한\\북한편집완본",
+            "Flag": 1441803
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2000773,
+            "Name": "사회",
+            "Path": "북한\\사회",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000789,
+                "Name": "북한도시",
+                "Path": "북한\\사회\\북한도시",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000790,
+                "Name": "주민생활",
+                "Path": "북한\\사회\\주민생활",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2006608,
+                "Name": "교육",
+                "Path": "북한\\사회\\교육",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000771,
+            "Name": "정치",
+            "Path": "북한\\정치",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000778,
+                "Name": "김정일",
+                "Path": "북한\\정치\\김정일",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000779,
+                "Name": "김정은",
+                "Path": "북한\\정치\\김정은",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000781,
+                "Name": "인물",
+                "Path": "북한\\정치\\인물",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000777,
+                "Name": "정치일반",
+                "Path": "북한\\정치\\정치일반",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000780,
+                "Name": "회의대화",
+                "Path": "북한\\정치\\회의대화",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        },
+        {
+          "KsimTree": {
+            "Id": 2000774,
+            "Name": "통일",
+            "Path": "북한\\통일",
+            "Flag": 0
+          },
+          "ChildNodes": [
+            {
+              "KsimTree": {
+                "Id": 2000795,
+                "Name": "수용소",
+                "Path": "북한\\통일\\수용소",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000794,
+                "Name": "이산가족",
+                "Path": "북한\\통일\\이산가족",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000791,
+                "Name": "일반",
+                "Path": "북한\\통일\\일반",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000793,
+                "Name": "탈북",
+                "Path": "북한\\통일\\탈북",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000796,
+                "Name": "한국전쟁",
+                "Path": "북한\\통일\\한국전쟁",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            },
+            {
+              "KsimTree": {
+                "Id": 2000792,
+                "Name": "회담",
+                "Path": "북한\\통일\\회담",
+                "Flag": 0
+              },
+              "ChildNodes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2002657,
+        "Name": "뉴스",
+        "Path": "뉴스",
+        "Flag": 0
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2003054,
+            "Name": "아침뉴스",
+            "Path": "뉴스\\아침뉴스",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003055,
+            "Name": "오전 뉴스",
+            "Path": "뉴스\\오전 뉴스",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003056,
+            "Name": "오후뉴스",
+            "Path": "뉴스\\오후뉴스",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003057,
+            "Name": "저녁뉴스",
+            "Path": "뉴스\\저녁뉴스",
+            "Flag": 1278280229
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003058,
+            "Name": "8뉴스",
+            "Path": "뉴스\\8뉴스",
+            "Flag": 1010722932
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003059,
+            "Name": "마감뉴스",
+            "Path": "뉴스\\마감뉴스",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003060,
+            "Name": "스포츠뉴스",
+            "Path": "뉴스\\스포츠뉴스",
+            "Flag": 701395905
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003061,
+            "Name": "속보특보",
+            "Path": "뉴스\\속보특보",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2003062,
+            "Name": "기타",
+            "Path": "뉴스\\기타",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2003726,
+        "Name": "기타",
+        "Path": "기타",
+        "Flag": 5111819
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20139,
+        "Name": "미분류",
+        "Path": "미분류",
+        "Flag": 10001
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2008280,
+        "Name": "스브스뉴스",
+        "Path": "스브스뉴스",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2008473,
+        "Name": "상용",
+        "Path": "상용",
+        "Flag": -842150451
+      },
+      "ChildNodes": null
+    }
+  ]
+}

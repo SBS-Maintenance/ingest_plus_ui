@@ -1,6 +1,7 @@
 import sys
 import os
 import datetime
+import time
 import configparser
 import json
 import struct
@@ -51,6 +52,24 @@ STATUS_SOCKET.setsockopt(
 HOST_IP = config["ip"]["unicast"]
 HOST_PORT = int(config["ports"]["unicast"])
 SEND_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+source_news_folder = ".//source_news_folder.json"
+source_digital_event = ".//source_digital_event.json"
+source_news_category = ".//source_news_category.json"
+
+folder_list = []
+with open(source_news_folder, encoding="utf-8") as folder_json:
+    folder_list = json.load(folder_json)["ChildNodes"]
+
+event_list = []
+with open(source_digital_event, encoding="utf-8") as event_json:
+    event_list = json.load(event_json)["ChildNodes"]
+
+category_list = []
+with open(source_news_category, encoding="utf-8") as category_json:
+    category_list = json.load(category_json)["ChildNodes"]
+
+WEEKDAYS = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -282,8 +301,7 @@ class MyApp(QMainWindow, form_class):
                 self.job_list = json.loads(f.read())
                 for i, job in enumerate(self.job_list):
                     item = QTreeWidgetItem()
-                    item.setText(0, job["source_info"]["title"])
-
+                    item.setText(0, job["metadata"]["title"])
                     item.setText(1, job["ingest_status"])
                     item.setText(2, job["ftp_status"])
                     self.root.addChild(item)
@@ -291,17 +309,17 @@ class MyApp(QMainWindow, form_class):
     def on_status_received(self, msg: str) -> None:
         self.statusPlainTextEdit.setPlainText(msg)
         for index, job in enumerate(self.job_list):
-            if job["source_info"]["title"] in self.finished_title_list:
+            if job["metadata"]["title"] in self.finished_title_list:
                 self.job_list[index]["ingest_status"] = "완료"
                 self.root.child(index).setText(
                     1, self.job_list[index]["ingest_status"])
                 self.root.child(index).setText(
                     2, self.job_list[index]["ftp_status"])
-            elif job["source_info"]["title"] in self.failed_title_list:
+            elif job["metadata"]["title"] in self.failed_title_list:
                 self.job_list[index]["ingest_status"] = "실패"
                 self.root.child(index).setText(
                     1, self.job_list[index]["ingest_status"])
-            elif job["source_info"]["title"] == self.current_title:
+            elif job["metadata"]["title"] == self.current_title:
                 self.job_list[index]["ingest_status"] = "작업중"
                 self.root.child(index).setText(
                     1, self.job_list[index]["ingest_status"])
@@ -430,26 +448,28 @@ class MyApp(QMainWindow, form_class):
         if (index >= 0):
             self.restrictionComboBox.setCurrentIndex(index)
 
-        self.titleLineEdit.setText(job["source_info"]["title"])
+        self.titleLineEdit.setText(job["metadata"]["title"])
 
-        self.deptLineEdit.setText(job["creation_info"]["department"])
+        self.deptLineEdit.setText(
+            job["metadata"]["sub_metadata"]["department"])
 
         self.journalistLineEdit.setText(
-            job["creation_info"]["journalist"])
+            job["metadata"]["sub_metadata"]["journalist"])
 
         self.videoReporterLineEdit.setText(
-            job["creation_info"]["video_reporter"])
+            job["metadata"]["sub_metadata"]["video_reporter"])
 
-        self.placeLineEdit.setText(job["creation_info"]["place"])
+        self.placeLineEdit.setText(job["metadata"]["sub_metadata"]["place"])
 
-        date: list = job["creation_info"]["date"].split("-")
+        date: list = job["metadata"]["sub_metadata"]["date"].split("-")
         year: str = date[0]
         month: str = date[1]
         day: str = date[2]
         date_var = QDate(int(year), int(month), int(day))
         self.videoDateWidget.setSelectedDate(date_var)
 
-        self.contentTextEdit.setPlainText(job["creation_info"]["contents"])
+        self.contentTextEdit.setPlainText(
+            job["metadata"]["contents"])
 
         self.listen_status_thread.send_msg("get_src_fail")
 
@@ -500,7 +520,7 @@ class MyApp(QMainWindow, form_class):
     def create_xml(self):
         titles = []
         for item in self.job_list:
-            titles.append(item["source_info"]["title"])
+            titles.append(item["metadata"]["title"])
         job = {}
 
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")+".xml"
@@ -510,8 +530,14 @@ class MyApp(QMainWindow, form_class):
             f.write("")
 
         root = Element("sbs_ingest_plus")
-        job_info = SubElement(root, "job_info")
 
+        generator = SubElement(root, "generator")
+        SubElement(generator, "generator_name").text = "Ingest Plus UI"
+        SubElement(generator, "generator_id").text = ""
+        SubElement(generator, "generator_version").text = "1.0"
+
+        job_info = SubElement(root, "job_info")
+        SubElement(job_info, "job_id").text = ""
         SubElement(
             job_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
         job["ingest_type"] = self.ingestTypeComboBox.currentText()
@@ -523,32 +549,109 @@ class MyApp(QMainWindow, form_class):
             source_info, "centralmediatypecode").text = self.centralmediatypecodeComboBox.currentText()
         job["source_info"]["centralmediatypecode"] = self.centralmediatypecodeComboBox.currentText()
 
-        SubElement(source_info, "folder").text = self.folderComboBox.currentText()
-        job["source_info"]["folder"] = self.folderComboBox.currentText()
-
-        SubElement(source_info, "event").text = "미분류"
-        job["source_info"]["event"] = "미분류"
-
         SubElement(
             source_info, "ingest_src").text = self.sourceComboBox.currentText()
         job["source_info"]["ingest_src"] = self.sourceComboBox.currentText()
 
-        SubElement(
-            source_info, "category1").text = self.categoryComboBox1.currentText()
-        job["source_info"]["category1"] = self.categoryComboBox1.currentText()
+        weekday_name = WEEKDAYS[time.localtime().tm_wday]
+        folder_Id = ""
+        folder_name = ""
+        folder_path = ""
+        for folder in folder_list:
+            if (folder["KsimTree"]["Name"] == weekday_name):
+                folder_Id = str(folder["KsimTree"]["Id"])
+                folder_name = folder["KsimTree"]["Name"]
+                folder_path = folder["KsimTree"]["Path"]
 
-        SubElement(
-            source_info, "category2").text = self.categoryComboBox2.currentText()
-        job["source_info"]["category2"] = self.categoryComboBox2.currentText()
-        SubElement(
-            source_info, "category3").text = self.categoryComboBox3.currentText()
-        job["source_info"]["category3"] = self.categoryComboBox3.currentText()
+        folder = SubElement(source_info, "folder")
+        SubElement(folder, "folder_name").text = folder_name
+        SubElement(folder, "folder_path").text = folder_path
+        SubElement(folder, "folder_id").text = folder_Id
+        job["source_info"]["folder"] = {}
+        job["source_info"]["folder"]["folder_name"] = folder_name
+        job["source_info"]["folder"]["folder_path"] = folder_path
+        job["source_info"]["folder"]["folder_Id"] = folder_Id
+
+        event_Id = ""
+        event_name = "미분류"
+        event_path = ""
+        for event in event_list:
+            if (event["KsimTree"]["Name"] == event_name):
+                event_Id = str(event["KsimTree"]["Id"])
+                event_path = event["KsimTree"]["Path"]
+        event = SubElement(source_info, "event")
+        SubElement(event, "event_name").text = event_name
+        SubElement(event, "event_path").text = event_path
+        SubElement(event, "event_id").text = event_Id
+        job["source_info"]["event"] = {}
+        job["source_info"]["event"]["event_name"] = event_name
+        job["source_info"]["event"]["event_path"] = event_path
+        job["source_info"]["event"]["event_id"] = event_Id
+
+        category = SubElement(source_info, "category")
+
+        category3 = self.categoryComboBox3.currentText()
+        category2 = self.categoryComboBox2.currentText()
+        category1 = self.categoryComboBox1.currentText()
+
+        category_name = ""
+        category_path = ""
+        category_Id = ""
+        if (category3 != ""):
+            for temp_cat_1 in category_list:
+                if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    temp_cat_2_list = temp_cat_1["ChildNodes"]
+                    for temp_cat_2 in temp_cat_2_list:
+                        if (temp_cat_2["KsimTree"]["Name"] == category2):
+                            temp_cat_3_list = temp_cat_2["ChildNodes"]
+                            for temp_cat_3 in temp_cat_3_list:
+                                if (temp_cat_3["KsimTree"]["Name"] == category3):
+                                    category_name = temp_cat_3["KsimTree"]["Name"]
+                                    category_path = temp_cat_3["KsimTree"]["Path"]
+                                    category_Id = str(
+                                        temp_cat_3["KsimTree"]["Id"])
+        elif (category2 != ""):
+            for temp_cat_1 in category_list:
+                if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    temp_cat_2_list = temp_cat_1["ChildNodes"]
+                    for temp_cat_2 in temp_cat_2_list:
+                        if (temp_cat_2["KsimTree"]["Name"] == category2):
+                            category_name = temp_cat_2["KsimTree"]["Name"]
+                            category_path = temp_cat_2["KsimTree"]["Path"]
+                            category_Id = str(temp_cat_2["KsimTree"]["Id"])
+        else:
+            for temp_cat_1 in category_list:
+                if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    category_name = temp_cat_1["KsimTree"]["Name"]
+                    category_path = temp_cat_1["KsimTree"]["Path"]
+                    category_Id = str(temp_cat_1["KsimTree"]["Id"])
+
+        category = SubElement(source_info, "category")
+        SubElement(category, "category_name").text = category_name
+        SubElement(category, "category_path").text = category_path
+        SubElement(category, "category_id").text = category_Id
+
+        job["source_info"]["category"] = {}
+        job["source_info"]["category"]["category_name"] = category_name
+        job["source_info"]["category"]["category_path"] = category_path
+        job["source_info"]["category"]["category_id"] = category_Id
+
         SubElement(
             source_info, "restriction").text = self.restrictionComboBox.currentText()
         job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
 
-        SubElement(source_info, "title").text = self.titleLineEdit.text()
-        job["source_info"]["title"] = self.titleLineEdit.text()
+        dest_info = SubElement(job_info, "dest_info")
+        SubElement(dest_info, "dest_filename").text = ""
+        job["dest_info"] = {}
+        job["dest_info"]["dest_filename"] = ""
+
+        job["metadata"] = {}
+        metadata = SubElement(job_info, "metadata")
+
+        SubElement(metadata,
+                   "date").text = datetime.datetime.strptime(self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
+        job["metadata"]["date"] = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
 
         title = self.titleLineEdit.text()
         i = 0
@@ -560,35 +663,30 @@ class MyApp(QMainWindow, form_class):
                 title = title+"-1"
             i = i+1
 
-        SubElement(source_info, "title").text = title
-        job["source_info"]["title"] = title
+        SubElement(metadata, "title").text = title
+        job["metadata"]["title"] = title
         self.titleLineEdit.setText(title)
 
-        creation_info = SubElement(job_info, "creation_info")
-        job["creation_info"] = {}
-
-        SubElement(creation_info, "department").text = self.deptLineEdit.text()
-        job["creation_info"]["department"] = self.deptLineEdit.text()
-
-        SubElement(creation_info,
-                   "journalist").text = self.journalistLineEdit.text()
-        job["creation_info"]["journalist"] = self.journalistLineEdit.text()
-
-        SubElement(creation_info,
-                   "video_reporter").text = self.videoReporterLineEdit.text()
-        job["creation_info"]["video_reporter"] = self.videoReporterLineEdit.text()
-
-        SubElement(creation_info, "place").text = self.placeLineEdit.text()
-        job["creation_info"]["place"] = self.placeLineEdit.text()
-
-        SubElement(creation_info,
-                   "date").text = datetime.datetime.strptime(self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
-        job["creation_info"]["date"] = datetime.datetime.strptime(
-            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d").strftime("%Y-%m-%d")
-
-        SubElement(creation_info,
+        SubElement(metadata,
                    "contents").text = self.contentTextEdit.toPlainText()
-        job["creation_info"]["contents"] = self.contentTextEdit.toPlainText()
+        job["metadata"]["contents"] = self.contentTextEdit.toPlainText()
+
+        sub_metadata = SubElement(metadata, "sub_metadata")
+        job["metadata"]["sub_metadata"] = {}
+
+        SubElement(sub_metadata, "department").text = self.deptLineEdit.text()
+        job["metadata"]["sub_metadata"]["department"] = self.deptLineEdit.text()
+
+        SubElement(sub_metadata,
+                   "journalist").text = self.journalistLineEdit.text()
+        job["metadata"]["sub_metadata"]["journalist"] = self.journalistLineEdit.text()
+
+        SubElement(sub_metadata,
+                   "video_reporter").text = self.videoReporterLineEdit.text()
+        job["metadata"]["sub_metadata"]["video_reporter"] = self.videoReporterLineEdit.text()
+
+        SubElement(sub_metadata, "place").text = self.placeLineEdit.text()
+        job["metadata"]["sub_metadata"]["place"] = self.placeLineEdit.text()
 
         file_list = SubElement(job_info, "file_list")
         job["files"] = {}
@@ -610,7 +708,7 @@ class MyApp(QMainWindow, form_class):
             self.root.takeChild(0)
             break
         item = QTreeWidgetItem()
-        item.setText(0, job["source_info"]["title"])
+        item.setText(0, job["metadata"]["title"])
         item.setText(1, job["ingest_status"])
         item.setText(2, job["ftp_status"])
         self.job_list.append(job)

@@ -1,0 +1,137 @@
+{
+  "KsimTree": {
+    "Id": 20070,
+    "Name": "News",
+    "Path": "전체\\News",
+    "Flag": 10002
+  },
+  "ChildNodes": [
+    {
+      "KsimTree": {
+        "Id": 20304,
+        "Name": "월요일",
+        "Path": "전체\\News\\월요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20305,
+        "Name": "화요일",
+        "Path": "전체\\News\\화요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20306,
+        "Name": "수요일",
+        "Path": "전체\\News\\수요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20307,
+        "Name": "목요일",
+        "Path": "전체\\News\\목요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20308,
+        "Name": "금요일",
+        "Path": "전체\\News\\금요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20309,
+        "Name": "토요일",
+        "Path": "전체\\News\\토요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20310,
+        "Name": "일요일",
+        "Path": "전체\\News\\일요일",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 20080,
+        "Name": "국제",
+        "Path": "전체\\News\\국제",
+        "Flag": 0
+      },
+      "ChildNodes": [
+        {
+          "KsimTree": {
+            "Id": 2010066,
+            "Name": "CNN",
+            "Path": "전체\\News\\국제\\CNN",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2010067,
+            "Name": "RTV",
+            "Path": "전체\\News\\국제\\RTV",
+            "Flag": 2621453
+          },
+          "ChildNodes": null
+        },
+        {
+          "KsimTree": {
+            "Id": 2010068,
+            "Name": "APTN",
+            "Path": "전체\\News\\국제\\APTN",
+            "Flag": 0
+          },
+          "ChildNodes": null
+        }
+      ]
+    },
+    {
+      "KsimTree": {
+        "Id": 2003249,
+        "Name": "뉴스_공유",
+        "Path": "전체\\News\\뉴스_공유",
+        "Flag": 10002
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009135,
+        "Name": "스브스뉴스",
+        "Path": "전체\\News\\스브스뉴스",
+        "Flag": 0
+      },
+      "ChildNodes": null
+    },
+    {
+      "KsimTree": {
+        "Id": 2009955,
+        "Name": "스포츠_예고",
+        "Path": "전체\\News\\스포츠_예고",
+        "Flag": 2621453
+      },
+      "ChildNodes": null
+    }
+  ]
+}
