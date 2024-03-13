@@ -11,6 +11,7 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree
 from time import sleep
 from threading import Thread
 import logging
+import traceback
 import logging.handlers
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox,  QTreeWidgetItem,   QAbstractItemView, QFileDialog
@@ -759,6 +760,9 @@ def sort(target_list):
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = MyApp()
+    try:
+        app = QApplication(sys.argv)
+        ex = MyApp()
+    except:
+        logging.error(traceback.format_exc())
     sys.exit(app.exec_())
