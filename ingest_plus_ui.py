@@ -319,7 +319,8 @@ class MyApp(QMainWindow, form_class):
             self.fileListWidget.addItem(QListWidgetItem(item))
 
     def onTreeItemClicked(self, item: QStandardItem, column):
-        self.selected_job_row = self.jobTreeWidget.indexFromItem(item).row()
+        self.selected_job_row = self.jobTreeWidget.indexFromItem(
+            item).row()
         logging.info(self.selected_job_row)
 
         job = self.job_list[self.jobTreeWidget.indexFromItem(item).row()]
@@ -329,13 +330,14 @@ class MyApp(QMainWindow, form_class):
         if (index >= 0):
             self.ingestTypeComboBox.setCurrentIndex(index)
 
+        print(job["source_info"]["centralmediatypecode"])
         index = self.centralmediatypecodeComboBox.findText(
             job["source_info"]["centralmediatypecode"])
         if (index >= 0):
             self.centralmediatypecodeComboBox.setCurrentIndex(index)
 
         index = self.folderComboBox.findText(
-            job["source_info"]["folder"])
+            job["source_info"]["folder"]["folder_name"])
         if (index >= 0):
             self.folderComboBox.setCurrentIndex(index)
 
@@ -346,7 +348,7 @@ class MyApp(QMainWindow, form_class):
 
         for i in range(1, 4):
             eval(f"self.categoryComboBox{i}.setCurrentIndex(self.categoryComboBox{
-                 i}.findText(job['source_info']['category{i}']))")
+                 i}.findText(job['source_info']['category']['category{i}']))")
 
         index = self.restrictionComboBox.findText(
             job["source_info"]["restriction"])
@@ -364,9 +366,10 @@ class MyApp(QMainWindow, form_class):
         self.videoReporterLineEdit.setText(
             job["metadata"]["sub_metadata"]["video_reporter"])
 
-        self.placeLineEdit.setText(job["metadata"]["sub_metadata"]["place"])
+        self.placeLineEdit.setText(
+            job["metadata"]["sub_metadata"]["place"])
 
-        date: list = job["metadata"]["sub_metadata"]["date"].split("-")
+        date: list = job["metadata"]["date"].split("-")
         year: str = date[0]
         month: str = date[1]
         day: str = date[2]
@@ -525,18 +528,21 @@ class MyApp(QMainWindow, form_class):
         category = SubElement(source_info, "category")
 
         category3 = self.categoryComboBox3.currentText()
-        category2 = self.categoryComboBox2.currentText()
+        category2 = self.categoryComboBox2.currentText()["f"]
         category1 = self.categoryComboBox1.currentText()
 
         category_name = ""
         category_path = ""
         category_Id = ""
+        job["source_info"]["category"] = {}
         if (category3 != ""):
             for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    job["source_info"]["category"]["category1"] = temp_cat_1["KsimTree"]["Name"]
                     temp_cat_2_list = temp_cat_1["ChildNodes"]
                     for temp_cat_2 in temp_cat_2_list:
                         if (temp_cat_2["KsimTree"]["Name"] == category2):
+                            job["source_info"]["category"]["category2"] = temp_cat_2["KsimTree"]["Name"]
                             temp_cat_3_list = temp_cat_2["ChildNodes"]
                             for temp_cat_3 in temp_cat_3_list:
                                 if (temp_cat_3["KsimTree"]["Name"] == category3):
@@ -544,28 +550,34 @@ class MyApp(QMainWindow, form_class):
                                     category_path = temp_cat_3["KsimTree"]["Path"]
                                     category_Id = str(
                                         temp_cat_3["KsimTree"]["Id"])
+                                    job["source_info"]["category"]["category3"] = category_name
         elif (category2 != ""):
             for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    job["source_info"]["category"]["category1"] = temp_cat_1["KsimTree"]["Name"]
                     temp_cat_2_list = temp_cat_1["ChildNodes"]
                     for temp_cat_2 in temp_cat_2_list:
                         if (temp_cat_2["KsimTree"]["Name"] == category2):
+                            job["source_info"]["category"]["category2"] = temp_cat_2["KsimTree"]["Name"]
                             category_name = temp_cat_2["KsimTree"]["Name"]
                             category_path = temp_cat_2["KsimTree"]["Path"]
                             category_Id = str(temp_cat_2["KsimTree"]["Id"])
+                            job["source_info"]["category"]["category3"] = ""
         else:
             for temp_cat_1 in category1_list:
                 if (temp_cat_1["KsimTree"]["Name"] == category1):
+                    job["source_info"]["category"]["category1"] = temp_cat_1["KsimTree"]["Name"]
                     category_name = temp_cat_1["KsimTree"]["Name"]
                     category_path = temp_cat_1["KsimTree"]["Path"]
                     category_Id = str(temp_cat_1["KsimTree"]["Id"])
+                    job["source_info"]["category"]["category2"] = ""
+                    job["source_info"]["category"]["category3"] = ""
 
         category = SubElement(source_info, "category")
         SubElement(category, "category_name").text = category_name
         SubElement(category, "category_path").text = category_path
         SubElement(category, "category_id").text = category_Id
 
-        job["source_info"]["category"] = {}
         job["source_info"]["category"]["category_name"] = category_name
         job["source_info"]["category"]["category_path"] = category_path
         job["source_info"]["category"]["category_id"] = category_Id
