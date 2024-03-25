@@ -432,8 +432,9 @@ class MyApp(QMainWindow, form_class):
         category2_list = [""]
         for category1 in category1_list:
             if category1["KsimTree"]["Name"] == self.categoryComboBox1.currentText():
-                for category2 in category1["ChildNodes"]:
-                    category2_list.append(category2["KsimTree"]["Name"])
+                if category1["ChildNodes"] != None:
+                    for category2 in category1["ChildNodes"]:
+                        category2_list.append(category2["KsimTree"]["Name"])
 
         for category2 in category2_list:
             self.categoryComboBox2.addItem(category2)
@@ -444,13 +445,14 @@ class MyApp(QMainWindow, form_class):
         category3_list = [""]
         for category1 in category1_list:
             if category1["KsimTree"]["Name"] == self.categoryComboBox1.currentText():
-                for category2 in category1["ChildNodes"]:
-                    if (
-                        category2["KsimTree"]["Name"]
-                        == self.categoryComboBox2.currentText()
-                    ):
-                        for category3 in category2["ChildNodes"]:
-                            category3_list.append(category3["KsimTree"]["Name"])
+                if category1["ChildNodes"] != None:
+                    for category2 in category1["ChildNodes"]:
+                        if (
+                            category2["KsimTree"]["Name"]
+                            == self.categoryComboBox2.currentText()
+                        ):
+                            for category3 in category2["ChildNodes"]:
+                                category3_list.append(category3["KsimTree"]["Name"])
 
         for category3 in category3_list:
             self.categoryComboBox3.addItem(category3)
@@ -470,256 +472,241 @@ class MyApp(QMainWindow, form_class):
             self.items.append(self.fileListWidget.item(x).text())
 
     def create_xml(self):
-        try:
-            titles = []
-            for item in self.job_list:
-                titles.append(item["metadata"]["title"])
-            job = {}
+        titles = []
+        for item in self.job_list:
+            titles.append(item["metadata"]["title"])
+        job = {}
 
-            filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + ".xml"
-            path = config["xml"]["dir"] + "//" + filename
-            job["xml"] = path
-            with open(path, "w") as f:
-                f.write("")
+        filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + ".xml"
+        path = config["xml"]["dir"] + "//" + filename
+        job["xml"] = path
+        with open(path, "w") as f:
+            f.write("")
 
-            root = Element("sbs_ingest_plus")
+        root = Element("sbs_ingest_plus")
 
-            generator = SubElement(root, "generator")
-            SubElement(generator, "generator_name").text = "Ingest Plus UI"
-            SubElement(generator, "generator_id").text = ""
-            SubElement(generator, "generator_version").text = "1.0"
+        generator = SubElement(root, "generator")
+        SubElement(generator, "generator_name").text = "Ingest Plus UI"
+        SubElement(generator, "generator_id").text = ""
+        SubElement(generator, "generator_version").text = "1.0"
 
-            job_info = SubElement(root, "job_info")
-            SubElement(job_info, "job_id").text = ""
-            SubElement(
-                job_info, "ingest_type"
-            ).text = self.ingestTypeComboBox.currentText()
-            job["ingest_type"] = self.ingestTypeComboBox.currentText()
-            if job["ingest_type"] == "Normal":
-                job["ingest_type"] = "Single"
+        job_info = SubElement(root, "job_info")
+        SubElement(job_info, "job_id").text = ""
+        SubElement(job_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
+        job["ingest_type"] = self.ingestTypeComboBox.currentText()
+        if job["ingest_type"] == "Normal":
+            job["ingest_type"] = "Single"
 
-            source_info = SubElement(job_info, "source_info")
-            job["source_info"] = {}
+        source_info = SubElement(job_info, "source_info")
+        job["source_info"] = {}
 
-            SubElement(
-                source_info, "centralmediatypecode"
-            ).text = self.centralmediatypecodeComboBox.currentText()
-            job["source_info"]["centralmediatypecode"] = (
-                self.centralmediatypecodeComboBox.currentText()
-            )
+        SubElement(
+            source_info, "centralmediatypecode"
+        ).text = self.centralmediatypecodeComboBox.currentText()
+        job["source_info"]["centralmediatypecode"] = (
+            self.centralmediatypecodeComboBox.currentText()
+        )
 
-            SubElement(
-                source_info, "ingest_src"
-            ).text = self.sourceComboBox.currentText()
-            job["source_info"]["ingest_src"] = self.sourceComboBox.currentText()
+        SubElement(source_info, "ingest_src").text = self.sourceComboBox.currentText()
+        job["source_info"]["ingest_src"] = self.sourceComboBox.currentText()
 
-            weekday_name = WEEKDAYS[time.localtime().tm_wday]
-            folder_Id = ""
-            folder_name = self.folderComboBox.currentText()
-            folder_path = ""
+        weekday_name = WEEKDAYS[time.localtime().tm_wday]
+        folder_Id = ""
+        folder_name = self.folderComboBox.currentText()
+        folder_path = ""
 
-            if folder_name == "News":
-                for folder in target_list[
-                    self.centralmediatypecodeComboBox.currentText()
-                ]:
-                    if folder["KsimTree"]["Name"] == weekday_name:
-                        folder_Id = str(folder["KsimTree"]["Id"])
-                        folder_path = folder["KsimTree"]["Path"]
-            else:
-                for folder in target_list[
-                    self.centralmediatypecodeComboBox.currentText()
-                ]:
-                    if folder["KsimTree"]["Name"] == folder_name:
-                        folder_Id = str(folder["KsimTree"]["Id"])
-                        folder_path = folder["KsimTree"]["Path"]
+        if folder_name == "News":
+            for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
+                if folder["KsimTree"]["Name"] == weekday_name:
+                    folder_Id = str(folder["KsimTree"]["Id"])
+                    folder_path = folder["KsimTree"]["Path"]
+        else:
+            for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
+                if folder["KsimTree"]["Name"] == folder_name:
+                    folder_Id = str(folder["KsimTree"]["Id"])
+                    folder_path = folder["KsimTree"]["Path"]
 
-            folder = SubElement(source_info, "folder")
-            SubElement(folder, "folder_name").text = folder_name
-            SubElement(folder, "folder_path").text = folder_path
-            SubElement(folder, "folder_id").text = folder_Id
-            job["source_info"]["folder"] = {}
-            job["source_info"]["folder"]["folder_name"] = folder_name
-            job["source_info"]["folder"]["folder_path"] = folder_path
-            job["source_info"]["folder"]["folder_Id"] = folder_Id
+        folder = SubElement(source_info, "folder")
+        SubElement(folder, "folder_name").text = folder_name
+        SubElement(folder, "folder_path").text = folder_path
+        SubElement(folder, "folder_id").text = folder_Id
+        job["source_info"]["folder"] = {}
+        job["source_info"]["folder"]["folder_name"] = folder_name
+        job["source_info"]["folder"]["folder_path"] = folder_path
+        job["source_info"]["folder"]["folder_Id"] = folder_Id
 
-            event_Id = ""
-            event_name = "미분류"
-            event_path = ""
-            for event in event_list:
-                if event["KsimTree"]["Name"] == event_name:
-                    event_Id = str(event["KsimTree"]["Id"])
-                    event_path = event["KsimTree"]["Path"]
-            event = SubElement(source_info, "event")
-            SubElement(event, "event_name").text = event_name
-            SubElement(event, "event_path").text = event_path
-            SubElement(event, "event_id").text = event_Id
-            job["source_info"]["event"] = {}
-            job["source_info"]["event"]["event_name"] = event_name
-            job["source_info"]["event"]["event_path"] = event_path
-            job["source_info"]["event"]["event_id"] = event_Id
+        event_Id = ""
+        event_name = "미분류"
+        event_path = ""
+        for event in event_list:
+            if event["KsimTree"]["Name"] == event_name:
+                event_Id = str(event["KsimTree"]["Id"])
+                event_path = event["KsimTree"]["Path"]
+        event = SubElement(source_info, "event")
+        SubElement(event, "event_name").text = event_name
+        SubElement(event, "event_path").text = event_path
+        SubElement(event, "event_id").text = event_Id
+        job["source_info"]["event"] = {}
+        job["source_info"]["event"]["event_name"] = event_name
+        job["source_info"]["event"]["event_path"] = event_path
+        job["source_info"]["event"]["event_id"] = event_Id
 
-            category = SubElement(source_info, "category")
+        category = SubElement(source_info, "category")
 
-            category3 = self.categoryComboBox3.currentText()
-            category2 = self.categoryComboBox2.currentText()
-            category1 = self.categoryComboBox1.currentText()
+        category3 = self.categoryComboBox3.currentText()
+        category2 = self.categoryComboBox2.currentText()
+        category1 = self.categoryComboBox1.currentText()
 
-            category_name = ""
-            category_path = ""
-            category_Id = ""
-            job["source_info"]["category"] = {}
-            if category3 != "":
-                for temp_cat_1 in category1_list:
-                    if temp_cat_1["KsimTree"]["Name"] == category1:
-                        job["source_info"]["category"]["category1"] = temp_cat_1[
-                            "KsimTree"
-                        ]["Name"]
-                        temp_cat_2_list = temp_cat_1["ChildNodes"]
-                        for temp_cat_2 in temp_cat_2_list:
-                            if temp_cat_2["KsimTree"]["Name"] == category2:
-                                job["source_info"]["category"]["category2"] = (
-                                    temp_cat_2["KsimTree"]["Name"]
-                                )
-                                temp_cat_3_list = temp_cat_2["ChildNodes"]
-                                for temp_cat_3 in temp_cat_3_list:
-                                    if temp_cat_3["KsimTree"]["Name"] == category3:
-                                        category_name = temp_cat_3["KsimTree"]["Name"]
-                                        category_path = temp_cat_3["KsimTree"]["Path"]
-                                        category_Id = str(temp_cat_3["KsimTree"]["Id"])
-                                        job["source_info"]["category"]["category3"] = (
-                                            category_name
-                                        )
-            elif category2 != "":
-                for temp_cat_1 in category1_list:
-                    if temp_cat_1["KsimTree"]["Name"] == category1:
-                        job["source_info"]["category"]["category1"] = temp_cat_1[
-                            "KsimTree"
-                        ]["Name"]
-                        temp_cat_2_list = temp_cat_1["ChildNodes"]
-                        for temp_cat_2 in temp_cat_2_list:
-                            if temp_cat_2["KsimTree"]["Name"] == category2:
-                                job["source_info"]["category"]["category2"] = (
-                                    temp_cat_2["KsimTree"]["Name"]
-                                )
-                                category_name = temp_cat_2["KsimTree"]["Name"]
-                                category_path = temp_cat_2["KsimTree"]["Path"]
-                                category_Id = str(temp_cat_2["KsimTree"]["Id"])
-                                job["source_info"]["category"]["category3"] = ""
-            else:
-                for temp_cat_1 in category1_list:
-                    if temp_cat_1["KsimTree"]["Name"] == category1:
-                        job["source_info"]["category"]["category1"] = temp_cat_1[
-                            "KsimTree"
-                        ]["Name"]
-                        category_name = temp_cat_1["KsimTree"]["Name"]
-                        category_path = temp_cat_1["KsimTree"]["Path"]
-                        category_Id = str(temp_cat_1["KsimTree"]["Id"])
-                        job["source_info"]["category"]["category2"] = ""
-                        job["source_info"]["category"]["category3"] = ""
+        category_name = ""
+        category_path = ""
+        category_Id = ""
+        job["source_info"]["category"] = {}
+        if category3 != "":
+            for temp_cat_1 in category1_list:
+                if temp_cat_1["KsimTree"]["Name"] == category1:
+                    job["source_info"]["category"]["category1"] = temp_cat_1[
+                        "KsimTree"
+                    ]["Name"]
+                    temp_cat_2_list = temp_cat_1["ChildNodes"]
+                    for temp_cat_2 in temp_cat_2_list:
+                        if temp_cat_2["KsimTree"]["Name"] == category2:
+                            job["source_info"]["category"]["category2"] = temp_cat_2[
+                                "KsimTree"
+                            ]["Name"]
+                            temp_cat_3_list = temp_cat_2["ChildNodes"]
+                            for temp_cat_3 in temp_cat_3_list:
+                                if temp_cat_3["KsimTree"]["Name"] == category3:
+                                    category_name = temp_cat_3["KsimTree"]["Name"]
+                                    category_path = temp_cat_3["KsimTree"]["Path"]
+                                    category_Id = str(temp_cat_3["KsimTree"]["Id"])
+                                    job["source_info"]["category"]["category3"] = (
+                                        category_name
+                                    )
+        elif category2 != "":
+            for temp_cat_1 in category1_list:
+                if temp_cat_1["KsimTree"]["Name"] == category1:
+                    job["source_info"]["category"]["category1"] = temp_cat_1[
+                        "KsimTree"
+                    ]["Name"]
+                    temp_cat_2_list = temp_cat_1["ChildNodes"]
+                    for temp_cat_2 in temp_cat_2_list:
+                        if temp_cat_2["KsimTree"]["Name"] == category2:
+                            job["source_info"]["category"]["category2"] = temp_cat_2[
+                                "KsimTree"
+                            ]["Name"]
+                            category_name = temp_cat_2["KsimTree"]["Name"]
+                            category_path = temp_cat_2["KsimTree"]["Path"]
+                            category_Id = str(temp_cat_2["KsimTree"]["Id"])
+                            job["source_info"]["category"]["category3"] = ""
+        else:
+            for temp_cat_1 in category1_list:
+                if temp_cat_1["KsimTree"]["Name"] == category1:
+                    job["source_info"]["category"]["category1"] = temp_cat_1[
+                        "KsimTree"
+                    ]["Name"]
+                    category_name = temp_cat_1["KsimTree"]["Name"]
+                    category_path = temp_cat_1["KsimTree"]["Path"]
+                    category_Id = str(temp_cat_1["KsimTree"]["Id"])
+                    job["source_info"]["category"]["category2"] = ""
+                    job["source_info"]["category"]["category3"] = ""
 
-            category = SubElement(source_info, "category")
-            SubElement(category, "category_name").text = category_name
-            SubElement(category, "category_path").text = category_path
-            SubElement(category, "category_id").text = category_Id
+        category = SubElement(source_info, "category")
+        SubElement(category, "category_name").text = category_name
+        SubElement(category, "category_path").text = category_path
+        SubElement(category, "category_id").text = category_Id
 
-            job["source_info"]["category"]["category_name"] = category_name
-            job["source_info"]["category"]["category_path"] = category_path
-            job["source_info"]["category"]["category_id"] = category_Id
+        job["source_info"]["category"]["category_name"] = category_name
+        job["source_info"]["category"]["category_path"] = category_path
+        job["source_info"]["category"]["category_id"] = category_Id
 
-            SubElement(
-                source_info, "restriction"
-            ).text = self.restrictionComboBox.currentText()
-            job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
+        SubElement(
+            source_info, "restriction"
+        ).text = self.restrictionComboBox.currentText()
+        job["source_info"]["restriction"] = self.restrictionComboBox.currentText()
 
-            job["metadata"] = {}
-            metadata = SubElement(job_info, "metadata")
+        job["metadata"] = {}
+        metadata = SubElement(job_info, "metadata")
 
-            SubElement(metadata, "date").text = datetime.datetime.strptime(
-                self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
-            ).strftime("%Y-%m-%d")
-            job["metadata"]["date"] = datetime.datetime.strptime(
-                self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
-            ).strftime("%Y-%m-%d")
+        SubElement(metadata, "date").text = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
+        ).strftime("%Y-%m-%d")
+        job["metadata"]["date"] = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
+        ).strftime("%Y-%m-%d")
 
-            title = self.titleLineEdit.text()
-            i = 0
-            while title in titles:
-                try:
-                    title = (
-                        "-".join(title.split("-")[0:-1])
-                        + "-"
-                        + str(int(title.split("-")[-1]) + 1)
-                    )
-                except:
-                    title = title + "-1"
-                i = i + 1
+        title = self.titleLineEdit.text()
+        i = 0
+        while title in titles:
+            try:
+                title = (
+                    "-".join(title.split("-")[0:-1])
+                    + "-"
+                    + str(int(title.split("-")[-1]) + 1)
+                )
+            except:
+                title = title + "-1"
+            i = i + 1
 
-            SubElement(metadata, "title").text = title
-            job["metadata"]["title"] = title
-            self.titleLineEdit.setText(title)
+        SubElement(metadata, "title").text = title
+        job["metadata"]["title"] = title
+        self.titleLineEdit.setText(title)
 
-            dest_info = SubElement(job_info, "dest_info")
-            sanitized_title = re.sub(r'[\\/*?:"<>|]', "", title)
-            SubElement(
-                dest_info, "dest_filename"
-            ).text = f"IngestPlus_{sanitized_title}"
-            job["dest_info"] = {}
-            job["dest_info"]["dest_filename"] = f"IngestPlus_{sanitized_title}"
+        dest_info = SubElement(job_info, "dest_info")
+        sanitized_title = re.sub(r'[\\/*?:"<>|]', "", title)
+        SubElement(dest_info, "dest_filename").text = f"IngestPlus_{sanitized_title}"
+        job["dest_info"] = {}
+        job["dest_info"]["dest_filename"] = f"IngestPlus_{sanitized_title}"
 
-            SubElement(metadata, "contents").text = self.contentTextEdit.toPlainText()
-            job["metadata"]["contents"] = self.contentTextEdit.toPlainText()
+        SubElement(metadata, "contents").text = self.contentTextEdit.toPlainText()
+        job["metadata"]["contents"] = self.contentTextEdit.toPlainText()
 
-            sub_metadata = SubElement(metadata, "sub_metadata")
-            job["metadata"]["sub_metadata"] = {}
+        sub_metadata = SubElement(metadata, "sub_metadata")
+        job["metadata"]["sub_metadata"] = {}
 
-            SubElement(sub_metadata, "department").text = self.deptLineEdit.text()
-            job["metadata"]["sub_metadata"]["department"] = self.deptLineEdit.text()
+        SubElement(sub_metadata, "department").text = self.deptLineEdit.text()
+        job["metadata"]["sub_metadata"]["department"] = self.deptLineEdit.text()
 
-            SubElement(sub_metadata, "journalist").text = self.journalistLineEdit.text()
-            job["metadata"]["sub_metadata"]["journalist"] = (
-                self.journalistLineEdit.text()
-            )
+        SubElement(sub_metadata, "journalist").text = self.journalistLineEdit.text()
+        job["metadata"]["sub_metadata"]["journalist"] = self.journalistLineEdit.text()
 
-            SubElement(
-                sub_metadata, "video_reporter"
-            ).text = self.videoReporterLineEdit.text()
-            job["metadata"]["sub_metadata"]["video_reporter"] = (
-                self.videoReporterLineEdit.text()
-            )
+        SubElement(
+            sub_metadata, "video_reporter"
+        ).text = self.videoReporterLineEdit.text()
+        job["metadata"]["sub_metadata"]["video_reporter"] = (
+            self.videoReporterLineEdit.text()
+        )
 
-            SubElement(sub_metadata, "place").text = self.placeLineEdit.text()
-            job["metadata"]["sub_metadata"]["place"] = self.placeLineEdit.text()
+        SubElement(sub_metadata, "place").text = self.placeLineEdit.text()
+        job["metadata"]["sub_metadata"]["place"] = self.placeLineEdit.text()
 
-            file_list = SubElement(job_info, "file_list")
-            job["files"] = {}
-            for i in range(self.fileListWidget.count()):
-                file = SubElement(file_list, "file")
-                SubElement(file, "order").text = str(i)
-                SubElement(file, "full_path").text = self.fileListWidget.item(i).text()
-                job["files"][str(i)] = self.fileListWidget.item(i).text()
+        file_list = SubElement(job_info, "file_list")
+        job["files"] = {}
+        for i in range(self.fileListWidget.count()):
+            file = SubElement(file_list, "file")
+            SubElement(file, "order").text = str(i)
+            SubElement(file, "full_path").text = self.fileListWidget.item(i).text()
+            job["files"][str(i)] = self.fileListWidget.item(i).text()
 
-            tree = ElementTree(root)
-            tree.write(path, encoding="utf-8", xml_declaration=True)
+        tree = ElementTree(root)
+        tree.write(path, encoding="utf-8", xml_declaration=True)
 
-            job["ingest_status"] = "대기"
-            job["ftp_status"] = ""
+        job["ingest_status"] = "대기"
+        job["ftp_status"] = ""
 
-            while len(self.job_list) > 30:
-                self.job_list.pop(0)
-                self.root.takeChild(0)
-                break
-            item = QTreeWidgetItem()
-            item.setText(0, job["metadata"]["title"])
-            item.setText(1, job["ingest_status"])
-            item.setText(2, job["ftp_status"])
-            self.job_list.append(job)
-            self.root.addChild(item)
+        while len(self.job_list) > 30:
+            self.job_list.pop(0)
+            self.root.takeChild(0)
+            break
+        item = QTreeWidgetItem()
+        item.setText(0, job["metadata"]["title"])
+        item.setText(1, job["ingest_status"])
+        item.setText(2, job["ftp_status"])
+        self.job_list.append(job)
+        self.root.addChild(item)
 
-            with open("work/jobs.txt", "w", encoding="utf-8") as f:
-                f.write(json.dumps(self.job_list))
-            QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
-        except:
-            logging.error(traceback.format_exc())
+        with open("work/jobs.txt", "w", encoding="utf-8") as f:
+            f.write(json.dumps(self.job_list))
+        QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
 
     def item_up(self):
         current_row: int = self.fileListWidget.currentRow()
@@ -827,9 +814,9 @@ def sort(target_list):
 
 
 if __name__ == "__main__":
+    app = QApplication(sys.argv)
     try:
-        app = QApplication(sys.argv)
         ex = MyApp()
     except:
-        logging.error(traceback.format_exc())
+        logger.exception(traceback.format_exc())
     sys.exit(app.exec_())
