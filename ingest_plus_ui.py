@@ -364,8 +364,9 @@ class MyApp(QMainWindow, form_class):
             self.sourceComboBox.setCurrentIndex(index)
 
         for i in range(1, 4):
-            eval(f"self.categoryComboBox{i}.setCurrentIndex(self.categoryComboBox{
-                 i}.findText(job['source_info']['category']['category{i}']))")
+            eval(
+                f"self.categoryComboBox{i}.setCurrentIndex(self.categoryComboBox{i}.findText(job['source_info']['category']['category{i}']))"
+            )
 
         index = self.restrictionComboBox.findText(job["source_info"]["restriction"])
         if index >= 0:
@@ -445,14 +446,15 @@ class MyApp(QMainWindow, form_class):
         category3_list = [""]
         for category1 in category1_list:
             if category1["KsimTree"]["Name"] == self.categoryComboBox1.currentText():
-                if category1["ChildNodes"] != None:
+                if category1["ChildNodes"] is not None:
                     for category2 in category1["ChildNodes"]:
                         if (
                             category2["KsimTree"]["Name"]
                             == self.categoryComboBox2.currentText()
                         ):
-                            for category3 in category2["ChildNodes"]:
-                                category3_list.append(category3["KsimTree"]["Name"])
+                            if category2["ChildNodes"] is not None:
+                                for category3 in category2["ChildNodes"]:
+                                    category3_list.append(category3["KsimTree"]["Name"])
 
         for category3 in category3_list:
             self.categoryComboBox3.addItem(category3)
@@ -643,7 +645,7 @@ class MyApp(QMainWindow, form_class):
                     + "-"
                     + str(int(title.split("-")[-1]) + 1)
                 )
-            except:
+            except:  # noqa: E722
                 title = title + "-1"
             i = i + 1
 
@@ -653,7 +655,8 @@ class MyApp(QMainWindow, form_class):
 
         dest_info = SubElement(job_info, "dest_info")
         sanitized_title = re.sub(r'[\\/*?:"<>|]', "", title)
-        SubElement(dest_info, "dest_filename").text = f"IngestPlus_{sanitized_title}"
+        SubElement(dest_info, "dest_filename").text = f"IngestPlus_{
+            sanitized_title}"
         job["dest_info"] = {}
         job["dest_info"]["dest_filename"] = f"IngestPlus_{sanitized_title}"
 
@@ -817,6 +820,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     try:
         ex = MyApp()
-    except:
+    except:  # noqa: E722
         logger.exception(traceback.format_exc())
     sys.exit(app.exec_())
