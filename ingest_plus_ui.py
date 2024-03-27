@@ -31,6 +31,8 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
+time0 = 0
+time1 = 0
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -174,9 +176,9 @@ class ListenThread(QThread):
     def get_status(self):
         while self.should_work:
             SEND_SOCKET.sendto("get_title_fail".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.05)
+            sleep(0.1)
             SEND_SOCKET.sendto("get_title_finished".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.05)
+            sleep(0.1)
             SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
             sleep(5)
 
@@ -196,21 +198,21 @@ class ListenThread(QThread):
                 temp_fail_src_list = []
                 if "get_title" in js.keys():
                     temp_titles = js["get_title"]
-                    if (
-                        len(
-                            [
-                                x
-                                for x in temp_titles
-                                if x not in self.parent.finished_title_list
-                            ]
-                        )
-                        == 1
-                    ):
-                        self.parent.current_title = [
-                            x
-                            for x in temp_titles
-                            if x not in self.parent.finished_title_list
-                        ][0]
+                    # if (
+                    #     len(
+                    #         [
+                    #             x
+                    #             for x in temp_titles
+                    #             if x not in self.parent.finished_title_list
+                    #         ]
+                    #     )
+                    #     == 1
+                    # ):
+                    self.parent.current_title = [
+                        x
+                        for x in temp_titles
+                        if x not in self.parent.finished_title_list
+                    ]
                 elif "get_title_fail" in js.keys():
                     self.parent.failed_title_list = js["get_title_fail"]
                 elif "get_title_finished" in js.keys():
@@ -257,16 +259,19 @@ class MyApp(QMainWindow, form_class):
     def load_jobs(self) -> None:
         if os.path.exists("work/jobs.txt"):
             with open("work/jobs.txt", "r", encoding="utf-8") as f:
-                try:
-                    self.job_list = json.loads(f.read())
-                    for i, job in enumerate(self.job_list):
-                        item = QTreeWidgetItem()
-                        item.setText(0, job["metadata"]["title"])
-                        item.setText(1, job["ingest_status"])
-                        item.setText(2, job["ftp_status"])
-                        self.root.addChild(item)
-                except:
-                    return None
+                file_content = f.read()
+            if file_content != "":
+                self.job_list = json.loads(file_content)
+                for i, job in enumerate(self.job_list):
+                    item = QTreeWidgetItem()
+                    item.setText(0, job["metadata"]["title"])
+                    item.setText(1, job["ingest_status"])
+                    item.setText(2, job["ftp_status"])
+                    self.root.addChild(item)
+            else:
+                self.job_list = []
+                for i in range(self.root.childCount()):
+                    self.root.removeChild(self.root.child(0))
 
     @tback_args
     def on_status_received(self, msg: str) -> None:
@@ -274,12 +279,15 @@ class MyApp(QMainWindow, form_class):
         if (
             len(self.finished_title_list) == 0
             and len(self.failed_title_list) == 0
-            and len(self.current_title) == 0
+            and self.current_title == []
         ):
-            with open("work/jobs.txt", "w", encoding="utf-8") as f:
-                f.write("")
+            if self.titleLineEdit.text() == "":
+                logger.info(self.titleLineEdit.text())
+                with open("work/jobs.txt", "w", encoding="utf-8") as f:
+                    f.write("")
                 self.load_jobs()
-                return None
+
+            return None
 
         for index, job in enumerate(self.job_list):
             if job["metadata"]["title"] in self.finished_title_list:
@@ -289,9 +297,10 @@ class MyApp(QMainWindow, form_class):
             elif job["metadata"]["title"] in self.failed_title_list:
                 self.job_list[index]["ingest_status"] = "실패"
                 self.root.child(index).setText(1, self.job_list[index]["ingest_status"])
-            elif job["metadata"]["title"] == self.current_title:
+            elif job["metadata"]["title"] in self.current_title:
                 self.job_list[index]["ingest_status"] = "작업중"
                 self.root.child(index).setText(1, self.job_list[index]["ingest_status"])
+                logger.debug(self.current_title[0])
             item = QTreeWidgetItem()
 
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
