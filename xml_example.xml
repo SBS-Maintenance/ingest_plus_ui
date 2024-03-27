@@ -11,9 +11,9 @@
             <title></title>
         </source_info>
         <creation_info>
-            <department></department>
-            <journalist></journalist>
-            <video_reporter></video_reporter>
+            <interviewdept></interviewdept>
+            <interviewrepoter></interviewrepoter>
+            <mediarepoter></mediarepoter>
             <place></place>
             <contents></contents>
         </creation_info>

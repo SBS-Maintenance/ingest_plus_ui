@@ -257,17 +257,30 @@ class MyApp(QMainWindow, form_class):
     def load_jobs(self) -> None:
         if os.path.exists("work/jobs.txt"):
             with open("work/jobs.txt", "r", encoding="utf-8") as f:
-                self.job_list = json.loads(f.read())
-                for i, job in enumerate(self.job_list):
-                    item = QTreeWidgetItem()
-                    item.setText(0, job["metadata"]["title"])
-                    item.setText(1, job["ingest_status"])
-                    item.setText(2, job["ftp_status"])
-                    self.root.addChild(item)
+                try:
+                    self.job_list = json.loads(f.read())
+                    for i, job in enumerate(self.job_list):
+                        item = QTreeWidgetItem()
+                        item.setText(0, job["metadata"]["title"])
+                        item.setText(1, job["ingest_status"])
+                        item.setText(2, job["ftp_status"])
+                        self.root.addChild(item)
+                except:
+                    return None
 
     @tback_args
     def on_status_received(self, msg: str) -> None:
         self.statusPlainTextEdit.setPlainText(msg)
+        if (
+            len(self.finished_title_list) == 0
+            and len(self.failed_title_list) == 0
+            and len(self.current_title) == 0
+        ):
+            with open("work/jobs.txt", "w", encoding="utf-8") as f:
+                f.write("")
+                self.load_jobs()
+                return None
+
         for index, job in enumerate(self.job_list):
             if job["metadata"]["title"] in self.finished_title_list:
                 self.job_list[index]["ingest_status"] = "완료"
@@ -401,15 +414,19 @@ class MyApp(QMainWindow, form_class):
 
         self.titleLineEdit.setText(job["metadata"]["title"])
 
-        self.deptLineEdit.setText(job["metadata"]["sub_metadata"]["department"])
+        self.deptLineEdit.setText(job["metadata"]["sub_metadata"]["interviewdept"])
 
-        self.journalistLineEdit.setText(job["metadata"]["sub_metadata"]["journalist"])
-
-        self.videoReporterLineEdit.setText(
-            job["metadata"]["sub_metadata"]["video_reporter"]
+        self.interviewrepoterLineEdit.setText(
+            job["metadata"]["sub_metadata"]["interviewrepoter"]
         )
 
-        self.placeLineEdit.setText(job["metadata"]["sub_metadata"]["place"])
+        self.mediarepoterLineEdit.setText(
+            job["metadata"]["sub_metadata"]["mediarepoter"]
+        )
+
+        self.shootingplaceLineEdit.setText(
+            job["metadata"]["sub_metadata"]["shootingplace"]
+        )
 
         date: list = job["metadata"]["date"].split("-")
         year: str = date[0]
@@ -688,8 +705,7 @@ class MyApp(QMainWindow, form_class):
 
         dest_info = SubElement(job_info, "dest_info")
         sanitized_title = re.sub(r'[\\/*?:"<>|]', "", title)
-        SubElement(dest_info, "dest_filename").text = f"IngestPlus_{
-            sanitized_title}"
+        SubElement(dest_info, "dest_filename").text = f"IngestPlus_{sanitized_title}"
         job["dest_info"] = {}
         job["dest_info"]["dest_filename"] = f"IngestPlus_{sanitized_title}"
 
@@ -699,21 +715,27 @@ class MyApp(QMainWindow, form_class):
         sub_metadata = SubElement(metadata, "sub_metadata")
         job["metadata"]["sub_metadata"] = {}
 
-        SubElement(sub_metadata, "department").text = self.deptLineEdit.text()
-        job["metadata"]["sub_metadata"]["department"] = self.deptLineEdit.text()
-
-        SubElement(sub_metadata, "journalist").text = self.journalistLineEdit.text()
-        job["metadata"]["sub_metadata"]["journalist"] = self.journalistLineEdit.text()
+        SubElement(sub_metadata, "interviewdept").text = self.deptLineEdit.text()
+        job["metadata"]["sub_metadata"]["interviewdept"] = self.deptLineEdit.text()
 
         SubElement(
-            sub_metadata, "video_reporter"
-        ).text = self.videoReporterLineEdit.text()
-        job["metadata"]["sub_metadata"]["video_reporter"] = (
-            self.videoReporterLineEdit.text()
+            sub_metadata, "interviewrepoter"
+        ).text = self.interviewrepoterLineEdit.text()
+        job["metadata"]["sub_metadata"]["interviewrepoter"] = (
+            self.interviewrepoterLineEdit.text()
         )
 
-        SubElement(sub_metadata, "place").text = self.placeLineEdit.text()
-        job["metadata"]["sub_metadata"]["place"] = self.placeLineEdit.text()
+        SubElement(sub_metadata, "mediarepoter").text = self.mediarepoterLineEdit.text()
+        job["metadata"]["sub_metadata"]["mediarepoter"] = (
+            self.mediarepoterLineEdit.text()
+        )
+
+        SubElement(
+            sub_metadata, "shootingplace"
+        ).text = self.shootingplaceLineEdit.text()
+        job["metadata"]["sub_metadata"]["shootingplace"] = (
+            self.shootingplaceLineEdit.text()
+        )
 
         file_list = SubElement(job_info, "file_list")
         job["files"] = {}
@@ -742,6 +764,7 @@ class MyApp(QMainWindow, form_class):
 
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
             f.write(json.dumps(self.job_list))
+
         QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
 
     @tback
@@ -853,8 +876,5 @@ def sort(target_list):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    try:
-        ex = MyApp()
-    except:  # noqa: E722
-        logger.exception(traceback.format_exc())
+    ex = MyApp()
     sys.exit(app.exec_())
