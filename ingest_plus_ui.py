@@ -14,6 +14,7 @@ import logging
 import traceback
 import logging.handlers
 import re
+from functools import wraps
 
 from PyQt5.QtWidgets import (
     QApplication,
@@ -44,7 +45,28 @@ timedfilehandler.setFormatter(formatter)
 timedfilehandler.suffix = "%Y%m%d"
 logger.addHandler(timedfilehandler)
 
-logger.info("as")
+
+def tback(fn):
+    @wraps(fn)
+    def wrapit(self, *args, **kwargs):
+        try:
+            return fn(self)
+        except:
+            logger.exception(traceback.format_exc())
+
+    return wrapit
+
+
+def tback_args(fn):
+    @wraps(fn)
+    def wrapit(self, *args, **kwargs):
+        try:
+            return fn(self, *args, **kwargs)
+        except:
+            logger.exception(traceback.format_exc())
+
+    return wrapit
+
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -231,6 +253,7 @@ class MyApp(QMainWindow, form_class):
         self.listen_status_thread.received.connect(self.on_status_received)
         self.listen_status_thread.start()
 
+    @tback
     def load_jobs(self) -> None:
         if os.path.exists("work/jobs.txt"):
             with open("work/jobs.txt", "r", encoding="utf-8") as f:
@@ -242,6 +265,7 @@ class MyApp(QMainWindow, form_class):
                     item.setText(2, job["ftp_status"])
                     self.root.addChild(item)
 
+    @tback_args
     def on_status_received(self, msg: str) -> None:
         self.statusPlainTextEdit.setPlainText(msg)
         for index, job in enumerate(self.job_list):
@@ -321,6 +345,7 @@ class MyApp(QMainWindow, form_class):
         self.filePushButton.clicked.connect(self.add_files)
         self.dirPushButton.clicked.connect(self.add_folders)
 
+    @tback
     def add_files(self):
         fnames = QFileDialog.getOpenFileNames(self, "파일 추가")[0]
         self.items = self.items + sort(fnames)
@@ -329,6 +354,7 @@ class MyApp(QMainWindow, form_class):
         for item in self.items:
             self.fileListWidget.addItem(QListWidgetItem(item))
 
+    @tback
     def add_folders(self):
         dname = QFileDialog.getExistingDirectory(self, "폴더 추가")
         self.items = self.items + sort([dname])
@@ -337,6 +363,7 @@ class MyApp(QMainWindow, form_class):
         for item in self.items:
             self.fileListWidget.addItem(QListWidgetItem(item))
 
+    @tback_args
     def onTreeItemClicked(self, item: QStandardItem, column):
         self.selected_job_row = self.jobTreeWidget.indexFromItem(item).row()
         logging.info(self.selected_job_row)
@@ -402,6 +429,7 @@ class MyApp(QMainWindow, form_class):
                 item.setBackground(QColor("#ff0000"))
             self.fileListWidget.addItem(item)
 
+    @tback
     def centralmediatypecodeChanged(self):
         self.categoryComboBox1.clear()
         self.categoryComboBox2.clear()
@@ -427,6 +455,7 @@ class MyApp(QMainWindow, form_class):
                 ):
                     self.folderComboBox.addItem(folder["KsimTree"]["Name"])
 
+    @tback
     def category1changed(self):
         self.categoryComboBox2.clear()
 
@@ -440,6 +469,7 @@ class MyApp(QMainWindow, form_class):
         for category2 in category2_list:
             self.categoryComboBox2.addItem(category2)
 
+    @tback
     def category2changed(self):
         self.categoryComboBox3.clear()
 
@@ -459,10 +489,12 @@ class MyApp(QMainWindow, form_class):
         for category3 in category3_list:
             self.categoryComboBox3.addItem(category3)
 
+    @tback
     def reset_list(self):
         self.items.clear()
         self.fileListWidget.clear()
 
+    @tback
     def delete_item(self):
         list_items: list = self.fileListWidget.selectedItems()
         if not list_items:
@@ -473,6 +505,7 @@ class MyApp(QMainWindow, form_class):
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
+    @tback
     def create_xml(self):
         titles = []
         for item in self.job_list:
@@ -711,6 +744,7 @@ class MyApp(QMainWindow, form_class):
             f.write(json.dumps(self.job_list))
         QMessageBox.information(self, "XML 생성 완료", "XML 생성을 완료하였습니다.")
 
+    @tback
     def item_up(self):
         current_row: int = self.fileListWidget.currentRow()
         current_item: QListWidgetItem = self.fileListWidget.takeItem(current_row)
@@ -720,6 +754,7 @@ class MyApp(QMainWindow, form_class):
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
 
+    @tback
     def item_down(self):
         current_row: int = self.fileListWidget.currentRow()
         current_item: QListWidgetItem = self.fileListWidget.takeItem(current_row)
