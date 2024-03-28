@@ -441,7 +441,7 @@ class MyApp(QMainWindow, form_class):
             job["metadata"]["sub_metadata"]["shootingplace"]
         )
 
-        date: list = job["metadata"]["date"].split("-")
+        date: list = job["metadata"]["sub_metadata"]["shootingdate"].split("-")
         year: str = date[0]
         month: str = date[1]
         day: str = date[2]
@@ -697,13 +697,6 @@ class MyApp(QMainWindow, form_class):
         job["metadata"] = {}
         metadata = SubElement(job_info, "metadata")
 
-        SubElement(metadata, "date").text = datetime.datetime.strptime(
-            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
-        ).strftime("%Y-%m-%d")
-        job["metadata"]["date"] = datetime.datetime.strptime(
-            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
-        ).strftime("%Y-%m-%d")
-
         title = self.titleLineEdit.text()
         i = 0
         while title in titles:
@@ -754,6 +747,13 @@ class MyApp(QMainWindow, form_class):
         job["metadata"]["sub_metadata"]["shootingplace"] = (
             self.shootingplaceLineEdit.text()
         )
+
+        SubElement(sub_metadata, "shootingdate").text = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
+        ).strftime("%Y-%m-%d")
+        job["metadata"]["sub_metadata"]["shootingdate"] = datetime.datetime.strptime(
+            self.videoDateWidget.selectedDate().toString(Qt.ISODate), "%Y-%m-%d"
+        ).strftime("%Y-%m-%d")
 
         file_list = SubElement(job_info, "file_list")
         job["files"] = {}
