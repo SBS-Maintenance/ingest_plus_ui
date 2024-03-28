@@ -173,15 +173,15 @@ class ListenThread(QThread):
     def get_status(self):
         while self.should_work:
             SEND_SOCKET.sendto("get_title_fail".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.1)
+            sleep(0.05)
             SEND_SOCKET.sendto("get_title_finished".encode(), (HOST_IP, HOST_PORT))
-            sleep(0.1)
+            sleep(0.05)
             SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
             sleep(5)
 
     def send_msg(self, msg: str):
         SEND_SOCKET.sendto(msg.encode(), (HOST_IP, HOST_PORT))
-        sleep(0.5)
+        sleep(0.05)
         return True
 
     def run(self):
