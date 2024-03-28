@@ -170,6 +170,7 @@ class ListenThread(QThread):
         self.parent = parent
         Thread(target=self.get_status, daemon=True).start()
 
+    @tback
     def get_status(self):
         while self.should_work:
             SEND_SOCKET.sendto("get_title_fail".encode(), (HOST_IP, HOST_PORT))
@@ -179,11 +180,13 @@ class ListenThread(QThread):
             SEND_SOCKET.sendto("get_title".encode(), (HOST_IP, HOST_PORT))
             sleep(5)
 
+    @tback_args
     def send_msg(self, msg: str):
         SEND_SOCKET.sendto(msg.encode(), (HOST_IP, HOST_PORT))
         sleep(0.05)
         return True
 
+    @tback
     def run(self):
         with STATUS_SOCKET:
             while self.should_work:
@@ -210,7 +213,7 @@ class ListenThread(QThread):
                         x
                         for x in temp_titles
                         if x not in self.parent.finished_title_list
-                        and x not in x not in self.parent.finished_title_list
+                        and x not in self.parent.failed_title_list
                     ]
                 elif "get_title_fail" in js.keys():
                     self.parent.failed_title_list = js["get_title_fail"]
@@ -284,7 +287,6 @@ class MyApp(QMainWindow, form_class):
             and len(self.failed_title_list) == 0
             and len(self.current_title) == 0
         ):
-            logger.info("aa")
             if self.titleLineEdit.text() == "":
                 with open("work/jobs.txt", "w", encoding="utf-8") as f:
                     f.write("")
@@ -841,6 +843,7 @@ class MyApp(QMainWindow, form_class):
         super().closeEvent(a0)
 
 
+@tback_args
 def sort(target_list):
     is_gopro: bool = False
     if len(target_list) == 0:
