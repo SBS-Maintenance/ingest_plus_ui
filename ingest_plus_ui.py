@@ -313,7 +313,7 @@ class MyApp(QMainWindow, form_class):
 
     def init_ui(self):
         self.ingestTypeComboBox.addItem("Consolidation")
-        self.ingestTypeComboBox.addItem("Normal")
+        self.ingestTypeComboBox.addItem("Single")
 
         self.centralmediatypecodeComboBox.addItem("취재원본 (보도국)")
         self.centralmediatypecodeComboBox.addItem("원본-디지털")
@@ -555,8 +555,6 @@ class MyApp(QMainWindow, form_class):
         SubElement(job_info, "job_id").text = ""
         SubElement(job_info, "ingest_type").text = self.ingestTypeComboBox.currentText()
         job["ingest_type"] = self.ingestTypeComboBox.currentText()
-        if job["ingest_type"] == "Normal":
-            job["ingest_type"] = "Single"
 
         source_info = SubElement(job_info, "source_info")
         job["source_info"] = {}
@@ -613,8 +611,6 @@ class MyApp(QMainWindow, form_class):
         job["source_info"]["event"]["event_path"] = event_path
         job["source_info"]["event"]["event_id"] = event_Id
 
-        category = SubElement(source_info, "category")
-
         category3 = self.categoryComboBox3.currentText()
         category2 = self.categoryComboBox2.currentText()
         category1 = self.categoryComboBox1.currentText()
@@ -644,6 +640,7 @@ class MyApp(QMainWindow, form_class):
                                     job["source_info"]["category"]["category3"] = (
                                         category_name
                                     )
+
         elif category2 != "":
             for temp_cat_1 in category1_list:
                 if temp_cat_1["KsimTree"]["Name"] == category1:
@@ -672,6 +669,9 @@ class MyApp(QMainWindow, form_class):
                     job["source_info"]["category"]["category2"] = ""
                     job["source_info"]["category"]["category3"] = ""
         else:
+            category_name = ""
+            category_path = ""
+            category_Id = ""
             job["source_info"]["category"]["category1"] = ""
             job["source_info"]["category"]["category2"] = ""
             job["source_info"]["category"]["category3"] = ""
