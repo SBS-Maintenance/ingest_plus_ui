@@ -193,6 +193,7 @@ class ListenThread(QThread):
                 js: dict = json.loads(msg.decode())
                 temp_fin_title_list = []
                 temp_fail_src_list = []
+                temp_titles = []
                 if "get_title" in js.keys():
                     temp_titles = js["get_title"]
                     # if (
@@ -209,6 +210,7 @@ class ListenThread(QThread):
                         x
                         for x in temp_titles
                         if x not in self.parent.finished_title_list
+                        and x not in x not in self.parent.finished_title_list
                     ]
                 elif "get_title_fail" in js.keys():
                     self.parent.failed_title_list = js["get_title_fail"]
@@ -240,9 +242,9 @@ class MyApp(QMainWindow, form_class):
         self.load_jobs()
 
         self.items = []
-        self.current_title = []
-        self.finished_title_list = []
-        self.failed_title_list = []
+        self.current_title = [None]
+        self.finished_title_list = [None]
+        self.failed_title_list = [None]
 
         self.selected_job_row = -1
 
@@ -280,8 +282,9 @@ class MyApp(QMainWindow, form_class):
         if (
             len(self.finished_title_list) == 0
             and len(self.failed_title_list) == 0
-            and self.current_title == []
+            and len(self.current_title) == 0
         ):
+            logger.info("aa")
             if self.titleLineEdit.text() == "":
                 with open("work/jobs.txt", "w", encoding="utf-8") as f:
                     f.write("")
@@ -300,7 +303,6 @@ class MyApp(QMainWindow, form_class):
             elif job["metadata"]["title"] in self.current_title:
                 self.job_list[index]["ingest_status"] = "작업중"
                 self.root.child(index).setText(1, self.job_list[index]["ingest_status"])
-                logger.debug(self.current_title[0])
             item = QTreeWidgetItem()
 
         with open("work/jobs.txt", "w", encoding="utf-8") as f:
@@ -823,7 +825,6 @@ class MyApp(QMainWindow, form_class):
             event.accept()
         else:
             event.ignore()
-
         self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
@@ -856,39 +857,33 @@ def sort(target_list):
             is_gopro = True
     except:  # noqa: E722
         pass
-    item_dict = {}
+
+    new_list = []
     if is_gopro:
         target_list = [f for f in target_list if f.split(".")[-1].lower() == "mp4"]
         gopro_dict = {}
         for item in target_list:
-            gopro_dict[item[-7:-4]] = []
+            gopro_dict[item[:-4]] = []
         for item in target_list:
-            gopro_dict[item[-7:-4]].append(item)
-        target_list.clear()
+            gopro_dict[item[:-4]].append(item)
         for key, value in gopro_dict.items():
             gopro_dict[key].sort(key=lambda x: x.split("\\")[-1].split(".")[0][:-4])
             for item in gopro_dict[key]:
-                target_list.append(item)
+                new_list.append(item)
     else:
-        for item in target_list:
-            item_dict[item.split("\\")[-1]] = item
-        target_list.clear()
-        for key in natsorted(item_dict.keys()):
-            if os.path.isdir(item_dict[key]):
+        for item in natsorted(target_list):
+            if os.path.isdir(item):
                 inside = []
                 try:
-                    inside = os.listdir(item_dict[key])
+                    inside = os.listdir(item)
                 except:  # noqa: E722
                     pass
                 full_inside = []
-                for item in inside:
-                    full_inside.append(os.path.join(item_dict[key], item))
-                target_list = target_list + sort(full_inside)
+                for item2 in inside:
+                    full_inside.append(os.path.join(item, item2))
             else:
-                target_list.append(item_dict[key])
-
-    # return target_list
-    return [os.path.normpath(x) for x in target_list]
+                new_list.append(item)
+    return [os.path.normpath(x) for x in new_list]
 
 
 if __name__ == "__main__":
