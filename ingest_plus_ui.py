@@ -275,7 +275,11 @@ class MyApp(QMainWindow, form_class):
 
     @tback_args
     def on_status_received(self, msg: str) -> None:
-        self.statusPlainTextEdit.setPlainText(msg)
+        display_str = ""
+        for k, v in json.loads(msg).items():
+            display_str += f"{k}:{v}\n"
+        self.statusPlainTextEdit.setPlainText(display_str)
+
         if (
             len(self.finished_title_list) == 0
             and len(self.failed_title_list) == 0
@@ -571,16 +575,17 @@ class MyApp(QMainWindow, form_class):
         SubElement(source_info, "ingest_src").text = self.sourceComboBox.currentText()
         job["source_info"]["ingest_src"] = self.sourceComboBox.currentText()
 
-        weekday_name = WEEKDAYS[time.localtime().tm_wday]
         folder_Id = ""
         folder_name = self.folderComboBox.currentText()
         folder_path = ""
 
         if folder_name == "News":
-            for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
-                if folder["KsimTree"]["Name"] == weekday_name:
-                    folder_Id = str(folder["KsimTree"]["Id"])
-                    folder_path = folder["KsimTree"]["Path"]
+            folder_Id = str(20070)
+            folder_path = "전체\\News"
+            # for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
+            #     if folder["KsimTree"]["Name"] == weekday_name:
+            #         folder_Id = str(folder["KsimTree"]["Id"])
+            #         folder_path = folder["KsimTree"]["Path"]
         else:
             for folder in target_list[self.centralmediatypecodeComboBox.currentText()]:
                 if folder["KsimTree"]["Name"] == folder_name:
