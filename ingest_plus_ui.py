@@ -660,7 +660,7 @@ class MyApp(QMainWindow, form_class):
                             category_path = temp_cat_2["KsimTree"]["Path"]
                             category_Id = str(temp_cat_2["KsimTree"]["Id"])
                             job["source_info"]["category"]["category3"] = ""
-        else:
+        elif category1 != "":
             for temp_cat_1 in category1_list:
                 if temp_cat_1["KsimTree"]["Name"] == category1:
                     job["source_info"]["category"]["category1"] = temp_cat_1[
@@ -671,6 +671,10 @@ class MyApp(QMainWindow, form_class):
                     category_Id = str(temp_cat_1["KsimTree"]["Id"])
                     job["source_info"]["category"]["category2"] = ""
                     job["source_info"]["category"]["category3"] = ""
+        else:
+            job["source_info"]["category"]["category1"] = ""
+            job["source_info"]["category"]["category2"] = ""
+            job["source_info"]["category"]["category3"] = ""
 
         category = SubElement(source_info, "category")
         SubElement(category, "category_name").text = category_name
@@ -820,6 +824,9 @@ class MyApp(QMainWindow, form_class):
         else:
             event.ignore()
 
+        self.items.clear()
+        for x in range(self.fileListWidget.count()):
+            self.items.append(self.fileListWidget.item(x).text())
         self.items = self.items + sort(temp_items)
 
         self.fileListWidget.clear()
