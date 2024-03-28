@@ -31,9 +31,6 @@ from PyQt5 import uic
 
 from natsort import natsorted
 
-time0 = 0
-time1 = 0
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -276,8 +273,8 @@ class MyApp(QMainWindow, form_class):
     @tback_args
     def on_status_received(self, msg: str) -> None:
         display_str = ""
-        for k, v in json.loads(msg).items():
-            display_str += f"{k}:{v}\n"
+        for k in sorted(json.loads(msg).keys()):
+            display_str += f"{k.ljust(22)} : {json.loads(msg)[k]}\n"
         self.statusPlainTextEdit.setPlainText(display_str)
 
         if (
@@ -286,7 +283,6 @@ class MyApp(QMainWindow, form_class):
             and self.current_title == []
         ):
             if self.titleLineEdit.text() == "":
-                logger.info(self.titleLineEdit.text())
                 with open("work/jobs.txt", "w", encoding="utf-8") as f:
                     f.write("")
                 self.load_jobs()
