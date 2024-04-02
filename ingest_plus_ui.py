@@ -844,6 +844,34 @@ class MyApp(QMainWindow, form_class):
         super().closeEvent(a0)
 
 
+blacklist_exts = [
+    "xml",
+    "bdm",
+    "mpl",
+    "bin",
+    "ind",
+    "ds_store",
+    "cpi",
+    "bat",
+    "txt",
+    "smi",
+    "ese",
+    "ctg",
+    "ppn",
+    "bim",
+    "sav",
+    "url",
+    "db",
+    "htm",
+    "js",
+    "log",
+    "css",
+    "lwi",
+    "ffindex",
+    "idx",
+]
+
+
 @tback_args
 def sort(target_list):
     new_list = []
@@ -852,6 +880,8 @@ def sort(target_list):
         return []
 
     first_item: str = target_list[0]
+    if ("CLIPINF" in first_item.upper()) or ("THMBNL" in first_item.upper()):
+        return []
     if os.path.isdir(first_item):
         target_list = [os.path.join(first_item, f) for f in os.listdir(first_item)]
     try:
@@ -877,7 +907,8 @@ def sort(target_list):
     else:
         for item in natsorted(target_list):
             if not os.path.isdir(item):
-                new_list.append(item)
+                if item.lower().split(".")[-1] not in blacklist_exts:
+                    new_list.append(item)
             else:
                 new_list += sort([item])
     return_list = [os.path.normpath(x) for x in new_list]
