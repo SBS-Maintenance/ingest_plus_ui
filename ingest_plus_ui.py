@@ -830,6 +830,7 @@ class MyApp(QMainWindow, form_class):
         self.items.clear()
         for x in range(self.fileListWidget.count()):
             self.items.append(self.fileListWidget.item(x).text())
+
         self.items = self.items + sort(temp_items)
 
         self.fileListWidget.clear()
@@ -845,6 +846,7 @@ class MyApp(QMainWindow, form_class):
 
 @tback_args
 def sort(target_list):
+    new_list = []
     is_gopro: bool = False
     if len(target_list) == 0:
         return []
@@ -861,7 +863,6 @@ def sort(target_list):
     except:  # noqa: E722
         pass
 
-    new_list = []
     if is_gopro:
         target_list = [f for f in target_list if f.split(".")[-1].lower() == "mp4"]
         gopro_dict = {}
@@ -875,18 +876,12 @@ def sort(target_list):
                 new_list.append(item)
     else:
         for item in natsorted(target_list):
-            if os.path.isdir(item):
-                inside = []
-                try:
-                    inside = os.listdir(item)
-                except:  # noqa: E722
-                    pass
-                full_inside = []
-                for item2 in inside:
-                    full_inside.append(os.path.join(item, item2))
-            else:
+            if not os.path.isdir(item):
                 new_list.append(item)
-    return [os.path.normpath(x) for x in new_list]
+            else:
+                new_list += sort([item])
+    return_list = [os.path.normpath(x) for x in new_list]
+    return return_list
 
 
 if __name__ == "__main__":
