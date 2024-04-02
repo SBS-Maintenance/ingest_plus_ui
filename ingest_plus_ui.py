@@ -191,7 +191,7 @@ class ListenThread(QThread):
         with STATUS_SOCKET:
             while self.should_work:
                 select.select([self.sock], [], [])
-                msg = self.sock.recvfrom(4096)[0]
+                msg = self.sock.recvfrom(4096 * 4)[0]
                 self.received.emit(msg.decode())
                 js: dict = json.loads(msg.decode())
                 temp_fin_title_list = []
@@ -869,6 +869,21 @@ blacklist_exts = [
     "lwi",
     "ffindex",
     "idx",
+    "zip",
+    "exe",
+    "hwp",
+    "ppt",
+    "pptx",
+    "doc",
+    "docx",
+    "dll",
+    "html",
+    "lua",
+    "vhdx",
+    "ico",
+    "cs",
+    "csproj",
+    "pdf",
 ]
 
 
@@ -879,38 +894,39 @@ def sort(target_list):
     if len(target_list) == 0:
         return []
 
-    first_item: str = target_list[0]
-    if ("CLIPINF" in first_item.upper()) or ("THMBNL" in first_item.upper()):
-        return []
-    if os.path.isdir(first_item):
-        target_list = [os.path.join(first_item, f) for f in os.listdir(first_item)]
-    try:
-        if (
-            first_item.split("\\")[-1] == "100GOPRO"
-            or first_item.split("\\")[-2] == "100GOPRO"
-        ):
-            is_gopro = True
-    except:  # noqa: E722
-        pass
+    # first_item: str = target_list[0]
+    for first_item in natsorted(target_list):
+        if ("CLIPINF" in first_item.upper()) or ("THMBNL" in first_item.upper()):
+            return []
+        if os.path.isdir(first_item):
+            target_list = [os.path.join(first_item, f) for f in os.listdir(first_item)]
+        try:
+            if (
+                first_item.split("\\")[-1] == "100GOPRO"
+                or first_item.split("\\")[-2] == "100GOPRO"
+            ):
+                is_gopro = True
+        except:  # noqa: E722
+            pass
 
-    if is_gopro:
-        target_list = [f for f in target_list if f.split(".")[-1].lower() == "mp4"]
-        gopro_dict = {}
-        for item in target_list:
-            gopro_dict[item[:-4]] = []
-        for item in target_list:
-            gopro_dict[item[:-4]].append(item)
-        for key, value in gopro_dict.items():
-            gopro_dict[key].sort(key=lambda x: x.split("\\")[-1].split(".")[0][:-4])
-            for item in gopro_dict[key]:
-                new_list.append(item)
-    else:
-        for item in natsorted(target_list):
-            if not os.path.isdir(item):
-                if item.lower().split(".")[-1] not in blacklist_exts:
+        if is_gopro:
+            target_list = [f for f in target_list if f.split(".")[-1].lower() == "mp4"]
+            gopro_dict = {}
+            for item in target_list:
+                gopro_dict[item[:-4]] = []
+            for item in target_list:
+                gopro_dict[item[:-4]].append(item)
+            for key, value in gopro_dict.items():
+                gopro_dict[key].sort(key=lambda x: x.split("\\")[-1].split(".")[0][:-4])
+                for item in gopro_dict[key]:
                     new_list.append(item)
-            else:
-                new_list += sort([item])
+        else:
+            for item in natsorted(target_list):
+                if not os.path.isdir(item):
+                    if item.lower().split(".")[-1] not in blacklist_exts:
+                        new_list.append(item)
+                else:
+                    new_list += sort([item])
     return_list = [os.path.normpath(x) for x in new_list]
     return return_list
 
