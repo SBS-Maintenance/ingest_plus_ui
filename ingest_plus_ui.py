@@ -29,7 +29,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal, QDate
 from PyQt5.QtGui import QCloseEvent, QStandardItemModel, QStandardItem, QColor
 from PyQt5 import uic
 
-from natsort import natsorted
+from natsort import natsorted, os_sorted
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -371,6 +371,33 @@ class MyApp(QMainWindow, form_class):
         self.filePushButton.clicked.connect(self.add_files)
         self.dirPushButton.clicked.connect(self.add_folders)
 
+        self.newPushButton.clicked.connect(self.newPushButtonHandler)
+
+    @tback
+    def newPushButtonHandler(self):
+        self.centralmediatypecodeComboBox.setCurrentIndex(0)
+        self.folderComboBox.setCurrentIndex(0)
+        self.sourceComboBox.setCurrentIndex(0)
+        self.categoryComboBox1.setCurrentIndex(0)
+        self.categoryComboBox2.setCurrentIndex(0)
+        self.categoryComboBox3.setCurrentIndex(0)
+        self.restrictionComboBox.setCurrentIndex(0)
+        self.titleLineEdit.setText("")
+        self.deptLineEdit.setText("")
+        self.interviewrepoterLineEdit.setText("")
+        self.mediarepoterLineEdit.setText("")
+        self.shootingplaceLineEdit.setText("")
+        self.contentTextEdit.setPlainText("")
+        self.fileListWidget.clear()
+        self.items.clear()
+        self.videoDateWidget.setSelectedDate(
+            QDate(
+                int(datetime.date.today().strftime("%Y")),
+                int(datetime.date.today().strftime("%m")),
+                int(datetime.date.today().strftime("%d")),
+            )
+        )
+
     @tback
     def add_files(self):
         fnames = QFileDialog.getOpenFileNames(self, "파일 추가")[0]
@@ -452,12 +479,15 @@ class MyApp(QMainWindow, form_class):
 
         self.listen_status_thread.send_msg("get_src_fail")
 
+        self.items.clear()
         self.fileListWidget.clear()
         for i, file in enumerate(job["files"]):
             item = QListWidgetItem(job["files"][str(i)])
             if os.path.normpath(job["files"][str(i)]) in self.failed_src_list:
                 item.setBackground(QColor("#ff0000"))
             self.fileListWidget.addItem(item)
+        for x in range(self.fileListWidget.count()):
+            self.items.append(self.fileListWidget.item(x).text())
 
     @tback
     def centralmediatypecodeChanged(self):
@@ -828,10 +858,12 @@ class MyApp(QMainWindow, form_class):
         else:
             event.ignore()
         self.items.clear()
-        for x in range(self.fileListWidget.count()):
+        x_range = range(self.fileListWidget.count())
+        for x in x_range:
             self.items.append(self.fileListWidget.item(x).text())
 
-        self.items = self.items + sort(temp_items)
+        new_items = self.items + sort(temp_items)
+        self.items = new_items
 
         self.fileListWidget.clear()
         for item in self.items:
@@ -884,27 +916,25 @@ blacklist_exts = [
     "cs",
     "csproj",
     "pdf",
+    "cpf",
 ]
 
 
 @tback_args
 def sort(target_list):
-    new_list = []
+    return_list = []
     is_gopro: bool = False
     if len(target_list) == 0:
         return []
-
     # first_item: str = target_list[0]
-    for first_item in natsorted(target_list):
-        if ("CLIPINF" in first_item.upper()) or ("THMBNL" in first_item.upper()):
+    for item in os_sorted(target_list):
+        new_list = []
+        if ("CLIPINF" in item.upper()) or ("THMBNL" in item.upper()):
             return []
-        if os.path.isdir(first_item):
-            target_list = [os.path.join(first_item, f) for f in os.listdir(first_item)]
+        if os.path.isdir(item):
+            target_list = [os.path.join(item, f) for f in os.listdir(item)]
         try:
-            if (
-                first_item.split("\\")[-1] == "100GOPRO"
-                or first_item.split("\\")[-2] == "100GOPRO"
-            ):
+            if item.split("\\")[-1] == "100GOPRO" or item.split("\\")[-2] == "100GOPRO":
                 is_gopro = True
         except:  # noqa: E722
             pass
@@ -921,13 +951,14 @@ def sort(target_list):
                 for item in gopro_dict[key]:
                     new_list.append(item)
         else:
-            for item in natsorted(target_list):
-                if not os.path.isdir(item):
-                    if item.lower().split(".")[-1] not in blacklist_exts:
-                        new_list.append(item)
-                else:
-                    new_list += sort([item])
-    return_list = [os.path.normpath(x) for x in new_list]
+            if not os.path.isdir(item):
+                if item.lower().split(".")[-1] not in blacklist_exts:
+                    new_list.append(item)
+            else:
+                targets = [os.path.join(item, f) for f in os.listdir(item)]
+                for target in targets:
+                    new_list += sort([target])
+        return_list = return_list + [os.path.normpath(x) for x in new_list]
     return return_list
 
 
