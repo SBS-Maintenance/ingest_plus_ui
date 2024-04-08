@@ -567,6 +567,25 @@ class MyApp(QMainWindow, form_class):
 
     @tback
     def create_xml(self):
+        length_check_dict = {
+            "취재부서": len(self.deptLineEdit.text().encode("utf-8")),
+            "취재기자": len(self.interviewrepoterLineEdit.text().encode("utf-8")),
+            "영상기자": len(self.mediarepoterLineEdit.text().encode("utf-8")),
+            "촬영장소": len(self.shootingplaceLineEdit.text().encode("utf-8")),
+        }
+        too_long_entities = ""
+        for key, length in length_check_dict.items():
+            if length > 24:
+                too_long_entities = too_long_entities + "," + key
+        if len(too_long_entities) > 0:
+            too_long_entities = too_long_entities[1:]
+            QMessageBox.information(
+                self,
+                "오류",
+                f"{too_long_entities}의 길이가 한글 24자를 넘습니다. 한글 24자 미만으로 줄여주세요.",
+            )
+            return None
+
         titles = []
         for item in self.job_list:
             titles.append(item["metadata"]["title"])
