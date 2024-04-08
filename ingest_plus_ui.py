@@ -582,7 +582,7 @@ class MyApp(QMainWindow, form_class):
             QMessageBox.information(
                 self,
                 "오류",
-                f"{too_long_entities}의 길이가 한글 24자를 넘습니다. 한글 24자 미만으로 줄여주세요.",
+                f"{too_long_entities}의 길이가 한글 8자를 넘습니다. 한글 8자 미만으로 줄여주세요.",
             )
             return None
 
